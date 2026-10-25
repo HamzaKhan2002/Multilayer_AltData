@@ -1,0 +1,14 @@
+{
+  "item": "S1A_IW_GRDH_1SDV_20251010T002841_20251010T002906_061356_07A7FB_rtc",
+  "date": "2025-10-10",
+  "days_from_cloudy_optical": 3,
+  "orbit": "ascending",
+  "valid_radar_pixels": 1.0,
+  "optical_cloud_fraction": 0.7682896040084675,
+  "shape": [
+    603,
+    681
+  ],
+  "mean_vv_db_inside_mapped_tanks": 2.495478868484497,
+  "mean_vv_db_elsewhere": -10.019450187683105
+}

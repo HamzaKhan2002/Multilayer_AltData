@@ -1,0 +1,66 @@
+{
+  "source": "OpenStreetMap contributors (ODbL), Overpass API",
+  "area": [
+    -96.82,
+    35.89,
+    -96.68,
+    35.99
+  ],
+  "n_tanks": 333,
+  "with_polygon": 333,
+  "diameter_m_median": 59.62855735826141,
+  "diameter_m_p10_p90": [
+    35.0665817483021,
+    68.74507938501297
+  ],
+  "footprint_km2": 0.820054701336202,
+  "n_in_window": 333,
+  "window": [
+    -96.782,
+    35.915,
+    -96.708,
+    35.968
+  ],
+  "densest_cells_0.01deg": [
+    {
+      "lon_min": -96.75,
+      "lat_min": 35.93,
+      "tanks": 39
+    },
+    {
+      "lon_min": -96.76,
+      "lat_min": 35.94,
+      "tanks": 36
+    },
+    {
+      "lon_min": -96.74,
+      "lat_min": 35.94,
+      "tanks": 31
+    },
+    {
+      "lon_min": -96.76,
+      "lat_min": 35.95,
+      "tanks": 24
+    },
+    {
+      "lon_min": -96.77,
+      "lat_min": 35.94,
+      "tanks": 21
+    },
+    {
+      "lon_min": -96.75,
+      "lat_min": 35.92,
+      "tanks": 21
+    },
+    {
+      "lon_min": -96.75,
+      "lat_min": 35.94,
+      "tanks": 21
+    },
+    {
+      "lon_min": -96.74,
+      "lat_min": 35.93,
+      "tanks": 18
+    }
+  ]
+}

@@ -1,0 +1,527 @@
+{
+  "id": "B0",
+  "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+  "periods": [
+    [
+      "2013-08-01",
+      "2023-12-31"
+    ],
+    [
+      "2026-06-01",
+      "2026-10-24"
+    ]
+  ],
+  "data": {
+    "pair": "WTIUSD",
+    "n_bars": 3431268,
+    "first_bar": "2013-08-01 00:00:00-04:00",
+    "last_bar": "2026-10-16 16:58:00-04:00"
+  },
+  "events": {
+    "candidates": 562,
+    "excluded_by_first_reason": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 15,
+      "missing_1029_or_1035": 0,
+      "no_surprise": 3
+    },
+    "independent_flags": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 19,
+      "missing_1029_or_1035": 20,
+      "no_surprise": 3
+    },
+    "no_surprise_detail": {
+      "lag_missing": 2,
+      "no_first_release_row": 1
+    }
+  },
+  "sanity_clock": {
+    "n_events": 464,
+    "n_argmax_1030": 205,
+    "share_1030": 0.4418103448275862,
+    "threshold": 0.7,
+    "passed": false,
+    "share_within_1_minute_of_1030": 0.5387931034482759,
+    "profile_abs_change": {
+      "10:15": {
+        "mean_abs_change_cents": 4.1006465517241315,
+        "n": 464
+      },
+      "10:16": {
+        "mean_abs_change_cents": 3.686853448275825,
+        "n": 464
+      },
+      "10:17": {
+        "mean_abs_change_cents": 3.786363636363604,
+        "n": 462
+      },
+      "10:18": {
+        "mean_abs_change_cents": 3.7474025974025977,
+        "n": 462
+      },
+      "10:19": {
+        "mean_abs_change_cents": 3.5685344827586665,
+        "n": 464
+      },
+      "10:20": {
+        "mean_abs_change_cents": 3.8543103448275877,
+        "n": 464
+      },
+      "10:21": {
+        "mean_abs_change_cents": 3.6153347732181276,
+        "n": 463
+      },
+      "10:22": {
+        "mean_abs_change_cents": 3.5974082073434244,
+        "n": 463
+      },
+      "10:23": {
+        "mean_abs_change_cents": 3.274568965517262,
+        "n": 464
+      },
+      "10:24": {
+        "mean_abs_change_cents": 3.306896551724154,
+        "n": 464
+      },
+      "10:25": {
+        "mean_abs_change_cents": 3.4465517241379398,
+        "n": 464
+      },
+      "10:26": {
+        "mean_abs_change_cents": 3.3648706896551577,
+        "n": 464
+      },
+      "10:27": {
+        "mean_abs_change_cents": 3.1946120689655237,
+        "n": 464
+      },
+      "10:28": {
+        "mean_abs_change_cents": 3.6267241379310207,
+        "n": 464
+      },
+      "10:29": {
+        "mean_abs_change_cents": 4.070689655172408,
+        "n": 464
+      },
+      "10:30": {
+        "mean_abs_change_cents": 24.10711206896551,
+        "n": 464
+      },
+      "10:31": {
+        "mean_abs_change_cents": 11.075215517241404,
+        "n": 464
+      },
+      "10:32": {
+        "mean_abs_change_cents": 9.285344827586202,
+        "n": 464
+      },
+      "10:33": {
+        "mean_abs_change_cents": 8.537284482758638,
+        "n": 464
+      },
+      "10:34": {
+        "mean_abs_change_cents": 7.603017241379328,
+        "n": 464
+      },
+      "10:35": {
+        "mean_abs_change_cents": 8.920043103448302,
+        "n": 464
+      },
+      "10:36": {
+        "mean_abs_change_cents": 7.410991379310326,
+        "n": 464
+      },
+      "10:37": {
+        "mean_abs_change_cents": 7.3219827586207185,
+        "n": 464
+      },
+      "10:38": {
+        "mean_abs_change_cents": 6.302801724137909,
+        "n": 464
+      },
+      "10:39": {
+        "mean_abs_change_cents": 6.769827586206876,
+        "n": 464
+      },
+      "10:40": {
+        "mean_abs_change_cents": 6.653663793103472,
+        "n": 464
+      },
+      "10:41": {
+        "mean_abs_change_cents": 6.779310344827598,
+        "n": 464
+      },
+      "10:42": {
+        "mean_abs_change_cents": 5.9133620689655535,
+        "n": 464
+      },
+      "10:43": {
+        "mean_abs_change_cents": 5.645689655172447,
+        "n": 464
+      },
+      "10:44": {
+        "mean_abs_change_cents": 6.002370689655192,
+        "n": 464
+      },
+      "10:45": {
+        "mean_abs_change_cents": 6.050862068965497,
+        "n": 464
+      }
+    },
+    "argmax_distribution": {
+      "10:00": 3,
+      "10:01": 2,
+      "10:02": 1,
+      "10:04": 2,
+      "10:05": 3,
+      "10:07": 1,
+      "10:09": 2,
+      "10:10": 1,
+      "10:15": 1,
+      "10:17": 2,
+      "10:18": 1,
+      "10:19": 3,
+      "10:20": 1,
+      "10:21": 1,
+      "10:22": 1,
+      "10:23": 1,
+      "10:26": 1,
+      "10:28": 1,
+      "10:29": 3,
+      "10:30": 205,
+      "10:31": 42,
+      "10:32": 27,
+      "10:33": 19,
+      "10:34": 17,
+      "10:35": 17,
+      "10:36": 9,
+      "10:37": 7,
+      "10:38": 6,
+      "10:39": 8,
+      "10:40": 5,
+      "10:41": 7,
+      "10:42": 3,
+      "10:43": 8,
+      "10:44": 11,
+      "10:45": 4,
+      "10:46": 5,
+      "10:47": 7,
+      "10:48": 2,
+      "10:49": 2,
+      "10:50": 3,
+      "10:51": 2,
+      "10:53": 5,
+      "10:54": 1,
+      "10:55": 8,
+      "10:56": 2,
+      "10:59": 1
+    }
+  },
+  "amendment": {
+    "id": "AM-B0-1",
+    "status": "EXPLORATORY (validity gate amended after the first run)",
+    "year_gate": {
+      "2013": {
+        "n": 17,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 21.47058823529432,
+        "mean_1015_1029_cents": 3.564705882352981,
+        "passed": true
+      },
+      "2014": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 17.086956521739083,
+        "mean_1015_1029_cents": 2.9217391304347737,
+        "passed": true
+      },
+      "2015": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 31.02173913043476,
+        "mean_1015_1029_cents": 3.666666666666671,
+        "passed": true
+      },
+      "2016": {
+        "n": 45,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 31.39999999999995,
+        "mean_1015_1029_cents": 2.9765993265993225,
+        "passed": true
+      },
+      "2017": {
+        "n": 44,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 18.886363636363594,
+        "mean_1015_1029_cents": 1.9226568005637859,
+        "passed": true
+      },
+      "2018": {
+        "n": 42,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 30.96428571428587,
+        "mean_1015_1029_cents": 2.801587301587304,
+        "passed": true
+      },
+      "2019": {
+        "n": 44,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 24.89318181818179,
+        "mean_1015_1029_cents": 2.54242424242422,
+        "passed": true
+      },
+      "2020": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 16.1260869565217,
+        "mean_1015_1029_cents": 3.291594202898544,
+        "passed": true
+      },
+      "2021": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 19.419565217391412,
+        "mean_1015_1029_cents": 3.57188405797104,
+        "passed": true
+      },
+      "2022": {
+        "n": 43,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 32.02325581395338,
+        "mean_1015_1029_cents": 7.565891472868209,
+        "passed": true
+      },
+      "2023": {
+        "n": 31,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 25.929032258064368,
+        "mean_1015_1029_cents": 4.750107526881708,
+        "passed": true
+      },
+      "2026": {
+        "n": 14,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 10.85714285714283,
+        "mean_1015_1029_cents": 5.520476190476165,
+        "passed": false
+      }
+    },
+    "years_excluded": [
+      2026
+    ],
+    "events_after_gate": 447
+  },
+  "status": "COMPLETED",
+  "verdict": "NOT DETECTED",
+  "included_events": 447,
+  "secondary_events_with_1100": 436,
+  "descriptives": {
+    "n": 447,
+    "mean_dP_1035_cents": -0.6420581655480955,
+    "sd_dP_1035_cents": 39.12481376641552,
+    "sd_dP_1100_cents": 57.59600917336646,
+    "sd_surprise_million_bbl": {
+      "cushing": 1.1566540305866926,
+      "us_ex_cushing": 4.893708170696549,
+      "gasoline": 2.766974910794702,
+      "distillate": 2.449303166581967
+    },
+    "events_by_year": {
+      "2013": 17,
+      "2014": 46,
+      "2015": 46,
+      "2016": 45,
+      "2017": 44,
+      "2018": 42,
+      "2019": 41,
+      "2020": 46,
+      "2021": 46,
+      "2022": 43,
+      "2023": 31
+    },
+    "largest_abs_dP_1035": [
+      {
+        "event_day": "2017-06-07",
+        "dP_1035_usd": -1.5
+      },
+      {
+        "event_day": "2016-05-11",
+        "dP_1035_usd": 1.3699999999999974
+      },
+      {
+        "event_day": "2015-04-15",
+        "dP_1035_usd": 1.1799999999999997
+      },
+      {
+        "event_day": "2016-10-26",
+        "dP_1035_usd": 1.1499999999999986
+      },
+      {
+        "event_day": "2016-11-02",
+        "dP_1035_usd": -1.1000000000000014
+      }
+    ]
+  },
+  "primary": {
+    "outcome": "close(10:35) - close(10:29), USD per barrel",
+    "unit": "cents per barrel per million barrels",
+    "cushing": {
+      "coef_usd_per_mb": -0.030683659484032687,
+      "coef_cents_per_mb": -3.068365948403269,
+      "se_cents_per_mb": 1.7827460617149977,
+      "t": -1.72114582906525,
+      "p_two_sided": 0.08522436485265668,
+      "ci95_cents_per_mb": [
+        -6.562484022945285,
+        0.4257521261387471
+      ]
+    },
+    "n": 447,
+    "verdict": "NOT DETECTED",
+    "us_ex_cushing_reference": {
+      "coef_usd_per_mb": -0.026186950576274477,
+      "coef_cents_per_mb": -2.6186950576274475,
+      "se_cents_per_mb": 0.41927237930992456,
+      "t": -6.2458086600828,
+      "p_two_sided": 4.216130486662863e-10,
+      "ci95_cents_per_mb": [
+        -3.440453820787316,
+        -1.796936294467579
+      ]
+    }
+  },
+  "model_primary": {
+    "n": 447,
+    "r2": 0.21188956003550563,
+    "r2_adjusted": 0.20475733885935643,
+    "cov_type": "HC1",
+    "interval": "normal approximation (statsmodels default for robust covariance)",
+    "coefficients": {
+      "const": {
+        "coef_usd_per_mb": -0.005629403020920801,
+        "coef_cents_per_mb": -0.5629403020920801,
+        "se_cents_per_mb": 1.6524524160390062,
+        "t": -0.34066959909288663,
+        "p_two_sided": 0.7333523274778658,
+        "ci95_cents_per_mb": [
+          -3.80168752369473,
+          2.6758069195105696
+        ]
+      },
+      "cushing": {
+        "coef_usd_per_mb": -0.030683659484032687,
+        "coef_cents_per_mb": -3.068365948403269,
+        "se_cents_per_mb": 1.7827460617149977,
+        "t": -1.72114582906525,
+        "p_two_sided": 0.08522436485265668,
+        "ci95_cents_per_mb": [
+          -6.562484022945285,
+          0.4257521261387471
+        ]
+      },
+      "us_ex_cushing": {
+        "coef_usd_per_mb": -0.026186950576274477,
+        "coef_cents_per_mb": -2.6186950576274475,
+        "se_cents_per_mb": 0.41927237930992456,
+        "t": -6.2458086600828,
+        "p_two_sided": 4.216130486662863e-10,
+        "ci95_cents_per_mb": [
+          -3.440453820787316,
+          -1.796936294467579
+        ]
+      },
+      "gasoline": {
+        "coef_usd_per_mb": -0.03582332762120443,
+        "coef_cents_per_mb": -3.582332762120443,
+        "se_cents_per_mb": 0.7226929427822991,
+        "t": -4.9569222972190685,
+        "p_two_sided": 7.161860200901772e-07,
+        "ci95_cents_per_mb": [
+          -4.998784901855015,
+          -2.1658806223858704
+        ]
+      },
+      "distillate": {
+        "coef_usd_per_mb": -0.030960451129509053,
+        "coef_cents_per_mb": -3.0960451129509052,
+        "se_cents_per_mb": 0.7304676356095939,
+        "t": -4.238442556551019,
+        "p_two_sided": 2.2507575466364983e-05,
+        "ci95_cents_per_mb": [
+          -4.527735370617838,
+          -1.6643548552839733
+        ]
+      }
+    }
+  },
+  "model_secondary": {
+    "outcome": "close(11:00) - close(10:29), USD per barrel",
+    "n": 436,
+    "r2": 0.07183560936615396,
+    "r2_adjusted": 0.06322155469669821,
+    "cov_type": "HC1",
+    "interval": "normal approximation (statsmodels default for robust covariance)",
+    "coefficients": {
+      "const": {
+        "coef_usd_per_mb": 0.019632347882369006,
+        "coef_cents_per_mb": 1.9632347882369006,
+        "se_cents_per_mb": 2.6663689465320317,
+        "t": 0.7362952493091209,
+        "p_two_sided": 0.4615510367249236,
+        "ci95_cents_per_mb": [
+          -3.262752316461887,
+          7.189221892935688
+        ]
+      },
+      "cushing": {
+        "coef_usd_per_mb": -0.014230270447345532,
+        "coef_cents_per_mb": -1.4230270447345532,
+        "se_cents_per_mb": 2.184663336895273,
+        "t": -0.6513713214764172,
+        "p_two_sided": 0.5148068186876283,
+        "ci95_cents_per_mb": [
+          -5.704888503394383,
+          2.858834413925276
+        ]
+      },
+      "us_ex_cushing": {
+        "coef_usd_per_mb": -0.018241849787908458,
+        "coef_cents_per_mb": -1.8241849787908457,
+        "se_cents_per_mb": 0.5949822836284123,
+        "t": -3.0659483970956596,
+        "p_two_sided": 0.0021698075928912545,
+        "ci95_cents_per_mb": [
+          -2.9903288261419294,
+          -0.6580411314397622
+        ]
+      },
+      "gasoline": {
+        "coef_usd_per_mb": -0.033335762118697106,
+        "coef_cents_per_mb": -3.3335762118697105,
+        "se_cents_per_mb": 1.1030187327934287,
+        "t": -3.022229915739805,
+        "p_two_sided": 0.0025091988618504706,
+        "ci95_cents_per_mb": [
+          -5.495453202417839,
+          -1.171699221321581
+        ]
+      },
+      "distillate": {
+        "coef_usd_per_mb": -0.03161370608917259,
+        "coef_cents_per_mb": -3.161370608917259,
+        "se_cents_per_mb": 1.1807672819439732,
+        "t": -2.677386693601885,
+        "p_two_sided": 0.007419894426768011,
+        "ci95_cents_per_mb": [
+          -5.475631955650698,
+          -0.8471092621838202
+        ]
+      }
+    }
+  }
+}

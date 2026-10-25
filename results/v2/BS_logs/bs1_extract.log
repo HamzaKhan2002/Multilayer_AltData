@@ -1,0 +1,48 @@
+02:07:08 prereg_v2 sha256 acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f; 234 tanks with diameter >= 40 m of 333
+02:07:08 model version 3544572528; 441 acquisitions with scene cloud <= 90%; 0 already fitted; 3 of the 441 to do already cached; 5 download workers
+02:07:20 10/441 acquisitions (2%) | failed 0 | elapsed 0.2 min | 51.6 acq/min | ETA 8.3 min
+02:07:28 20/441 acquisitions (5%) | failed 0 | elapsed 0.3 min | 61.0 acq/min | ETA 6.9 min
+02:07:34 30/441 acquisitions (7%) | failed 0 | elapsed 0.4 min | 69.9 acq/min | ETA 5.9 min
+02:07:40 40/441 acquisitions (9%) | failed 0 | elapsed 0.5 min | 76.3 acq/min | ETA 5.3 min
+02:07:46 50/441 acquisitions (11%) | failed 0 | elapsed 0.6 min | 79.2 acq/min | ETA 4.9 min
+02:07:52 60/441 acquisitions (14%) | failed 0 | elapsed 0.7 min | 82.9 acq/min | ETA 4.6 min
+02:07:57 70/441 acquisitions (16%) | failed 0 | elapsed 0.8 min | 85.7 acq/min | ETA 4.3 min
+02:08:03 80/441 acquisitions (18%) | failed 0 | elapsed 0.9 min | 88.0 acq/min | ETA 4.1 min
+02:08:09 90/441 acquisitions (20%) | failed 0 | elapsed 1.0 min | 88.6 acq/min | ETA 4.0 min
+02:08:16 100/441 acquisitions (23%) | failed 0 | elapsed 1.1 min | 88.6 acq/min | ETA 3.8 min
+02:08:23 110/441 acquisitions (25%) | failed 0 | elapsed 1.2 min | 88.4 acq/min | ETA 3.7 min
+02:08:28 120/441 acquisitions (27%) | failed 0 | elapsed 1.3 min | 90.0 acq/min | ETA 3.6 min
+02:08:34 130/441 acquisitions (29%) | failed 0 | elapsed 1.4 min | 91.2 acq/min | ETA 3.4 min
+02:08:40 140/441 acquisitions (32%) | failed 0 | elapsed 1.5 min | 91.5 acq/min | ETA 3.3 min
+02:08:46 150/441 acquisitions (34%) | failed 0 | elapsed 1.6 min | 92.4 acq/min | ETA 3.2 min
+02:08:51 160/441 acquisitions (36%) | failed 0 | elapsed 1.7 min | 93.0 acq/min | ETA 3.0 min
+02:08:56 170/441 acquisitions (39%) | failed 0 | elapsed 1.8 min | 94.5 acq/min | ETA 2.9 min
+02:09:02 180/441 acquisitions (41%) | failed 0 | elapsed 1.9 min | 95.0 acq/min | ETA 2.7 min
+02:09:07 190/441 acquisitions (43%) | failed 0 | elapsed 2.0 min | 95.7 acq/min | ETA 2.6 min
+02:09:14 200/441 acquisitions (45%) | failed 0 | elapsed 2.1 min | 95.5 acq/min | ETA 2.5 min
+02:09:20 210/441 acquisitions (48%) | failed 0 | elapsed 2.2 min | 95.4 acq/min | ETA 2.4 min
+02:09:27 220/441 acquisitions (50%) | failed 0 | elapsed 2.3 min | 94.8 acq/min | ETA 2.3 min
+02:09:35 230/441 acquisitions (52%) | failed 0 | elapsed 2.4 min | 94.1 acq/min | ETA 2.2 min
+02:09:41 240/441 acquisitions (54%) | failed 0 | elapsed 2.5 min | 94.1 acq/min | ETA 2.1 min
+02:09:48 250/441 acquisitions (57%) | failed 0 | elapsed 2.7 min | 94.0 acq/min | ETA 2.0 min
+02:09:55 260/441 acquisitions (59%) | failed 0 | elapsed 2.8 min | 93.7 acq/min | ETA 1.9 min
+02:09:59 270/441 acquisitions (61%) | failed 0 | elapsed 2.8 min | 95.0 acq/min | ETA 1.8 min
+02:10:04 280/441 acquisitions (63%) | failed 0 | elapsed 2.9 min | 95.6 acq/min | ETA 1.7 min
+02:10:10 290/441 acquisitions (66%) | failed 0 | elapsed 3.0 min | 95.5 acq/min | ETA 1.6 min
+02:10:16 300/441 acquisitions (68%) | failed 0 | elapsed 3.1 min | 95.9 acq/min | ETA 1.5 min
+02:10:23 310/441 acquisitions (70%) | failed 0 | elapsed 3.2 min | 95.4 acq/min | ETA 1.4 min
+02:10:29 320/441 acquisitions (73%) | failed 0 | elapsed 3.3 min | 95.5 acq/min | ETA 1.3 min
+02:10:35 330/441 acquisitions (75%) | failed 0 | elapsed 3.4 min | 95.9 acq/min | ETA 1.2 min
+02:10:41 340/441 acquisitions (77%) | failed 0 | elapsed 3.6 min | 95.7 acq/min | ETA 1.1 min
+02:10:49 350/441 acquisitions (79%) | failed 0 | elapsed 3.7 min | 95.2 acq/min | ETA 1.0 min
+02:10:54 360/441 acquisitions (82%) | failed 0 | elapsed 3.8 min | 95.5 acq/min | ETA 0.8 min
+02:11:01 370/441 acquisitions (84%) | failed 0 | elapsed 3.9 min | 95.5 acq/min | ETA 0.7 min
+02:11:07 380/441 acquisitions (86%) | failed 0 | elapsed 4.0 min | 95.6 acq/min | ETA 0.6 min
+02:11:12 390/441 acquisitions (88%) | failed 0 | elapsed 4.1 min | 95.8 acq/min | ETA 0.5 min
+02:11:18 400/441 acquisitions (91%) | failed 0 | elapsed 4.2 min | 95.9 acq/min | ETA 0.4 min
+02:11:25 410/441 acquisitions (93%) | failed 0 | elapsed 4.3 min | 95.9 acq/min | ETA 0.3 min
+02:11:31 420/441 acquisitions (95%) | failed 0 | elapsed 4.4 min | 95.7 acq/min | ETA 0.2 min
+02:11:38 430/441 acquisitions (98%) | failed 0 | elapsed 4.5 min | 95.6 acq/min | ETA 0.1 min
+02:11:44 440/441 acquisitions (100%) | failed 0 | elapsed 4.6 min | 95.6 acq/min | ETA 0.0 min
+02:11:45 441/441 acquisitions (100%) | failed 0 | elapsed 4.6 min | 95.6 acq/min | ETA 0.0 min | pass finished
+02:11:53 consolidated 441/441 acquisitions -> results/v2/BS1/fits.csv.gz; failed 0

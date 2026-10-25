@@ -1,0 +1,8 @@
+{
+  "n_tanks": 333,
+  "diameter_m_median": 59.62855735826141,
+  "footprint_km2": 0.820054701336202,
+  "mean_brightness_inside_over_outside": 2.8644034813743384,
+  "share_of_tank_centres_brighter_than_window_p75": 0.990990990990991,
+  "pixels_across_median_tank": 5.962855735826141
+}

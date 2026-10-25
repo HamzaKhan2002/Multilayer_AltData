@@ -1,0 +1,11 @@
+scope,sun_bin,gap_class,osm_id,n_pairs,n_tanks,median_diff_m,robust_spread_m
+pooled,ALL,all,ALL,1226,233,0.0000,0.7413
+pooled,ALL,same_pass,ALL,828,230,0.0000,0.7413
+pooled,ALL,later_days,ALL,398,226,0.0000,0.7413
+median_over_tanks_with_3plus_pairs,ALL,all,ALL,1207,222,0.0000,0.5560
+pooled,25-35,all,ALL,411,224,0.0000,0.7413
+pooled,25-35,same_pass,ALL,411,224,0.0000,0.7413
+pooled,35-45,all,ALL,417,221,0.0000,0.7413
+pooled,35-45,same_pass,ALL,417,221,0.0000,0.7413
+pooled,55-65,all,ALL,398,226,0.0000,0.7413
+pooled,55-65,later_days,ALL,398,226,0.0000,0.7413

@@ -1,0 +1,58 @@
+{
+  "RCLC1d.xls": {
+    "series": "WTI C1 (RCLC1d)",
+    "sha256": "85364c1f20f27b2b56cb5c9af4819f5cd80a297bac2800e9be317a918aa45f38",
+    "rows": 10183,
+    "missing_values": 0,
+    "first": "1983-04-04",
+    "last": "2024-04-05"
+  },
+  "RCLC2d.xls": {
+    "series": "WTI C2 (RCLC2d)",
+    "sha256": "d9cb3e20b9ff4878961b1cdbe64052dcbb6b24f8574a0425b6247bbb555afbc8",
+    "rows": 9594,
+    "missing_values": 0,
+    "first": "1985-01-02",
+    "last": "2024-04-05"
+  },
+  "RNGC1d.xls": {
+    "series": "NG C1 (RNGC1d)",
+    "sha256": "9d9c003e4220e448978e76ffe6aaed438a7732b16638eb33193c0b52902b184c",
+    "rows": 7496,
+    "missing_values": 0,
+    "first": "1994-01-13",
+    "last": "2024-04-05"
+  },
+  "RNGC2d.xls": {
+    "series": "NG C2 (RNGC2d)",
+    "sha256": "35b4fd8cd144d7ebfb2270fb141848be9a31bc47ed20f637ef93cb044b9bb180",
+    "rows": 7500,
+    "missing_values": 0,
+    "first": "1994-01-12",
+    "last": "2024-04-05"
+  },
+  "WCESTUS1w.xls": {
+    "series": "US crude stocks (WCESTUS1w)",
+    "sha256": "1d558024381f37816f256db83a37cbf56078d9894edda2dcb20bbf455f49bfd5",
+    "rows": 2299,
+    "missing_values": 0,
+    "first": "1982-08-20",
+    "last": "2026-10-16"
+  },
+  "W_EPC0_SAX_YCUOK_MBBLw.xls": {
+    "series": "Cushing stocks (W_EPC0_SAX_YCUOK_MBBLw)",
+    "sha256": "ec4ed594fb58d743797558941f4ed797fdcfcae341faa60c916b3b963d8a3abc",
+    "rows": 1092,
+    "missing_values": 0,
+    "first": "2004-04-16",
+    "last": "2026-10-16"
+  },
+  "NW2_EPG0_SWO_R48_BCFw.xls": {
+    "series": "US gas storage L48 (NW2_EPG0_SWO_R48_BCFw)",
+    "sha256": "b17ad48542d5f3128c1c5611090a70bcd292c3e3b2be975d70a34f1fb4ddb698",
+    "rows": 876,
+    "missing_values": 0,
+    "first": "2010-01-01",
+    "last": "2026-10-09"
+  }
+}

@@ -1,0 +1,6 @@
+2026-10-23T12:52:48 start T5
+2026-10-23T12:52:48 prereg hash 66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe
+2026-10-23T12:53:10 AGSI+ EU aggregate 4018 gas days 2015-01-01 -> 2025-12-31
+2026-10-23T12:53:12 Open-Meteo (4018, 6) city-days; missing 0
+2026-10-23T12:53:13 b (GWh/d per HDD degree): 645.4 se 17.2 t 37.55 n 1664 -> SUPPORTED
+2026-10-23T12:53:13 done in 24.3s

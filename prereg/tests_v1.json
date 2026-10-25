@@ -1,0 +1,106 @@
+{
+  "id": "MLAD-PREREG-1",
+  "frozen_at": "2026-10-23T10:40:00+02:00",
+  "status": "FROZEN - do not edit. Any change goes to results/deviations.md (timestamped) before the affected statistic is computed.",
+  "purpose": "Small falsifiable checks supporting idea cards I1 (energy inventories) and I2 (European power and gas). Mechanism checks only: no strategy backtest, no parameter chosen from results.",
+  "prior_exposure": "EIA weekly inventories (WCESTUS1, Cushing, gas storage NW2) and NYMEX contracts 1-4 were used on 2026-10-22 for a different hypothesis (inventory-driven calendar spreads). No release-day statistic, no inventory-surprise vs return statistic, no cloud-cover statistic, and no ENTSO-E or AGSI+ data have been computed or viewed before this freeze.",
+  "common": {
+    "trading_days": "Dates with a non-missing contract-1 settlement in the market's EIA daily series.",
+    "front_return": "r_t = ln(C1_t / C1_{t-1}); on the first trading day after a front-contract expiry, r_t = ln(C1_t / C2_{t-1}) so that both prices refer to the same contract.",
+    "expiry_rules": {
+      "WTI": "Last trading day = 3 business days before the 25th calendar day of the month preceding delivery; if the 25th is not a business day, 3 business days before the last business day preceding the 25th.",
+      "NG": "Last trading day = 3 business days before the first calendar day of the delivery month."
+    },
+    "holidays": "US federal holidays (pandas USFederalHolidayCalendar) for release-date shifts; business days for expiries = trading days observed in the data.",
+    "release_calendar": {
+      "WTI_WPSR": "Week ending Friday F (index of WCESTUS1): release R = F + 5 days (Wednesday); R = F + 6 days if a US federal holiday falls between F + 3 and F + 5 inclusive. Week dropped if R is not a trading day.",
+      "NG_WNGSR": "Week ending Friday F (index of NW2_EPG0_SWO_R48_BCFw): release R = F + 6 days (Thursday); R = F + 5 days if F + 6 is a US federal holiday. Week dropped if R is not a trading day.",
+      "note": "Approximate calendar (a few weeks per year may be misdated); misdating biases every test toward no effect. Rule not changed after any statistic is computed."
+    },
+    "coverage_audit_first": "Before any statistic: row counts by year for every series, list of gaps longer than 5 business days, written to results/coverage.md. NG sample rule fixed now: if RNGC1 or RNGC2 has a gap longer than 5 business days, the NG sample starts on the first trading day after the last such gap.",
+    "hac": "Newey-West, Bartlett kernel; lags stated per test.",
+    "bootstrap": "Week-block bootstrap: resample calendar weeks (Monday-Sunday) with replacement, 5,000 draws, numpy default_rng(20261023).",
+    "multiplicity": "Primary verdicts: T1-WTI, T1-NG, T2-WTI, T2-NG (4). Holm-adjusted one-sided p-values are reported next to each verdict for information; verdict rules below are unchanged. T3 is exploratory. T4 and T5 are mechanism checks.",
+    "run_once": "Each test script is run once on the full period after the coverage audit. Re-runs are allowed only for crashes or data-integrity fixes logged in results/deviations.md; all runs are logged in results/trial_log.csv.",
+    "reporting": "Every verdict is reported whatever the result (repo README and deck annex)."
+  },
+  "tests": [
+    {
+      "id": "T1",
+      "idea": "I1",
+      "name": "Release-day volatility of energy futures",
+      "hypothesis": "Absolute daily returns of front-month futures are larger on scheduled EIA release days than on other trading days: the weekly print carries information the market did not have.",
+      "data": {
+        "WTI": "EIA RCLC1d and RCLC2d (NYMEX WTI contracts 1-2, daily settlement)",
+        "NG": "EIA RNGC1d and RNGC2d (NYMEX Henry Hub contracts 1-2, daily settlement)",
+        "calendars": "Week-ending dates of EIA WCESTUS1w (crude) and NW2_EPG0_SWO_R48_BCFw (gas storage)"
+      },
+      "period": ["2010-01-04", "2024-04-05"],
+      "statistic": "ratio = mean |r| on release days / mean |r| on all other trading days; 95% CI and one-sided p (share of draws <= 1) from the week-block bootstrap.",
+      "prediction": "ratio > 1 for WTI (Wednesday prints) and for NG (Thursday prints).",
+      "verdict_rule": "Per market: SUPPORTED if the 95% CI lower bound > 1.00; otherwise NOT SUPPORTED.",
+      "secondary_reported_no_prediction": [
+        "Cross placebo: WTI ratio on NG release days; NG ratio on WTI release days.",
+        "Sub-periods 2010-01-04..2016-12-30 and 2017-01-03..2024-04-05."
+      ]
+    },
+    {
+      "id": "T2",
+      "idea": "I1",
+      "name": "Direction of the inventory surprise",
+      "hypothesis": "The unexpected part of the weekly inventory change moves the front contract in the opposite direction on the release day (more stock than expected -> lower price).",
+      "data": {
+        "WTI": "EIA WCESTUS1w (US commercial crude stocks excl. SPR, thousand barrels) + WTI front returns as in T1",
+        "NG": "EIA NW2_EPG0_SWO_R48_BCFw (Lower-48 working gas, Bcf) + NG front returns as in T1"
+      },
+      "surprise_model_M0": "Weekly change D_t = I_t - I_{t-1}. OLS of D_t on [1, D_{t-1}, D_{t-2}, sin(2*pi*k*doy/365.25), cos(2*pi*k*doy/365.25)], doy = day of year of F_t, k = 1..2 for crude and k = 1..3 for gas. Expanding window on weeks with week-ending date < F_t only; first forecast after 260 weeks of history. Surprise s_t = D_t - forecast_t; z_t = s_t / sd(s) over the test sample.",
+      "period": "Release days in [2010-01-04, 2024-04-05] with an available forecast (NG starts later if its history is shorter).",
+      "statistic": "OLS r_R = a + b * z_t on release days; Newey-West t with 4 lags; Spearman correlation reported.",
+      "prediction": "b < 0 for WTI and for NG.",
+      "verdict_rule": "Per market: SUPPORTED if t_b <= -2.0; otherwise NOT SUPPORTED, with the interpretation fixed now: the market's expectation also uses the API survey (Tuesday 16:30 ET) and analyst consensus, which M0 does not have, so the test bounds what a naive expectation captures.",
+      "secondary_reported_no_prediction": [
+        "Sign hit rate: share of release days with sign(r_R) = -sign(s_t).",
+        "Mean r_R by surprise quintile (chart)."
+      ]
+    },
+    {
+      "id": "T3",
+      "idea": "I1",
+      "name": "Cloud cover over Cushing (exploratory)",
+      "hypothesis": "When clouds hide Cushing from optical satellites in the days before the print, more information is left for the release day: |release-day return| is larger in cloudy weeks.",
+      "data": "Open-Meteo Historical Weather API (ERA5-based archive), hourly cloud_cover (%), point 35.985 N, -96.767 E, UTC.",
+      "period": ["2016-01-01", "2024-04-05"],
+      "definitions": "C_t = mean hourly cloud_cover over 16:00-19:00 UTC (around the Sentinel-2 overpass) on the 7 calendar days ending the day before WTI release R_t. Cloudy_t = 1 if C_t is in the top tercile of C over the sample, 0 otherwise. RV20_t = sqrt(mean r^2 over the 20 trading days ending the day before R_t).",
+      "statistic": "OLS |r_R| = a + b * Cloudy_t + c * ln(RV20_t); Newey-West t with 4 lags. Also ratio of mean |r_R| top vs bottom tercile with week-block bootstrap CI.",
+      "prediction": "b > 0.",
+      "verdict_rule": "CONSISTENT if one-sided t_b >= 1.65; otherwise INCONCLUSIVE AT DAILY RESOLUTION. Never presented as evidence of a trading edge; deck annex unless CONSISTENT.",
+      "limitations": "Close-to-close returns include other news; vendors also use radar, which clouds do not block; one hub only."
+    },
+    {
+      "id": "T4",
+      "idea": "I2",
+      "name": "Merit order in German day-ahead prices",
+      "hypothesis": "A higher forecast share of wind and solar in next-day load lowers the day-ahead price.",
+      "data": "ENTSO-E Transparency Platform, bidding zone DE-LU (EIC 10Y1001A1001A82H): day-ahead prices (A44); day-ahead generation forecast for wind and solar (A69, processType A01: solar, wind onshore, wind offshore); day-ahead total load forecast (A65, processType A01).",
+      "period": ["2019-01-01", "2025-12-31"],
+      "definitions": "Daily means over the delivery day in Europe/Berlin time (60- or 15-minute resolution averaged). S_d = (solar + wind onshore + wind offshore forecast) / load forecast.",
+      "integrity_checks_before_statistic": "Row counts per year, units (EUR/MWh, MW), time zone, zone code, share of days with complete data; logged in results/coverage.md.",
+      "statistic": "OLS P_d = month-year fixed effects + weekday fixed effects + b * S_d; Newey-West t with 7 lags.",
+      "prediction": "b < 0.",
+      "verdict_rule": "SUPPORTED if t_b <= -5.0; otherwise NOT SUPPORTED.",
+      "secondary_reported_no_prediction": ["b and its t by calendar year."]
+    },
+    {
+      "id": "T5",
+      "idea": "I2",
+      "name": "EU gas storage withdrawals and temperature",
+      "hypothesis": "Cold days drive EU storage withdrawals: net withdrawal rises with heating degree days.",
+      "data": "GIE AGSI+ API, EU aggregate, daily injection and withdrawal (GWh/d), gasInStorage and full (%); Open-Meteo Historical Weather API daily temperature_2m_mean for Berlin (52.52, 13.405), Paris (48.857, 2.352), Milan (45.464, 9.19), Amsterdam (52.37, 4.895), Vienna (48.208, 16.373), Warsaw (52.23, 21.012), equal weights.",
+      "period": "Gas days 2015-01-01..2025-12-31; statistic on November-March gas days only.",
+      "definitions": "NW_d = withdrawal - injection; T_d = mean of the six city temperatures; HDD_d = max(0, 15.5 - T_d).",
+      "statistic": "OLS NW_d = gas-year fixed effects + weekday fixed effects + b * HDD_d; Newey-West t with 7 lags.",
+      "prediction": "b > 0.",
+      "verdict_rule": "SUPPORTED if t_b >= 5.0; otherwise NOT SUPPORTED."
+    }
+  ]
+}

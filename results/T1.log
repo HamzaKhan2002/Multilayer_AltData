@@ -1,0 +1,7 @@
+2026-10-23T11:02:12 start T1
+2026-10-23T11:02:12 prereg hash 66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe
+2026-10-23T11:02:13 WTI ratio 1.105 ci95 [1.025, 1.189] p 0.0042 n_event 743 -> SUPPORTED
+2026-10-23T11:02:13 WTI placebo {'placebo_on_NG_release_days': 0.963} sub {'sub_2010-2016': 1.133, 'sub_2017-2024': 1.083}
+2026-10-23T11:02:13 NG ratio 1.088 ci95 [1.007, 1.175] p 0.0172 n_event 740 -> SUPPORTED
+2026-10-23T11:02:13 NG placebo {'placebo_on_WTI_release_days': 0.94} sub {'sub_2010-2016': 1.22, 'sub_2017-2024': 0.996}
+2026-10-23T11:02:14 done in 2.3s

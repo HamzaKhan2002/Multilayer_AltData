@@ -1,0 +1,13 @@
+2026-10-23T12:53:49 start T4
+2026-10-23T12:53:49 prereg hash 66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe
+2026-10-23T12:53:49 fetched 2019 prices 8760 wind/solar 35040 load 35040
+2026-10-23T12:53:49 fetched 2020 prices 8784 wind/solar 35136 load 35136
+2026-10-23T12:53:50 fetched 2021 prices 8760 wind/solar 35040 load 35040
+2026-10-23T12:53:50 fetched 2022 prices 8760 wind/solar 35040 load 34848
+2026-10-23T12:53:51 fetched 2023 prices 8760 wind/solar 35040 load 35036
+2026-10-23T12:53:51 fetched 2024 prices 8784 wind/solar 35136 load 35132
+2026-10-23T12:53:51 fetched 2025 prices 15387 wind/solar 35040 load 35040
+2026-10-23T12:53:52 days used 2555 of 2557 ; S range 0.045 1.022
+2026-10-23T12:53:52 b per +10 pp of S: -15.91 EUR/MWh; t -16.41 n 2555 -> SUPPORTED
+2026-10-23T12:53:52 by year {2019: (-5.7, -12.6), 2020: (-5.4, -18.7), 2021: (-16.3, -6.4), 2022: (-40.4, -12.6), 2023: (-15.6, -24.5), 2024: (-13.6, -9.4), 2025: (-14.4, -21.2)}
+2026-10-23T12:53:52 done in 3.1s

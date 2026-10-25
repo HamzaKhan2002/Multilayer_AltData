@@ -1,0 +1,9 @@
+id,timestamp,script,prereg_v2_sha256,verdict,seconds
+BS1,2026-10-25T02:11:53,scripts/bs1_extract.py (pass 1),acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,descriptive,287.5
+BS0+BS1,2026-10-25T02:12:17,scripts/bs1_analysis.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,descriptive,24.2
+BS2,2026-10-25T02:12:21,scripts/bs2_aggregate.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,INCONCLUSIVE,3.1
+FIG,2026-10-25T02:12:25,scripts/fig_bs.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,descriptive,4.1
+T1c,2026-10-25T02:30:01,scripts/t1c_t2c_calendar.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,WTI: SUPPORTED [calendar archive; 12 weeks redated in sample; rule check PASS],1.8
+T2c,2026-10-25T02:30:01,scripts/t1c_t2c_calendar.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,WTI: NOT SUPPORTED [calendar archive; 12 weeks redated in sample; rule check PASS],1.8
+B0,2026-10-25T02:32:55,scripts/b0_transmission.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,BLOCKED [clock share 0.442 < 0.7],16.8
+B0-AM1,2026-10-25T02:41:41,scripts/b0_transmission.py,acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f,NOT DETECTED [n 447; clock share 0.442; Cushing -3.07 c/bbl per Mb (95% CI -6.56 to 0.43); US ex-Cushing -2.62],16.6

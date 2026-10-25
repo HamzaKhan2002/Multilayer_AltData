@@ -1,0 +1,27 @@
+# Secrets: never commit
+.env
+.env.*
+!.env.example
+
+# Raw downloads and caches (rebuilt by the fetch scripts)
+data/
+*.tif
+*.tiff
+*.jp2
+*.zip
+*.xls
+*.xlsx
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+.pytest_cache/
+
+# Per-event files of B0 hold HistData minute closes (licensed, not redistributed); rebuilt by scripts/b0_transmission.py
+results/v2/B0/events.csv
+results/v2/B0_amended/events.csv
+
+# Temporary export copy of the specification
+docs/spec/_spec_export.html

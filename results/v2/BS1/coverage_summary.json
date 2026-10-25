@@ -1,0 +1,25 @@
+{
+ "n_acquisitions": 441,
+ "n_tank_rows": 103194,
+ "status_counts": {
+  "ok": 45061,
+  "cloudy": 34454,
+  "wide_interval": 13152,
+  "no_contrast": 6737,
+  "full_or_fixed": 3709,
+  "few_pixels": 81
+ },
+ "share_with_estimate": 0.6000542667209334,
+ "diagnostic_share_of_estimates_with_b_below_zero": 0.11050999644714318,
+ "diagnostic_share_of_ok_with_b_below_zero": 0.05295044495239786,
+ "acquisitions": {
+  "shift_flag_share": 0.07029478458049887,
+  "median_abs_shift_x_m": 1.21,
+  "median_abs_shift_y_m": 2.448,
+  "p95_abs_shift_m": 22.741605594152755,
+  "reg_corr_median": 0.63153,
+  "clear_area_share_median": 0.9849244505545685,
+  "share_acquisitions_clear_area_ge_50pct": 0.6689342403628118,
+  "n_acquisitions_with_nodata_tanks": 0
+ }
+}

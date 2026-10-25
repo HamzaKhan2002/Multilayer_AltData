@@ -1,0 +1,2 @@
+BS2 primary: n=19 r=0.161 Fisher 95% [-0.317, 0.573] verdict INCONCLUSIVE (bootstrap interval verdict INCONCLUSIVE)
+nowcast: {'n_evaluated': 0, 'min_history_weeks': 104, 'min_beta_weeks': 20, 'verdict': 'NO GAIN DETECTED', 'note': 'not evaluable: no week has 20 earlier valid weeks'}

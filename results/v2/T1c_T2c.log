@@ -1,0 +1,27 @@
+2026-10-25T02:22:34 start calendar=rule prereg_v1 66bec92f8383 prereg_v2 acfe66efb287
+2026-10-25T02:22:36 T1 WTI block, rule calendar vs results/T1.json: PASS (41 numbers, 44 fields, max relative difference 0)
+2026-10-25T02:22:36 T2 WTI block, rule calendar vs results/T2.json: PASS (31 numbers, 35 fields, max relative difference 0)
+2026-10-25T02:22:36 done in 1.5s
+2026-10-25T02:29:59 start calendar=archive prereg_v1 66bec92f8383 prereg_v2 acfe66efb287
+2026-10-25T02:30:01 T1 WTI block, rule calendar vs results/T1.json: PASS (41 numbers, 44 fields, max relative difference 0)
+2026-10-25T02:30:01 T2 WTI block, rule calendar vs results/T2.json: PASS (31 numbers, 35 fields, max relative difference 0)
+2026-10-25T02:30:01 weeks redated: 12 in sample, 15 in all years; weeks from 2011-07-22 on without a usable archive row (rule date kept, rule date in sample): ['2016-08-05', '2017-02-03', '2017-02-17', '2022-06-17', '2023-11-03']
+2026-10-25T02:30:01   redated {'week_ending': '2012-10-26', 'rule_release': '2012-10-31', 'archive_release': '2012-11-01', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2012-12-21', 'rule_release': '2012-12-27', 'archive_release': '2012-12-28', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2012-12-28', 'rule_release': '2013-01-03', 'archive_release': '2013-01-04', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2013-10-11', 'rule_release': '2013-10-17', 'archive_release': '2013-10-21', 'archive_minus_rule_days': 4, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2013-12-20', 'rule_release': '2013-12-26', 'archive_release': '2013-12-27', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2013-12-27', 'rule_release': '2014-01-02', 'archive_release': '2014-01-03', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2018-11-30', 'rule_release': '2018-12-05', 'archive_release': '2018-12-06', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2018-12-21', 'rule_release': '2018-12-27', 'archive_release': '2018-12-28', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2018-12-28', 'rule_release': '2019-01-03', 'archive_release': '2019-01-04', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2019-12-20', 'rule_release': '2019-12-26', 'archive_release': '2019-12-27', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2019-12-27', 'rule_release': '2020-01-02', 'archive_release': '2020-01-03', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2021-01-15', 'rule_release': '2021-01-21', 'archive_release': '2021-01-22', 'archive_minus_rule_days': 1, 'in_sample': True}
+2026-10-25T02:30:01   redated {'week_ending': '2024-12-20', 'rule_release': '2024-12-26', 'archive_release': '2024-12-27', 'archive_minus_rule_days': 1, 'in_sample': False}
+2026-10-25T02:30:01   redated {'week_ending': '2025-12-19', 'rule_release': '2025-12-24', 'archive_release': '2025-12-29', 'archive_minus_rule_days': 5, 'in_sample': False}
+2026-10-25T02:30:01   redated {'week_ending': '2026-06-19', 'rule_release': '2026-06-24', 'archive_release': '2026-06-14', 'archive_minus_rule_days': -10, 'in_sample': False}
+2026-10-25T02:30:01 T1c WTI ratio 1.1081 ci95 [1.0283, 1.1921] p 0.0036 n_event 743 n_other 2843 -> SUPPORTED | v1 ratio 1.1047 ci95 [1.0254, 1.1895] n_event 743
+2026-10-25T02:30:01 T1c placebo on NG days 0.9629 sub {'sub_2010-2016': 1.1308, 'sub_2017-2024': 1.0901}
+2026-10-25T02:30:01 T2c WTI n 743 slope -17.92 bp per sd se 13.58 t -1.319 spearman -0.151 hit 0.579 -> NOT SUPPORTED | v1 n 743 slope -16.99 t -1.256
+2026-10-25T02:30:01 wrote results/v2/T1c.json, results/v2/T2c.json; trial log lines appended; done in 1.8s

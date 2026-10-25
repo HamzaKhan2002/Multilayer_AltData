@@ -1,0 +1,124 @@
+{
+ "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+ "window_wgs84": [
+  -96.782,
+  35.915,
+  -96.708,
+  35.968
+ ],
+ "period": [
+  "2018-12-01T00:00:00Z",
+  "2026-10-24T23:59:59Z"
+ ],
+ "collections": {
+  "sentinel-2-l2a": {
+   "n_items_intersecting": 1638,
+   "n_items_containing_window": 1626,
+   "n_distinct_dates": 597,
+   "n_acquisitions_date_platform_orbit": 603,
+   "first_date": "2018-12-01",
+   "last_date": "2026-10-20",
+   "acquisitions_per_year": {
+    "2018": 6,
+    "2019": 73,
+    "2020": 73,
+    "2021": 73,
+    "2022": 72,
+    "2023": 73,
+    "2024": 77,
+    "2025": 85,
+    "2026": 71
+   },
+   "platforms": {
+    "sentinel-2b": 283,
+    "sentinel-2a": 252,
+    "sentinel-2c": 68
+   },
+   "tiles_among_containing_items": {
+    "MGRS-14SQE": 813,
+    "MGRS-14SPE": 813
+   }
+  },
+  "sentinel-2-c1-l2a": {
+   "n_items_intersecting": 1042,
+   "n_items_containing_window": 1036,
+   "n_distinct_dates": 509,
+   "n_acquisitions_date_platform_orbit": 515,
+   "first_date": "2019-03-26",
+   "last_date": "2026-10-20",
+   "acquisitions_per_year": {
+    "2019": 57,
+    "2020": 73,
+    "2021": 73,
+    "2022": 5,
+    "2023": 73,
+    "2024": 77,
+    "2025": 86,
+    "2026": 71
+   },
+   "platforms": {
+    "sentinel-2b": 241,
+    "sentinel-2a": 206,
+    "sentinel-2c": 68
+   },
+   "tiles_among_containing_items": {
+    "MGRS-14SQE": 518,
+    "MGRS-14SPE": 518
+   }
+  }
+ },
+ "chosen_collection": "sentinel-2-l2a",
+ "choice_rule": "more distinct acquisition dates among items containing the window (tie: more (date, platform, orbit) acquisitions)",
+ "ranking": [
+  "sentinel-2-l2a",
+  "sentinel-2-c1-l2a"
+ ],
+ "s2_acquisitions_after_dedup": 603,
+ "s2_acquisitions_cloud_le_90": 441,
+ "s2_tiles_selected": {
+  "MGRS-14SPE": 602,
+  "MGRS-14SQE": 1
+ },
+ "s2_sun_angle_source": {
+  "stac": 603
+ },
+ "sentinel1": {
+  "n_items_intersecting": 310,
+  "n_acquisitions_date_platform_orbit": 310,
+  "n_acquisitions_covering_window": 310,
+  "n_distinct_dates_covering_window": 310,
+  "first_date": "2018-12-04",
+  "last_date": "2026-10-24",
+  "acquisitions_per_year": {
+   "2018": 4,
+   "2019": 55,
+   "2020": 54,
+   "2021": 58,
+   "2022": 28,
+   "2023": 28,
+   "2024": 28,
+   "2025": 31,
+   "2026": 24
+  },
+  "platforms": {
+   "sentinel-1a": 214,
+   "sentinel-1b": 84,
+   "sentinel-1d": 10,
+   "sentinel-1c": 2
+  },
+  "orbit_states": {
+   "ascending": 310
+  }
+ },
+ "latency_hours": {
+  "median": 6.021388775,
+  "p90": 8.599598099277824,
+  "max": 12.810865148055555,
+  "min": 3.0249265236111107,
+  "share_le_24h": 1.0,
+  "share_le_48h": 1.0
+ },
+ "latency_n_products": 149,
+ "tie_break_after_zone14": "window farthest from the item footprint edge, then newest processing baseline, then highest item id",
+ "seconds": 36.1
+}

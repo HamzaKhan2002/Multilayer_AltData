@@ -1,0 +1,209 @@
+{
+  "id": "T2c",
+  "calendar": "archive",
+  "prereg_sha256": "66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe",
+  "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+  "period": [
+    "2010-01-04",
+    "2024-04-05"
+  ],
+  "n_weeks_redated": 12,
+  "n_weeks_redated_all_years": 15,
+  "redated_weeks": [
+    {
+      "week_ending": "2012-10-26",
+      "rule_release": "2012-10-31",
+      "archive_release": "2012-11-01",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2012-12-21",
+      "rule_release": "2012-12-27",
+      "archive_release": "2012-12-28",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2012-12-28",
+      "rule_release": "2013-01-03",
+      "archive_release": "2013-01-04",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2013-10-11",
+      "rule_release": "2013-10-17",
+      "archive_release": "2013-10-21",
+      "archive_minus_rule_days": 4,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2013-12-20",
+      "rule_release": "2013-12-26",
+      "archive_release": "2013-12-27",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2013-12-27",
+      "rule_release": "2014-01-02",
+      "archive_release": "2014-01-03",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2018-11-30",
+      "rule_release": "2018-12-05",
+      "archive_release": "2018-12-06",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2018-12-21",
+      "rule_release": "2018-12-27",
+      "archive_release": "2018-12-28",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2018-12-28",
+      "rule_release": "2019-01-03",
+      "archive_release": "2019-01-04",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2019-12-20",
+      "rule_release": "2019-12-26",
+      "archive_release": "2019-12-27",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2019-12-27",
+      "rule_release": "2020-01-02",
+      "archive_release": "2020-01-03",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2021-01-15",
+      "rule_release": "2021-01-21",
+      "archive_release": "2021-01-22",
+      "archive_minus_rule_days": 1,
+      "in_sample": true
+    },
+    {
+      "week_ending": "2024-12-20",
+      "rule_release": "2024-12-26",
+      "archive_release": "2024-12-27",
+      "archive_minus_rule_days": 1,
+      "in_sample": false
+    },
+    {
+      "week_ending": "2025-12-19",
+      "rule_release": "2025-12-24",
+      "archive_release": "2025-12-29",
+      "archive_minus_rule_days": 5,
+      "in_sample": false
+    },
+    {
+      "week_ending": "2026-06-19",
+      "rule_release": "2026-06-24",
+      "archive_release": "2026-06-14",
+      "archive_minus_rule_days": -10,
+      "in_sample": false
+    }
+  ],
+  "weeks_with_rule_date_kept_after_archive_start": [
+    {
+      "week_ending": "2016-08-05",
+      "rule_release": "2016-08-10"
+    },
+    {
+      "week_ending": "2017-02-03",
+      "rule_release": "2017-02-08"
+    },
+    {
+      "week_ending": "2017-02-17",
+      "rule_release": "2017-02-23"
+    },
+    {
+      "week_ending": "2022-06-17",
+      "rule_release": "2022-06-23"
+    },
+    {
+      "week_ending": "2023-11-03",
+      "rule_release": "2023-11-08"
+    }
+  ],
+  "rule_reproduction_check": {
+    "label": "T2 WTI block, rule calendar vs results/T2.json",
+    "status": "PASS",
+    "n_fields": 35,
+    "n_numbers_compared": 31,
+    "max_rel_diff": 0.0,
+    "tolerance": 1e-12
+  },
+  "v1_reference": {
+    "n": 743,
+    "slope_b_per_sd": -0.0016990302379983797,
+    "se": 0.0013522390349757713,
+    "t_nw4": -1.256457027236181,
+    "spearman": -0.14858802142899857,
+    "sign_hit_rate": 0.5787348586810229,
+    "verdict": "NOT SUPPORTED"
+  },
+  "markets": {
+    "WTI": {
+      "units": "thousand barrels",
+      "first_release": "2010-01-06",
+      "last_release": "2024-04-03",
+      "n": 743,
+      "sd_surprise": 4756.429400720169,
+      "slope_b_per_sd": -0.0017920311071119661,
+      "se": 0.0013582643475344427,
+      "t_nw4": -1.31935371075955,
+      "r2": 0.004389904435528558,
+      "p_one_sided_normal": 0.09352544463336776,
+      "spearman": -0.15142471665229418,
+      "spearman_p": 3.405397860532582e-05,
+      "sign_hit_rate": 0.5787348586810229,
+      "n_sign": 743,
+      "quintiles": [
+        {
+          "quintile": 1,
+          "n": 149,
+          "mean_r_bp": 61.818424225485735,
+          "se_bp": 19.312740962366078
+        },
+        {
+          "quintile": 2,
+          "n": 148,
+          "mean_r_bp": 12.783301340538548,
+          "se_bp": 18.33368160061236
+        },
+        {
+          "quintile": 3,
+          "n": 149,
+          "mean_r_bp": -2.2250652552024115,
+          "se_bp": 25.5980001605499
+        },
+        {
+          "quintile": 4,
+          "n": 148,
+          "mean_r_bp": -47.23385024895382,
+          "se_bp": 16.790581380344335
+        },
+        {
+          "quintile": 5,
+          "n": 149,
+          "mean_r_bp": -2.614255300399296,
+          "se_bp": 27.96775237749455
+        }
+      ],
+      "verdict": "NOT SUPPORTED"
+    }
+  }
+}

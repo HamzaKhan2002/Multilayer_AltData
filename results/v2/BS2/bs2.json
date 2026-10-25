@@ -1,0 +1,85 @@
+{
+ "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+ "seed": 20261025,
+ "bootstrap_draws": 5000,
+ "block_weeks": 4,
+ "definitions": {
+  "clear_acquisition": "clear_area_share >= 0.5",
+  "valid_tank": "status in ok/wide_interval/full_or_fixed",
+  "primary_sun_elevation_max_deg": 45.0,
+  "min_valid_area_share_both_dates": 0.5,
+  "dV_units": "kbbl; EIA change in kbbl",
+  "verdict_interval": "Fisher z 95%; bootstrap reported as a check"
+ },
+ "n_weeks_in_period": 411,
+ "n_weeks_with_selected_acquisition": 159,
+ "n_weeks_with_dV": 62,
+ "n_weeks_all_season_sample": 57,
+ "n_weeks_primary_sample": 19,
+ "period": [
+  "2018-12-07",
+  "2026-10-16"
+ ],
+ "primary": {
+  "n": 19,
+  "r": 0.1605623934183439,
+  "fisher_ci95": [
+   -0.3167469059557628,
+   0.5729845309869708
+  ],
+  "slope_eia_kbbl_per_kbbl": 0.13900694725880286,
+  "intercept_kbbl": -81.09433574384587,
+  "rmse_kbbl": 1017.0071615207032,
+  "rmse_constant_only_kbbl": 1030.3755709325192,
+  "implied_coverage_share": 7.193885051933425,
+  "bootstrap": {
+   "draws_used": 5000,
+   "r_ci95": [
+    -0.3176056091715179,
+    0.6683806232521341
+   ],
+   "slope_ci95": [
+    -0.2887976177092122,
+    0.706788341054808
+   ]
+  },
+  "verdict": "INCONCLUSIVE",
+  "verdict_note": "",
+  "verdict_bootstrap_interval": "INCONCLUSIVE",
+  "verdicts_agree": true
+ },
+ "secondary": {
+  "all_season": {
+   "n": 57,
+   "r": 0.129908273724856,
+   "fisher_ci95": [
+    -0.1352371457060793,
+    0.377691125335015
+   ],
+   "slope_eia_kbbl_per_kbbl": 0.09491304922367132,
+   "intercept_kbbl": -321.8373884020911,
+   "rmse_kbbl": 1150.2867649150098,
+   "rmse_constant_only_kbbl": 1160.1175827416787,
+   "implied_coverage_share": 10.535959050724502,
+   "bootstrap": {
+    "draws_used": 5000,
+    "r_ci95": [
+     -0.11069930480276627,
+     0.3700116782811312
+    ],
+    "slope_ci95": [
+     -0.08207044850168231,
+     0.27701247573587334
+    ]
+   }
+  },
+  "nowcast_primary_sample": {
+   "n_evaluated": 0,
+   "min_history_weeks": 104,
+   "min_beta_weeks": 20,
+   "verdict": "NO GAIN DETECTED",
+   "note": "not evaluable: no week has 20 earlier valid weeks"
+  }
+ },
+ "seconds": 1.5
+}

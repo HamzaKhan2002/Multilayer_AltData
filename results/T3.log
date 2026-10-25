@@ -1,0 +1,5 @@
+2026-10-23T12:54:06 start T3
+2026-10-23T12:54:06 prereg hash 66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe
+2026-10-23T12:54:07 cloud-cover hours 73176 selected 12196 missing 0
+2026-10-23T12:54:07 n 430 b 0.0022 t 0.88 ratio top/bottom 1.152 ci [0.911, 1.474] -> INCONCLUSIVE AT DAILY RESOLUTION
+2026-10-23T12:54:07 done in 1.6s

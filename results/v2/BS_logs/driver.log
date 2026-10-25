@@ -1,0 +1,10 @@
+2026-10-25T02:07:06 driver start; prereg_v2 sha256 acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f
+2026-10-25T02:07:06 START bs1_extract (scripts/bs1_extract.py) -> C:\Users\Hamza\OneDrive\Documents\GitHub\CV\multilayer-altdata\results\v2\BS_logs\bs1_extract.log
+2026-10-25T02:11:53 END   bs1_extract exit=0 seconds=287,5
+2026-10-25T02:11:53 START bs1_analysis (scripts/bs1_analysis.py) -> C:\Users\Hamza\OneDrive\Documents\GitHub\CV\multilayer-altdata\results\v2\BS_logs\bs1_analysis.log
+2026-10-25T02:12:17 END   bs1_analysis exit=0 seconds=24,2
+2026-10-25T02:12:17 START bs2_aggregate (scripts/bs2_aggregate.py) -> C:\Users\Hamza\OneDrive\Documents\GitHub\CV\multilayer-altdata\results\v2\BS_logs\bs2_aggregate.log
+2026-10-25T02:12:21 END   bs2_aggregate exit=0 seconds=3,1
+2026-10-25T02:12:21 START fig_bs (scripts/fig_bs.py) -> C:\Users\Hamza\OneDrive\Documents\GitHub\CV\multilayer-altdata\results\v2\BS_logs\fig_bs.log
+2026-10-25T02:12:25 END   fig_bs exit=0 seconds=4,1
+2026-10-25T02:12:25 driver done; BS2 primary verdict: INCONCLUSIVE

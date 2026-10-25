@@ -1,0 +1,5 @@
+2026-10-23T11:02:58 start T2
+2026-10-23T11:02:58 prereg hash 66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe
+2026-10-23T11:02:59 WTI n 743 from 2010-01-06 b(bp per sd) -17.0 t -1.26 spearman -0.149 hit 0.579 -> NOT SUPPORTED
+2026-10-23T11:03:00 NG n 479 from 2015-01-22 b(bp per sd) -8.9 t -0.65 spearman -0.027 hit 0.495 -> NOT SUPPORTED
+2026-10-23T11:03:00 done in 1.8s

@@ -1,0 +1,228 @@
+{
+  "id": "B0",
+  "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+  "periods": [
+    [
+      "2013-08-01",
+      "2023-12-31"
+    ],
+    [
+      "2026-06-01",
+      "2026-10-24"
+    ]
+  ],
+  "data": {
+    "pair": "WTIUSD",
+    "n_bars": 3431268,
+    "first_bar": "2013-08-01 00:00:00-04:00",
+    "last_bar": "2026-10-16 16:58:00-04:00"
+  },
+  "events": {
+    "candidates": 562,
+    "excluded_by_first_reason": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 15,
+      "missing_1029_or_1035": 0,
+      "no_surprise": 3
+    },
+    "independent_flags": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 19,
+      "missing_1029_or_1035": 20,
+      "no_surprise": 3
+    },
+    "no_surprise_detail": {
+      "lag_missing": 2,
+      "no_first_release_row": 1
+    }
+  },
+  "sanity_clock": {
+    "n_events": 464,
+    "n_argmax_1030": 205,
+    "share_1030": 0.4418103448275862,
+    "threshold": 0.7,
+    "passed": false,
+    "share_within_1_minute_of_1030": 0.5387931034482759,
+    "profile_abs_change": {
+      "10:15": {
+        "mean_abs_change_cents": 4.1006465517241315,
+        "n": 464
+      },
+      "10:16": {
+        "mean_abs_change_cents": 3.686853448275825,
+        "n": 464
+      },
+      "10:17": {
+        "mean_abs_change_cents": 3.786363636363604,
+        "n": 462
+      },
+      "10:18": {
+        "mean_abs_change_cents": 3.7474025974025977,
+        "n": 462
+      },
+      "10:19": {
+        "mean_abs_change_cents": 3.5685344827586665,
+        "n": 464
+      },
+      "10:20": {
+        "mean_abs_change_cents": 3.8543103448275877,
+        "n": 464
+      },
+      "10:21": {
+        "mean_abs_change_cents": 3.6153347732181276,
+        "n": 463
+      },
+      "10:22": {
+        "mean_abs_change_cents": 3.5974082073434244,
+        "n": 463
+      },
+      "10:23": {
+        "mean_abs_change_cents": 3.274568965517262,
+        "n": 464
+      },
+      "10:24": {
+        "mean_abs_change_cents": 3.306896551724154,
+        "n": 464
+      },
+      "10:25": {
+        "mean_abs_change_cents": 3.4465517241379398,
+        "n": 464
+      },
+      "10:26": {
+        "mean_abs_change_cents": 3.3648706896551577,
+        "n": 464
+      },
+      "10:27": {
+        "mean_abs_change_cents": 3.1946120689655237,
+        "n": 464
+      },
+      "10:28": {
+        "mean_abs_change_cents": 3.6267241379310207,
+        "n": 464
+      },
+      "10:29": {
+        "mean_abs_change_cents": 4.070689655172408,
+        "n": 464
+      },
+      "10:30": {
+        "mean_abs_change_cents": 24.10711206896551,
+        "n": 464
+      },
+      "10:31": {
+        "mean_abs_change_cents": 11.075215517241404,
+        "n": 464
+      },
+      "10:32": {
+        "mean_abs_change_cents": 9.285344827586202,
+        "n": 464
+      },
+      "10:33": {
+        "mean_abs_change_cents": 8.537284482758638,
+        "n": 464
+      },
+      "10:34": {
+        "mean_abs_change_cents": 7.603017241379328,
+        "n": 464
+      },
+      "10:35": {
+        "mean_abs_change_cents": 8.920043103448302,
+        "n": 464
+      },
+      "10:36": {
+        "mean_abs_change_cents": 7.410991379310326,
+        "n": 464
+      },
+      "10:37": {
+        "mean_abs_change_cents": 7.3219827586207185,
+        "n": 464
+      },
+      "10:38": {
+        "mean_abs_change_cents": 6.302801724137909,
+        "n": 464
+      },
+      "10:39": {
+        "mean_abs_change_cents": 6.769827586206876,
+        "n": 464
+      },
+      "10:40": {
+        "mean_abs_change_cents": 6.653663793103472,
+        "n": 464
+      },
+      "10:41": {
+        "mean_abs_change_cents": 6.779310344827598,
+        "n": 464
+      },
+      "10:42": {
+        "mean_abs_change_cents": 5.9133620689655535,
+        "n": 464
+      },
+      "10:43": {
+        "mean_abs_change_cents": 5.645689655172447,
+        "n": 464
+      },
+      "10:44": {
+        "mean_abs_change_cents": 6.002370689655192,
+        "n": 464
+      },
+      "10:45": {
+        "mean_abs_change_cents": 6.050862068965497,
+        "n": 464
+      }
+    },
+    "argmax_distribution": {
+      "10:00": 3,
+      "10:01": 2,
+      "10:02": 1,
+      "10:04": 2,
+      "10:05": 3,
+      "10:07": 1,
+      "10:09": 2,
+      "10:10": 1,
+      "10:15": 1,
+      "10:17": 2,
+      "10:18": 1,
+      "10:19": 3,
+      "10:20": 1,
+      "10:21": 1,
+      "10:22": 1,
+      "10:23": 1,
+      "10:26": 1,
+      "10:28": 1,
+      "10:29": 3,
+      "10:30": 205,
+      "10:31": 42,
+      "10:32": 27,
+      "10:33": 19,
+      "10:34": 17,
+      "10:35": 17,
+      "10:36": 9,
+      "10:37": 7,
+      "10:38": 6,
+      "10:39": 8,
+      "10:40": 5,
+      "10:41": 7,
+      "10:42": 3,
+      "10:43": 8,
+      "10:44": 11,
+      "10:45": 4,
+      "10:46": 5,
+      "10:47": 7,
+      "10:48": 2,
+      "10:49": 2,
+      "10:50": 3,
+      "10:51": 2,
+      "10:53": 5,
+      "10:54": 1,
+      "10:55": 8,
+      "10:56": 2,
+      "10:59": 1
+    }
+  },
+  "status": "BLOCKED",
+  "verdict": "BLOCKED",
+  "note": "clock check below the threshold; no outcome statistic computed"
+}

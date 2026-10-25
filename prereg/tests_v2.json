@@ -1,0 +1,74 @@
+{
+  "id": "tests_v2",
+  "frozen_at": "2026-10-25 (local time; see file timestamps and the SHA-256 recorded in results/v2/prereg_v2.sha256)",
+  "relation_to_v1": "tests_v1.json (SHA-256 66bec92f...cbbe) is unchanged; its verdicts stand. Every test below is a new, separately named experiment run once.",
+  "exposure_before_freezing": [
+    "T1-T5 results (tests_v1) are known; the 2026-10-24 audit re-ran them byte-identically.",
+    "Audit facts known: rule calendar vs EIA archive release dates (14 of 660 weeks differ, 2011-2024); Cushing first-release values equal latest values in all 795 weeks; Cushing AR(2) baseline reproduced (R2 0.307, n 521).",
+    "Sentinel-2 scenes of 2025-03..2026-09 over the window were downloaded as true colour for figures V1/V1b and their window cloud share computed (SCL). No tank-level reflectance statistic, no roof estimate and no comparison with EIA stocks has been computed.",
+    "HistData WTI minute data were used for an unrelated intraday test (last 30 minutes vs rest of day, 2026-10-22). No statistic in a window around EIA or API releases has been computed."
+  ],
+  "common": {
+    "window_wgs84": [-96.782, 35.915, -96.708, 35.968],
+    "tanks": "results/tank_registry.csv (OpenStreetMap, 333 tanks); circle model from centre and diameter; tanks with diameter >= 40 m",
+    "eia_target": "Cushing weekly change as first published: cushing_kbbl - cushing_prior_kbbl in the same release (results/v2/eia_first_release.csv; one row per week, first publication kept)",
+    "eia_reference_time": "Friday 07:00 America/Chicago of the data week",
+    "stop_rule": "If a sanity check below fails, the test stops and is reported as BLOCKED; no statistic is computed."
+  },
+  "tests": {
+    "T1c": {
+      "type": "calendar-corrected replication of T1 (WTI only)",
+      "definition": "Identical to tests_v1 T1 for WTI (same returns, same statistic, same bootstrap, same verdict rule), except that the release day of each data week is the EIA archive release date where one exists (audit/eia_release_registry.csv, data-only re-issue folders ignored) and the v1 rule date otherwise (weeks before 2011-07-22). Natural gas keeps the v1 calendar (no gas archive audit).",
+      "verdict_rule": "as T1"
+    },
+    "T2c": {
+      "type": "calendar-corrected replication of T2 (WTI only)",
+      "definition": "Identical to tests_v1 T2 for WTI, with the T1c release calendar.",
+      "verdict_rule": "as T2"
+    },
+    "BS0": {
+      "type": "descriptive: Sentinel catalogue and availability",
+      "sentinel2": "Earth Search STAC, 2018-12-01..2026-10-24, full pagination (no item cap). Collection chosen from the catalogue only, before any pixel is read: the one of sentinel-2-l2a and sentinel-2-c1-l2a with more distinct acquisition dates fully covering the window. Acquisitions de-duplicated by (date, platform, relative orbit). Recorded: datetime, platform, relative orbit, processing baseline, sun elevation and azimuth, view angles if present, scene cloud share.",
+      "clear_rule": "An acquisition is clear for a tank if no SCL pixel (classes 3, 8, 9, 10, 11) intersects the tank disk plus a 20 m buffer. Pre-filter: scene-level eo:cloud_cover <= 90.",
+      "sentinel1": "Planetary Computer sentinel-1-rtc catalogue over the window, 2018-12-01..2026-10-24, full pagination: dates, platform, orbit state, relative orbit.",
+      "availability": "For every EIA data week F: is there an acquisition within +-2 days of F 07:00 CT, available before Tuesday 16:30 ET (API) and before Wednesday 10:30 ET (EIA), under an assumed 24 h processing latency? Separately for Sentinel-2 (at least 50% of the tank area clear) and Sentinel-1. The latency assumption is checked on recent products where the Copernicus catalogue gives a publication time."
+    },
+    "BS1": {
+      "type": "physical measurement pilot: roof depth of external floating roofs from the internal shadow (Sentinel-2)",
+      "physics": "For a roof at depth d below the rim, sun elevation theta and azimuth phi, a roof point p is lit if and only if p + s*u lies inside the tank disk, with s = d / tan(theta) and u the horizontal unit vector toward the sun. The shadow is the crescent next to the sun-side wall.",
+      "image_model": "Band B04 (10 m, L2A). For each 10 m pixel whose footprint is at least 90% inside the disk: x_p = a*(1 - f_p(d)) + b*f_p(d) + e_p, where f_p(d) is the shadowed share of the pixel footprint computed on a 1 m sub-grid. a (lit roof) and b (shadow) are free for every tank and date, with b <= a only, so radiometric offsets, illumination and atmosphere are absorbed (no absolute reflectance is used). d on a grid 0..20 m, step 0.5 m; d_hat minimises the residual sum of squares; 68% interval from the profile (Delta RSS <= sigma2_hat, sigma2_hat = RSS_min / (n - 3)). No point-spread function (limitation, reported).",
+      "registration": "One translation per acquisition, estimated before any tank fit: the shift in [-20, 20] m that maximises the correlation between B04 and a synthetic image of all registry disks rendered on the 10 m grid (integer-pixel cross-correlation, then sub-pixel parabolic refinement). Shifts at the search edge are flagged.",
+      "abstention": "Fewer than 8 interior pixels; any SCL cloud or shadow class on the tank: no estimate. If d_hat > 0 and a - b < 3*sigma_hat (no contrast): d not identified. If d_hat = 0 the estimate is kept with its profile upper bound (full or nearly full tank, or a fixed roof). Interval wider than 6 m: kept, flagged low precision.",
+      "identifiability_simulation": "Illustrative (ILL): synthetic tanks with the registry diameters, true d in {0, 2, ..., 14} m, the actual sun angles of the catalogue, random sub-pixel offsets up to 5 m and noise equal to the residual sigma of real fits; RMSE of d_hat - d by sun-elevation bin.",
+      "stability": "Pairs of clear acquisitions at most 2 days apart: robust spread (1.4826 x MAD) of d_hat differences per tank, by sun-elevation bin. True roof movement adds to it, so it is an upper bound on noise.",
+      "reported": "Coverage, abstention reasons, identifiability map, stability by sun elevation. Descriptive; no verdict."
+    },
+    "BS2": {
+      "type": "aggregate proxy vs EIA Cushing change (fundamental information, exploratory but pre-specified)",
+      "weekly_proxy": "For EIA week F, the clear acquisition closest to F 07:00 CT within +-2 days (ties: earlier). Change between consecutive weeks: Delta V_F = -sum over tanks valid at both dates of A_i * (d_hat_i,F - d_hat_i,F-1), in barrels (6.2898 bbl per m3); A_i = disk area.",
+      "primary_sample": "Consecutive data weeks (F-1, F), 2018-12..2026-10, both with a selected acquisition of sun elevation <= 45 degrees and at least 50% of the tank area (diameter >= 40 m) with an identified d at both dates.",
+      "primary_statistic": "Pearson correlation r between Delta V_F and the first-published EIA Cushing change; 95% interval by Fisher z, checked by a moving-block bootstrap of weeks (block 4).",
+      "verdict_rule": "SIGNAL if the lower 95% bound of r > 0; NO SIGNAL DETECTED if the upper bound < 0.20; otherwise INCONCLUSIVE.",
+      "secondary": [
+        "Slope and RMSE of the EIA change on Delta V (coverage share implied by the slope).",
+        "All-season sample (no sun-elevation filter).",
+        "Nowcast gain (B1 preliminary): M0 = recursive AR(2) on first-published changes; M1 = M0 + beta*Delta V_F with beta re-estimated on earlier valid weeks only (at least 20). Out-of-sample MSE ratio M1/M0 on valid weeks, paired-loss moving-block bootstrap interval. GAIN if the upper bound of MSE1 - MSE0 < 0; otherwise NO GAIN DETECTED."
+      ]
+    },
+    "B0": {
+      "type": "ex post transmission diagnostic at the print (not a strategy, no position uses the surprise)",
+      "events": "Regular Wednesday releases at 10:30 ET from the EIA archive registry, 2013-08..2023-12 plus 2026-06..2026-10 where minute data exist; holiday-shifted releases excluded and counted.",
+      "price": "HistData WTI minute bid close, clock converted to America/New_York with the audited rule of deliverables_v2/analysis (amendment AM1). Front contract as defined by the data vendor; no second month (spread untested).",
+      "sanity_check": "On event days, the minute with the largest absolute price change between 10:00 and 11:00 ET must start at 10:30 in at least 70% of events. Otherwise BLOCKED.",
+      "outcome": "Delta P = close at 10:35 minus close at 10:29, in USD per barrel; secondary: close at 11:00 minus close at 10:29.",
+      "surprises": "For Cushing, US commercial crude excluding Cushing, total motor gasoline and distillate: first-published weekly change minus a recursive AR(2) forecast (expanding window, weeks strictly before, at least 104 weeks of history), in million barrels.",
+      "model": "OLS of Delta P on a constant and the four surprises; heteroskedasticity-robust (HC1) standard errors.",
+      "primary": "Coefficient on the Cushing surprise, in cents per barrel per million barrels, with t and 95% interval.",
+      "verdict_rule": "TRANSMISSION DETECTED if the 95% interval of the Cushing coefficient lies below zero; NOT DETECTED otherwise. The US ex-Cushing coefficient is reported as the reference effect."
+    }
+  },
+  "not_run_before_deadline": {
+    "A": "Alturki-Kurov replication and recent extension: not run; the published regression tables were not accessed, so a faithful replication cannot be specified. Protocol kept for the internship.",
+    "B2_B3": "Financial information and net PnL: not run; they require intraday quotes for two contracts at the decision time and an admissible physical variable first (BS1/BS2)."
+  }
+}

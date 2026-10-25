@@ -1,0 +1,20 @@
+﻿start 2026-10-23T13:56:58
+== fig_sentinel_cushing
+286 scenes contain the window; 103 are clear, 134 are at least 60% cloudy
+clear : S2C_14SQE_20251005_0_L2A 2025-10-05 local cloud 0.0%
+cloudy: S2A_14SQE_20251007_0_L2A 2025-10-07 local cloud 76.8%
+densest 1 km window holds 54 OpenStreetMap tanks: (-96.7475, 35.9325, -96.7364, 35.9415)
+zoom shape (102, 102, 3) window shapes (603, 681, 3) (603, 681, 3)
+== fig_sentinel1_cushing
+radar scene: S1A_IW_GRDH_1SDV_20251010T002841_20251010T002906_061356_07A7FB_rtc 2025-10-10 (+3 days from the optical pass)
+mean VV inside mapped tanks 2.5 dB, elsewhere -10.0 dB, difference +12.5 dB
+== fig_tank_registry
+{
+  "n_tanks": 333,
+  "diameter_m_median": 59.62855735826141,
+  "footprint_km2": 0.820054701336202,
+  "mean_brightness_inside_over_outside": 2.8644034813743384,
+  "share_of_tank_centres_brighter_than_window_p75": 0.990990990990991,
+  "pixels_across_median_tank": 5.962855735826141
+}
+done 2026-10-23T13:57:57

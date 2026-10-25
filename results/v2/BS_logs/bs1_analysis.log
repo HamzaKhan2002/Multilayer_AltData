@@ -1,0 +1,4 @@
+coverage: 441 acquisitions, 103194 tank rows, estimate share 60.0% (0s)
+stability: 1226 pairs <= 2 days (0s)
+identifiability simulation: 48000 synthetic fits (22s)
+availability: 410 EIA weeks; share of weeks with a usable acquisition {'s2_usable_api': 0.3853658536585366, 's2_usable_eia': 0.3853658536585366, 's2_usable_api_sun_le45': 0.14390243902439023, 's1_usable_api': 0.43902439024390244, 's1_usable_eia': 0.43902439024390244} (23s)

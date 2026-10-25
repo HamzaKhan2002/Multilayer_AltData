@@ -1,0 +1,7 @@
+2026-10-25T02:32:38 start B0 dry=False prereg_v2 acfe66efb287
+2026-10-25T02:32:54 minute bars loaded: 3431268 from 2013-08-01 00:00:00-04:00 to 2026-10-16 16:58:00-04:00
+2026-10-25T02:32:55 candidate events 562; excluded by first reason {'holiday_shifted': 81, 'data_only_same_day': 2, 'other_release_time': 0, 'no_minute_data': 15, 'missing_1029_or_1035': 0, 'no_surprise': 3}; independent flags {'holiday_shifted': 81, 'data_only_same_day': 2, 'other_release_time': 0, 'no_minute_data': 19, 'missing_1029_or_1035': 20, 'no_surprise': 3}
+2026-10-25T02:32:55 no-surprise detail {'': 559, 'lag_missing': 2, 'no_first_release_row': 1}; events entering the clock check 464; included 461
+2026-10-25T02:32:55 clock check: 205 of 464 events have the 10:30 minute as the largest move: share 0.4418 (threshold 0.7); alternative denominator 205/464 = 0.4418
+2026-10-25T02:32:55 argmax distribution (top 8): {'10:30': 205, '10:31': 42, '10:32': 27, '10:33': 19, '10:34': 17, '10:35': 17, '10:44': 11, '10:36': 9}
+2026-10-25T02:32:55 BLOCKED; wrote results/v2/B0; done in 16.8s

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Research &amp; Technical Specification: a multi-layer alternative-data research system (I1, Cushing)</title>
+<!-- Editable source of the specification. Export: python docs/spec/export_spec.py (headless Edge/Chrome, A4).
+     Every number below comes from a file of this repository; the file is named next to it. -->
+<style>
+@font-face { font-family:'Instrument Serif'; font-style:normal; font-weight:400;
+  src:url(fonts/instrument-serif-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family:'Instrument Serif'; font-style:normal; font-weight:400;
+  src:url(fonts/instrument-serif-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family:'Instrument Serif'; font-style:italic; font-weight:400;
+  src:url(fonts/instrument-serif-italic-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+@font-face { font-family:'Inter'; font-style:normal; font-weight:300 700;
+  src:url(fonts/inter-latin-ext.woff2) format('woff2');
+  unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C4,U+2113,U+2C60-2C7F,U+A720-A7FF; }
+@font-face { font-family:'Inter'; font-style:normal; font-weight:300 700;
+  src:url(fonts/inter-greek.woff2) format('woff2');
+  unicode-range:U+0370-0377,U+037A-037F,U+0384-038A,U+038C,U+038E-03A1,U+03A3-03FF; }
+@font-face { font-family:'Inter'; font-style:normal; font-weight:300 700;
+  src:url(fonts/inter-latin.woff2) format('woff2');
+  unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD; }
+
+:root {
+  --navy:#060c1a; --ink:#0f172a; --text:#1e293b; --muted:#475569; --faint:#64748b; --rule:#dbe3ef; --panel:#f5f7fb;
+  --blue:#2563eb; --blue-l:#7cb3fb; --violet:#7c3aed; --violet-l:#b4a0fb; --cyan:#0891b2; --green:#15803d; --amber:#b45309; --red:#b91c1c; --orange:#c2410c;
+  --serif:'Instrument Serif',Georgia,'Times New Roman',serif;
+  --sans:'Inter','Segoe UI',system-ui,Arial,sans-serif;
+  --mono:'Cascadia Mono',Consolas,'SFMono-Regular',monospace;
+}
+@page { size:A4; margin:16mm 15mm 17mm 15mm;
+  @bottom-left { content:"Hamza Khan \00B7  Research & Technical Specification \00B7  v1.0 \00B7  25 October 2026"; font:7.4pt var(--sans); font-family:'Inter','Segoe UI',Arial,sans-serif; color:#64748b; }
+  @bottom-right { content:counter(page) " / " counter(pages); font-size:7.4pt; font-family:'Inter','Segoe UI',Arial,sans-serif; color:#64748b; }
+}
+@page :first { @bottom-left { content:none; } }
+* { box-sizing:border-box; }
+html { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+body { margin:0; font-family:var(--sans); font-size:9.3pt; line-height:1.48; color:var(--text); }
+h1,h2,h3 { font-family:var(--serif); font-weight:400; color:var(--ink); margin:0; }
+h2 { font-size:21pt; line-height:1.1; margin:16pt 0 6pt; padding-top:2pt; break-after:avoid; }
+h2 .n { font-style:italic; color:var(--violet); margin-right:8pt; }
+h2::after { content:""; display:block; width:40pt; height:2pt; margin-top:5pt; border-radius:2pt; background:linear-gradient(90deg,#3b82f6,#8b5cf6); }
+h3 { font-size:13.5pt; line-height:1.15; margin:11pt 0 4pt; break-after:avoid; }
+p { margin:0 0 6pt; }
+ul, ol { margin:0 0 6pt; padding-left:15pt; }
+li { margin:0 0 2.5pt; }
+b, strong { font-weight:650; color:var(--ink); }
+code, .mono { font-family:var(--mono); font-size:.86em; background:#eef2f8; color:#1e3a8a; padding:0 3pt; border-radius:3pt; overflow-wrap:anywhere; }
+.pb { break-before:page; }
+.avoid { break-inside:avoid; }
+.small { font-size:8.3pt; }
+.faint { color:var(--faint); }
+table { width:100%; border-collapse:collapse; margin:4pt 0 8pt; font-size:8.3pt; line-height:1.38; break-inside:auto; }
+thead { display:table-header-group; }
+tr { break-inside:avoid; }
+th { text-align:left; font-weight:650; font-size:7.4pt; letter-spacing:.06em; text-transform:uppercase; color:#334155; border-bottom:1.2pt solid #94a3b8; padding:4pt 5pt 3pt; }
+td { border-bottom:.6pt solid var(--rule); padding:3.4pt 5pt; vertical-align:top; }
+td.num, th.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+.cap { font-size:7.8pt; color:var(--faint); margin:-3pt 0 9pt; }
+figure { margin:6pt 0 9pt; break-inside:avoid; }
+figure img { width:100%; display:block; border-radius:5pt; }
+figure.w80 img { width:80%; margin:0 auto; }
+figcaption { font-size:7.8pt; color:var(--faint); margin-top:3pt; }
+.callout { border-left:3pt solid #8b5cf6; background:var(--panel); padding:6pt 9pt; margin:6pt 0 9pt; border-radius:0 5pt 5pt 0; break-inside:avoid; }
+.callout.a { border-left-color:#d97706; } .callout.g { border-left-color:#16a34a; } .callout.r { border-left-color:#dc2626; } .callout.b { border-left-color:#2563eb; }
+.eq { font-family:var(--serif); font-size:13pt; text-align:center; margin:5pt 0 7pt; color:var(--ink); }
+.eq i { font-style:italic; }
+.two { display:grid; grid-template-columns:1fr 1fr; gap:10pt; }
+.pill { display:inline-block; font-size:6.8pt; font-weight:700; letter-spacing:.07em; text-transform:uppercase; padding:1pt 5pt; border-radius:8pt; border:.8pt solid; vertical-align:1pt; white-space:nowrap; }
+.pill.impl { color:#1d4ed8; border-color:#93c5fd; background:#eff6ff; }
+.pill.emp { color:#15803d; border-color:#86efac; background:#f0fdf4; }
+.pill.expl { color:#c2410c; border-color:#fdba74; background:#fff7ed; }
+.pill.prop { color:#6d28d9; border-color:#c4b5fd; background:#f5f3ff; }
+.pill.ass { color:#b45309; border-color:#fcd34d; background:#fffbeb; }
+.pill.ill { color:#0e7490; border-color:#67e8f9; background:#ecfeff; }
+.v-sup { color:var(--green); font-weight:650; } .v-not { color:var(--amber); font-weight:650; } .v-inc { color:var(--amber); font-weight:650; } .v-neu { color:var(--muted); font-weight:650; }
+/* cover */
+.cover { background:var(--navy); color:#e2e8f0; border-radius:8pt; padding:20pt 22pt 18pt; margin:0 0 12pt; position:relative; overflow:hidden; }
+.cover::after { content:""; position:absolute; right:-60pt; top:-60pt; width:220pt; height:220pt; border-radius:50%; background:radial-gradient(circle, rgba(139,92,246,.35), rgba(59,130,246,.08) 60%, transparent 70%); }
+.cover .kick { font-size:7.6pt; font-weight:700; letter-spacing:.18em; text-transform:uppercase; color:#7cb3fb; display:flex; align-items:center; gap:8pt; }
+.cover .kick::before { content:""; width:26pt; height:1.6pt; background:linear-gradient(90deg,#3b82f6,#8b5cf6); }
+.cover h1 { font-size:29pt; line-height:1.04; color:#c7d6fe; margin:8pt 0 6pt; max-width:420pt; }
+.cover .sub { font-size:10.4pt; color:#cbd5e1; max-width:440pt; line-height:1.4; }
+.cover .meta { margin-top:11pt; font-size:7.9pt; color:#94a3b8; line-height:1.5; }
+.cover .meta b { color:#e2e8f0; font-weight:600; }
+.legend { display:grid; grid-template-columns:auto 1fr; gap:3pt 8pt; align-items:baseline; font-size:8.1pt; margin:4pt 0 8pt; }
+/* architecture diagram */
+.arch { display:grid; grid-template-columns:repeat(7, 1fr); gap:5pt; margin:6pt 0 4pt; }
+.arch .box { border:1pt solid #c7d2fe; background:#f8faff; border-radius:5pt; padding:5pt 5pt 4pt; font-size:7.5pt; line-height:1.3; text-align:center; position:relative; }
+.arch .box b { display:block; font-size:8.2pt; color:#1e3a8a; margin-bottom:2pt; }
+.arch .box:not(:last-child)::after { content:"\2192"; position:absolute; right:-7.5pt; top:38%; color:#6366f1; font-weight:700; font-size:9pt; }
+.arch-band { border-radius:5pt; padding:4pt 7pt; font-size:7.6pt; text-align:center; margin:3pt 0; }
+.arch-band.reg { background:#f5f3ff; border:1pt dashed #a78bfa; color:#5b21b6; }
+.arch-band.val { background:#ecfdf5; border:1pt solid #86efac; color:#166534; }
+.kpis { display:grid; grid-template-columns:repeat(4,1fr); gap:6pt; margin:6pt 0 8pt; }
+.kpi { border:1pt solid var(--rule); border-radius:5pt; padding:5pt 7pt; background:#fbfcfe; }
+.kpi .n { font-family:var(--serif); font-size:17pt; color:#3730a3; line-height:1.05; }
+.kpi .l { font-size:7.3pt; color:var(--muted); line-height:1.3; margin-top:2pt; }
+.refs li { margin-bottom:3pt; font-size:8.1pt; }
+</style>
+</head>
+<body>
+
+<!-- ═══════════ COVER ═══════════ -->
+<div class="cover">
+  <div class="kick">Borel Capital &middot; Research &amp; Technical Specification</div>
+  <h1>A multi-layer alternative-data research system</h1>
+  <div class="sub">First application, I1: crude inventories at Cushing before the weekly EIA report. Physical measurement as the central thesis (B), a published price effect as a separate replication (A).</div>
+  <div class="meta"><b>Hamza Khan</b> &middot; version 1.0 &middot; 25 October 2026 &middot; companion to the application deck (45 pages)<br>
+  Repository <span class="mono" style="background:rgba(255,255,255,.08); color:#c7d6fe">multilayer-altdata</span>, commit <span class="mono" style="background:rgba(255,255,255,.08); color:#c7d6fe" id="commit">04134e6</span> &middot; pre-registrations v1 <span class="mono" style="background:rgba(255,255,255,.08); color:#c7d6fe">66bec92f&hellip;cbbe</span> and v2 <span class="mono" style="background:rgba(255,255,255,.08); color:#c7d6fe">acfe66ef&hellip;d84f</span></div>
+</div>
+
+<p>This document complements the deck. The deck gives the argument; this document gives a quantitative researcher what is needed to judge it: definitions, models, protocols, the exact files behind each number, and the statistical limits of what has been and can be shown. Paths are relative to the repository root. No strategy backtest, paper record or live result exists, and none is implied.</p>
+
+<div class="legend">
+  <span class="pill impl">Implemented</span><span>Code in the repository that runs and is tested; no claim about markets.</span>
+  <span class="pill emp">Empirical finding</span><span>A number computed by a script of the repository, with its output file; pre-registered unless marked exploratory.</span>
+  <span class="pill expl">Exploratory</span><span>Computed, but a validity rule was amended after a first run, or no decision rule was fixed in advance.</span>
+  <span class="pill prop">Proposed</span><span>A protocol or design that has not been run. Never presented as a result.</span>
+  <span class="pill ass">Assumption</span><span>An input that is chosen, not measured: costs, latency, capacity, coverage.</span>
+  <span class="pill ill">Illustrative</span><span>Arithmetic on assumptions (PnL grids, break-even examples). Never a result.</span>
+</div>
+
+<!-- ═══════════ 1 ═══════════ -->
+<h2><span class="n">1</span>Executive summary</h2>
+<p><b>Objective.</b> Build, within a six-month internship, one systematic strategy whose edge comes from information the market has not yet priced, and prove it at a level that justifies capital. The system is asset-class independent: sources, measurement and regimes change per idea; point-in-time discipline, validation and risk do not. Six ideas share it; I1 is developed first because its data can be tested now on free sources.</p>
+<div class="kpis">
+  <div class="kpi"><div class="n">9</div><div class="l">pre-registered tests run once (T1&ndash;T5, T1c, T2c, BS2, B0), each with its verdict</div></div>
+  <div class="kpi"><div class="n">91%</div><div class="l">of 828 same-pass tank pairs agree within 1&nbsp;m on roof depth (Sentinel-2, winter)</div></div>
+  <div class="kpi"><div class="n">0.16</div><div class="l">hub test correlation, 95% interval &minus;0.32 to 0.57 on 19 weeks: inconclusive</div></div>
+  <div class="kpi"><div class="n">&minus;2.6&nbsp;&cent;</div><div class="l">WTI move per 1&nbsp;Mb US ex-Cushing surprise within six minutes (t&nbsp;&minus;6.2); Cushing not detected</div></div>
+</div>
+<p><b>State of the work on 25 October 2026.</b></p>
+<ul>
+  <li><span class="pill impl">Implemented</span> A Python toolkit (EIA files and report archive, trading calendars, statistics, Sentinel-1/-2 access, OpenStreetMap tank registry, ENTSO-E, GIE AGSI+, Open-Meteo, HistData minute loader, roof-shadow model), 33 unit tests on synthetic data, two frozen pre-registrations whose hashes every test script verifies, single-run guards and trial logs.</li>
+  <li><span class="pill emp">Empirical finding</span> EIA report days are about 10% more volatile for WTI (1.10; 1.11 with the true release dates) and natural gas (1.09), less clearly since 2017. A naive surprise-direction test is not supported. Sentinel-2 roof-shadow depths are repeatable per tank; the weekly hub-level test is inconclusive. At the print, US ex-Cushing, gasoline and distillate surprises are priced within six minutes <span class="pill expl">Exploratory</span>; the Cushing coefficient is not detected on the outright.</li>
+  <li><span class="pill prop">Proposed</span> The nowcast ladder B1, the price-information test B2, the net-value test B3, the replication A, a vendor-data evaluation protocol, and a six-month plan with three gates whose outcomes are promising, inconclusive or stop.</li>
+</ul>
+<div class="callout"><b>Scientific reading so far.</b> The free 10&nbsp;m optical route measures floating-roof depth repeatably, but at Cushing its weekly cadence (one orbit, clouds, sun angle) is the binding constraint. The outright WTI price absorbs inventory news within minutes, and the Cushing-specific part is small on the outright. Value, if any, must come from (i) incorporation before the API and EIA releases, (ii) the CL1&ndash;CL2 spread, where hub scarcity should show, or (iii) higher-cadence data. Each is tested before money is spent (Sections 5&ndash;9).</div>
+<div class="callout a"><b>Statistical reality.</b> A weekly event strategy makes about 52 decisions a year. The standard error of a forecast&ndash;price correlation measured on <i>n</i> decisions is about 1/&radic;<i>n</i>: telling &rho;&nbsp;=&nbsp;0.06 from zero at two standard errors needs about 1,100 decisions, two decades of reports. PnL alone cannot validate I1 within six months. The gates therefore rest on higher-information intermediate evidence (measurement error, nowcast error on first-published values, price transmission) and on mechanism; the held-back window is a consistency check, not a proof.</div>
+
+<!-- ═══════════ 2 ═══════════ -->
+<h2><span class="n">2</span>Research integrity conventions</h2>
+<table>
+  <thead><tr><th style="width:22%">Rule</th><th>Implementation in the repository</th></tr></thead>
+  <tbody>
+    <tr><td>Pre-registration</td><td><code>prereg/tests_v1.json</code> (T1&ndash;T5), SHA-256 <code>66bec92f8383607c1777e3d69c23aa8abd25efa1f90bead18fc9f22615f1cbbe</code>; <code>prereg/tests_v2.json</code> (T1c, T2c, BS0&ndash;BS2, B0), SHA-256 <code>acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f</code>, frozen 2026-10-25 01:21 (+02:00) and recorded in <code>results/v2/prereg_v2.sha256</code>. Scripts stop if the hash differs.</td></tr>
+    <tr><td>Single run, trial log</td><td>Each test ran once. The v2 scripts for T1c, T2c and B0 refuse to overwrite an existing result. Every v2 run appends a line (id, timestamp, script, hash, verdict, seconds) to <code>results/v2/trial_log_v2.csv</code>: ids BS1, BS0+BS1, BS2, FIG, T1c, T2c, B0, B0-AM1.</td></tr>
+    <tr><td>Deviations before statistics</td><td>Implementation choices left open by the pre-registration are dated and written before the statistic they affect: <code>results/deviations.md</code>, <code>results/v2/deviations_v2.md</code> (13 items for B-S, 9 for T1c/T2c/B0).</td></tr>
+    <tr><td>Amendments</td><td>One: AM-B0-1, after the B0 validity gate failed and before any outcome was computed. The blocked first run stays in <code>results/v2/B0/</code>; the amended run is <code>results/v2/B0_amended/</code> and is reported as exploratory.</td></tr>
+    <tr><td>Verdicts</td><td>Three outcomes, fixed in advance: supported / not supported / inconclusive (or signal / no signal / inconclusive). Inconclusive is never a pass.</td></tr>
+    <tr><td>Point-in-time</td><td>Availability timestamps, not event timestamps, define what is known. EIA values are first publications from the report archive; satellite scenes count from their publication time.</td></tr>
+    <tr><td>Secrets and licences</td><td>API keys are read from the environment and never printed or committed. Licensed data (HistData minute files) and image caches are not redistributed; scripts rebuild caches from the sources.</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══════════ 3 ═══════════ -->
+<h2><span class="n">3</span>System architecture, common to the six ideas</h2>
+<p>The scaffold is <span class="pill impl">Implemented</span> for data access, point-in-time storage, statistics and validation; the regime, fusion and risk layers are <span class="pill prop">Proposed</span> for I1 and specified below.</p>
+<p><b>Interface contract.</b> Every layer passes, at a timestamp, a value, an uncertainty interval, an age and a coverage flag. A week without an admissible measurement falls back to the public model; uncertainty is propagated, not discarded. <b>Engineering per data type:</b> optical and radar images use physical forward models first (Section 5) and learned models only when labels exist; text uses embeddings with explicit look-ahead controls (filing dates, anonymised identifiers); flows use sequence models; tabular series use linear models or trees.</p>
+<div class="avoid">
+<div class="arch">
+  <div class="box"><b>Sources</b>free first (EIA, Sentinel, OSM), vendors where a gap is measured</div>
+  <div class="box"><b>Measurement</b>engineering per data type; physical models before learned ones</div>
+  <div class="box"><b>Point-in-time store</b>value, interval, age, coverage, publication time</div>
+  <div class="box"><b>Nowcast</b>public baseline, then the source as an increment</div>
+  <div class="box"><b>Price model</b>information beyond prices already seen</div>
+  <div class="box"><b>Risk and sizing</b>event risk, CVaR cap, volatility target</div>
+  <div class="box"><b>Execution</b>cut-off, fills at bid/ask, abstention</div>
+</div>
+<div class="arch-band reg">Regime layer: observability (clouds, revisits), curve state, volatility regime, calendar events: it weights sources and sizes risk; it is not an alpha.</div>
+<div class="arch-band val">Validation, constant: pre-registration, walk-forward with embargo, placebos, trial accounting, held-back window kept by Borel.</div>
+</div>
+<table>
+  <thead><tr><th style="width:24%">Idea</th><th style="width:13%">Status</th><th>Mechanism and evidence in this repository</th></tr></thead>
+  <tbody>
+    <tr><td>I1 Energy inventories</td><td>Developed</td><td>Physical stock measurement before the EIA report (this document).</td></tr>
+    <tr><td>I2 European power and gas</td><td>Prepared</td><td>Weather balance moves prices and storage draws. T4: &minus;15.9&nbsp;EUR/MWh per +10 points of wind and solar share (t&nbsp;=&nbsp;&minus;16.4; <code>results/T4.json</code>); T5: +645&nbsp;GWh/d of EU net withdrawal per heating degree day (t&nbsp;=&nbsp;37.5; <code>results/T5.json</code>). Mechanisms, not signals: forecasts are as published, after the auction.</td></tr>
+    <tr><td>I3 Equity revenue before earnings</td><td>Next</td><td>Transaction or geolocation panels nowcast revenue; needs a panel with point-in-time history.</td></tr>
+    <tr><td>I4 Text, I5 crops, I6 event volatility</td><td>Reserve</td><td>Same discipline; PnL of I4 not quantified (effective number of bets unknown).</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══════════ 4 ═══════════ -->
+<h2><span class="n">4</span>I1 specification</h2>
+<h3>4.1 Timeline and hypotheses</h3>
+<p>EIA stocks are as of Friday 07:00 CT; the industry (API) estimate is published Tuesday 16:30 ET; the EIA Weekly Petroleum Status Report is published Wednesday 10:30 ET, shifted in holiday weeks. Release dates come from the EIA report archive (796 releases since 2011, <code>audit/eia_release_registry.csv</code>): the rule calendar used by v1 misdated 14 of 660 weeks in 2011&ndash;2024 (<code>audit/calendar_audit.md</code>).</p>
+<div class="callout b"><b>Thesis B, central.</b> Let <i>Y<sub>t</sub></i> be the first-published weekly change of Cushing stocks, <i>X<sub>t</sub></i> the public information at a decision time <i>&tau;<sub>t</sub></i> before the release (prices, curve, lagged stocks, season, the API figure if already out), and <i>Z<sub>t</sub></i> a physical measurement available at <i>&tau;<sub>t</sub></i>. B holds if E[&Delta;<i>P<sub>t</sub></i> | <i>X<sub>t</sub></i>, <i>Z<sub>t</sub></i>] differs from E[&Delta;<i>P<sub>t</sub></i> | <i>X<sub>t</sub></i>] by more than trading costs, for a tradable price change &Delta;<i>P<sub>t</sub></i>. It is tested as a chain: <b>B-S</b> (does an admissible <i>Z</i> exist, with known error, coverage and age?) &rarr; <b>B1</b> (does <i>Z</i> improve the forecast of <i>Y</i> beyond a public model?) &rarr; <b>B2</b> (does that improvement carry price information?) &rarr; <b>B3</b> (does it survive costs, capacity and the data cost?). A pass at one step proves nothing at the next.</div>
+<div class="callout"><b>Branch A, complementary.</b> Alturki and Kurov (2022) report that the WTI return in the 30 minutes after the API release predicts the return between 60 minutes and 1 minute before the EIA release (January 2011 &ndash; August 2019). A is a replication and a recent extension of a published effect, capped in effort and reported separately. It shares infrastructure with B (events, prices, execution) but is never counted as evidence for B.</div>
+<p><b>Mechanism and counterparty.</b> Participants who react to the print and hedgers without an informational motive. Two forces work against B: storage arbitrage makes stocks respond to prices (a better stock forecast is not automatically a price forecast), and satellite information is partly priced before announcements (Mukherjee, Panayotov and Shon, 2021); vendors already sell measurements. The bar is information beyond prices, not a better picture.</p>
+
+<h3>4.2 Targets and surprise proxy</h3>
+<p>The target is the change of Cushing stocks as first published in the week's report (current minus prior level printed in the same release; <code>results/v2/eia_first_release.csv</code>). Cushing first publications equal the latest values in all 795 archived weeks; US commercial crude differs in 272 weeks of 2011&ndash;2016 (<code>audit/vintage_audit.md</code>). The surprise proxy is <i>u<sub>t</sub></i> = <i>Y<sub>t</sub></i> &minus; <i>m</i><sub>0</sub>(<i>X<sub>t</sub></i>), with <i>m</i><sub>0</sub> a recursive AR(2) with intercept on first-published changes since 2011-07-22 (at least 104 rows). It is a proxy, not the market consensus. US crude excluding Cushing is US commercial crude minus Cushing in both terms.</p>
+
+<h3>4.3 Data contracts</h3>
+<table>
+  <thead><tr><th style="width:17%">Source</th><th style="width:27%">Content</th><th style="width:30%">Availability rule and vintage</th><th>Licence</th></tr></thead>
+  <tbody>
+    <tr><td>EIA report archive</td><td>Release dates; first-published weekly stocks (Cushing, US commercial, gasoline, distillate)</td><td>Archive folder date; data-only re-issues dropped; earliest release per week</td><td>Public domain</td></tr>
+    <tr><td>EIA NYMEX series</td><td>Daily contracts 1&ndash;2 (WTI, Henry Hub)</td><td>Official settles; series stop on 2024-04-05</td><td>Public domain</td></tr>
+    <tr><td>Sentinel-2 L2A</td><td>10&nbsp;m optical, Element 84 Earth Search STAC</td><td>Counts from publication: median 6.0&nbsp;h after sensing, p90 8.6&nbsp;h, max 12.8&nbsp;h (149 products in 2026, Copernicus Data Space catalogue)</td><td>Free, full and open</td></tr>
+    <tr><td>Sentinel-1 RTC</td><td>Radar amplitude, Microsoft Planetary Computer</td><td>At Cushing ascending only: about 55 passes a year in 2019&ndash;21, 28&ndash;31 since 2022</td><td>Free, full and open</td></tr>
+    <tr><td>OpenStreetMap</td><td>Tank outlines</td><td>Volunteered; incomplete; roof type not tagged</td><td>ODbL</td></tr>
+    <tr><td>HistData</td><td>WTI minute bid bars</td><td>Clock converted by period, checked against the CME daily halt; no file for 2024-01 to 2026-05</td><td>Free download, not redistributed</td></tr>
+    <tr><td>To obtain at Borel</td><td>CL1, CL2 and spread quotes with sizes; API and EIA timestamps; vendor histories as delivered; forecast runs as issued</td><td>Timestamped at receipt; revisions kept apart</td><td>Under Borel licences</td></tr>
+  </tbody>
+</table>
+
+<h3>4.4 Instruments and position generation <span class="pill prop">Proposed</span></h3>
+<ul>
+  <li><b>Instruments.</b> CL outright and the CL1&ndash;CL2 calendar spread, in USD per barrel (the traded unit; equal percentage moves of two maturities are not a zero spread move). Products and options only after B2.</li>
+  <li><b>Decision time.</b> Set by the delivery of the measurement (own pipeline or vendor), before the API release when possible; one primary cut-off chosen from coverage and availability, without looking at returns. A post-API variant is a separate experiment.</li>
+  <li><b>Signal and abstention.</b> Direction = sign of the forecast price change of the instrument; no position if the forecast edge is below the estimated cost plus a margin fixed on development data. One decision per data week: about 52 a year, fewer without a usable measurement. The outright and the spread are two expressions of one signal, not independent bets.</li>
+  <li><b>Holding.</b> From the cut-off to six minutes after the print (primary), 30 minutes after (one pre-declared secondary). Branch A has its own window: entry 60 minutes before the EIA release, exit 1 minute before (5 minutes before as a sensitivity).</li>
+</ul>
+
+<!-- ═══════════ 5 ═══════════ -->
+<h2 class="pb"><span class="n">5</span>B-S: physical measurement from free Sentinel-2 images</h2>
+<p><b>Question.</b> Can floating-roof depths at Cushing be measured from 10&nbsp;m images, repeatably and in time, before any return or EIA error is looked at? <b>Scope.</b> The OpenStreetMap registry holds 333 tanks in the 6.8&nbsp;&times;&nbsp;6.0&nbsp;km window; the 234 with a diameter of 40&nbsp;m or more are modelled. Roof types are not tagged: a fixed roof shows no internal shadow and ends as <i>full_or_fixed</i>.</p>
+<h3>5.1 Forward model <span class="pill impl">Implemented</span> <span class="small faint">src/altdata/tankshadow.py</span></h3>
+<p>When a floating roof sits a depth <i>d</i> below the rim, the wall on the sun side casts a crescent on it of width</p>
+<div class="eq"><i>s</i> = <i>d</i> / tan&nbsp;<i>&theta;</i>,&emsp; <i>&theta;</i> = sun elevation.</div>
+<p>For each interior pixel <i>p</i> (at least 90% of its 100 sub-points inside the disk), the shadowed share <i>f<sub>p</sub></i>(<i>d</i>) is computed on a 1&nbsp;m sub-grid for <i>d</i> &isin; {0, 0.5, &hellip;, 20}&nbsp;m, and the red band is modelled as</p>
+<div class="eq"><i>x<sub>p</sub></i> = <i>a</i>&thinsp;(1 &minus; <i>f<sub>p</sub></i>(<i>d</i>)) + <i>b</i>&thinsp;<i>f<sub>p</sub></i>(<i>d</i>) + <i>&epsilon;<sub>p</sub></i>,&emsp; <i>b</i> &le; <i>a</i>,</div>
+<p>with lit-roof level <i>a</i> and shadow level <i>b</i> re-estimated by least squares for each tank and date, so that atmosphere and calibration drop out. The estimate <i>d&#770;</i> minimises the residual sum of squares over the grid; the nominal 68% interval is {<i>d</i>: RSS(<i>d</i>) &minus; RSS<sub>min</sub> &le; <i>&sigma;&#770;</i><sup>2</sup>}. One translation per scene registers the registry to the image (correlation with a synthetic image of all 333 disks, &plusmn;2 pixels, parabolic refinement). Abstention, in order: <i>few_pixels</i> (&lt;&thinsp;8 interior pixels), <i>cloudy</i> (cloud or shadow classes within the disk plus 20&nbsp;m), <i>no_contrast</i> (<i>a</i>&nbsp;&minus;&nbsp;<i>b</i> &lt; 3<i>&sigma;&#770;</i>), then kept with a flag: <i>full_or_fixed</i> (<i>d&#770;</i>&nbsp;=&nbsp;0) and <i>wide_interval</i> (&gt;&thinsp;6&nbsp;m). The hub proxy is the volume change under the roofs of the tanks measured at both dates, &Delta;<i>V</i> = &minus;&Sigma;<sub><i>i</i></sub> <i>A<sub>i</sub></i>(<i>d<sub>i,F</sub></i> &minus; <i>d<sub>i,F&minus;1</sub></i>) &times; 6.2898&nbsp;bbl/m<sup>3</sup>, with <i>A<sub>i</sub></i> the roof area.</p>
+<p class="small"><b>Orientation check before any outcome</b> (<code>results/v2/BS1/geometry_check.json</code>): on three winter scenes, the median RSS ratio to a constant fit is 0.153 with the physical sun direction and 0.998 with the mirrored one (701 fits).</p>
+<figure><img src="../../figures/BS1_shadow_model.png" alt="Shadow geometry, observed red-band pixels of one tank and the fitted model"><figcaption>Figure 1. Geometry, observed pixels of the largest registry tank on its lowest-sun clear scene (chosen by a fixed rule, not by fit quality), and the fitted model. <code>figures/BS1_shadow_model.png</code>. Contains modified Copernicus Sentinel data (ESA).</figcaption></figure>
+
+<h3>5.2 Results <span class="pill emp">Empirical finding</span> <span class="small faint">descriptive tests BS0 and BS1; results/v2/BS0, results/v2/BS1</span></h3>
+<table>
+  <thead><tr><th style="width:30%">Quantity</th><th>Value</th><th style="width:30%">File</th></tr></thead>
+  <tbody>
+    <tr><td>Sentinel-2 acquisitions</td><td>603 (2018-12 to 2026-10), all on relative orbit R112; 441 with scene cloud &le;&thinsp;90% processed</td><td><code>BS0/catalog_summary.json</code></td></tr>
+    <tr><td>Usable pass within &plusmn;2 days of Friday, before the Tuesday cut-off</td><td>Sentinel-2: 39% of 410 weeks; 14% with sun &le;&thinsp;45&deg;; Sentinel-1: 44% (24&nbsp;h latency assumed)</td><td><code>BS0/availability_summary.json</code></td></tr>
+    <tr><td>Tank-dates with an estimate</td><td>60% of 103,194; cloudy 33%; no contrast 7%</td><td><code>BS1/coverage_summary.json</code></td></tr>
+    <tr><td>Repeatability, same pass</td><td>828 pairs imaged 27&nbsp;s apart by two satellites (4 winter dates, sun 31&ndash;36&deg;): 91% within 1&nbsp;m, 78% within 0.5&nbsp;m</td><td><code>BS1/stability.csv</code></td></tr>
+    <tr><td>Registration</td><td>Median |shift| 1.2&nbsp;m (x), 2.4&nbsp;m (y); 7% of scenes flagged at the search border</td><td><code>BS1/coverage_summary.json</code></td></tr>
+  </tbody>
+</table>
+<table>
+  <thead><tr><th>Sun elevation</th><th class="num">25&ndash;35&deg;</th><th class="num">35&ndash;45&deg;</th><th class="num">45&ndash;55&deg;</th><th class="num">55&ndash;65&deg;</th><th class="num">&gt;&thinsp;65&deg;</th></tr></thead>
+  <tbody>
+    <tr><td>Simulated RMSE of <i>d&#770;</i> (m) <span class="pill ill">Illustrative</span></td><td class="num">2.28</td><td class="num">3.20</td><td class="num">4.48</td><td class="num">6.07</td><td class="num">7.21</td></tr>
+    <tr><td>Coverage of the nominal 68% interval</td><td class="num">0.33</td><td class="num">0.38</td><td class="num">0.44</td><td class="num">0.52</td><td class="num">0.57</td></tr>
+  </tbody>
+</table>
+<p class="cap">Simulation (<code>BS1/identifiability.csv</code>): 30 catalogue scenes &times; 40 registry tanks &times; depths 0&ndash;14&nbsp;m per sun bin, centre offsets up to 5&nbsp;m, noise and contrast drawn from the real fits. Contrast is taken from identified fits only, so the simulation flatters the method.</p>
+<figure><img src="../../figures/BS1_identifiability.png" alt="Simulated precision by sun elevation and measured stability"><figcaption>Figure 2. Simulated precision by sun elevation (left) and measured stability of pairs at most two days apart (right). <code>figures/BS1_identifiability.png</code>.</figcaption></figure>
+
+<h3>5.3 Hub-level test BS2 <span class="pill emp">Empirical finding</span> <span class="small faint">results/v2/BS2/bs2.json</span></h3>
+<p>Rule fixed in advance: signal if the lower 95% bound of the correlation between &Delta;<i>V</i> and the first-published EIA change is above 0; no signal if the upper bound is below 0.20; otherwise inconclusive. Primary sample: both scenes with sun &le;&thinsp;45&deg; and measured tanks covering at least half of the roof area.</p>
+<table>
+  <thead><tr><th>Sample</th><th class="num">Weeks</th><th class="num">r</th><th>95% interval (Fisher)</th><th>Block bootstrap</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>Primary, low sun</td><td class="num">19</td><td class="num">0.16</td><td>&minus;0.32 to 0.57</td><td>&minus;0.32 to 0.67</td><td class="v-inc">Inconclusive</td></tr>
+    <tr><td>All seasons (secondary)</td><td class="num">57</td><td class="num">0.13</td><td>&minus;0.14 to 0.38</td><td>&minus;0.11 to 0.37</td><td class="v-neu">Reported</td></tr>
+  </tbody>
+</table>
+<p>Of 411 weeks, 159 have a selected scene and 62 a volume change; the nowcast secondary test was not evaluable (fewer than 20 earlier valid weeks).</p>
+<div class="two">
+  <figure><img src="../../figures/BS0_availability.png" alt="Share of EIA weeks with a usable pass, by month"><figcaption>Figure 3. Weeks with a usable pass, by month. <code>figures/BS0_availability.png</code>.</figcaption></figure>
+  <figure><img src="../../figures/BS2_proxy_vs_eia.png" alt="Hub proxy against the first-published EIA change"><figcaption>Figure 4. Hub proxy against the first-published change, primary sample. <code>figures/BS2_proxy_vs_eia.png</code>.</figcaption></figure>
+</div>
+
+<h3>5.4 What is and is not established</h3>
+<ul>
+  <li><b>Established:</b> a physically oriented, repeatable roof-depth measurement per tank on low-sun scenes, from free data.</li>
+  <li><b>Not established:</b> accuracy against operator gauges (none available: repeatability is not accuracy), and a weekly hub variable that tracks EIA.</li>
+  <li><b>Error model:</b> the nominal intervals are too narrow (33&ndash;57% coverage for 68%), so <i>&sigma;&#770;</i> understates the error (registration, point-spread function, roof structure). The day-to-day robust spread, 0.74&nbsp;m, equals 1.4826 times the 0.5&nbsp;m grid step: the grid, not the method, limits what the stability table can resolve.</li>
+  <li><b>Hub test:</b> independent tank noise averages out over 234 tanks; scene-wide errors do not. Likely causes of the weak correlation: few Friday-matched passes, up to two days between scene and stock date, scene calibration, tanks outside the EIA scope, and a weekly hub change of only about 1&nbsp;Mb.</li>
+  <li><b>Power:</b> detecting <i>r</i>&nbsp;=&nbsp;0.3 with 80% power at the 5% level needs about 85 weeks; at 14% usable low-sun weeks, that is more than a decade of Sentinel-2. The free optical route cannot settle the hub question quickly; cadence is the constraint.</li>
+</ul>
+<h3>5.5 Next steps for B-S <span class="pill prop">Proposed</span></h3>
+<ol>
+  <li>Scene calibration with references inside each scene (fixed roofs, ground), and an empirical error model fitted on repeat pairs instead of <i>&sigma;&#770;</i>.</li>
+  <li>Friday anchoring: interpolate depths to the stock date with an interval that grows with the gap.</li>
+  <li>Sentinel-1 phase data (SLC): roof-height methods from coherent scatterers exist for TerraSAR-X (Villamil Lopez and Stilla, 2021); they are not validated on Sentinel-1 and would be tested as such.</li>
+  <li>A vendor trial evaluated against the pilot on overlapping weeks (Section 8), and ground truth on a sample: operator gauges or very-high-resolution tasking.</li>
+</ol>
+
+<!-- ═══════════ 6 ═══════════ -->
+<h2><span class="n">6</span>Price experiments: B0 to B3, and branch A</h2>
+<h3>6.1 B0: transmission at the print <span class="pill emp">Empirical finding</span> <span class="pill expl">Exploratory</span></h3>
+<p><b>Design</b> (<code>scripts/b0_transmission.py</code>, deviations items 3&ndash;8). Events: Wednesday 10:30 releases dated by archive folder, 2013-08 to 2023-12 and 2026-06 to 2026-10 (562 candidates; excluded: 81 holiday-shifted, 2 data-only days, 15 without minute data, 3 without a surprise). Outcome: &Delta;<i>P</i> = close of the 10:35 bar minus close of the 10:29 bar, i.e. the WTI bid change from 10:30:00 to 10:36:00 ET, in USD per barrel. Regressors: the four first-published surprises (Cushing, US ex-Cushing, gasoline, distillate), each the error of its recursive AR(2), in million barrels. OLS with HC1 errors. Rule: transmission detected if the 95% interval of the Cushing coefficient lies below zero.</p>
+<p><b>Validity gate and amendment.</b> The pre-registered clock check (10:30 the largest one-minute move of 10:00&ndash;10:59 on at least 70% of days) failed: 205 of 464 days, 44%, although the average profile peaks at 10:30 (24.1 cents against 3&ndash;4 cents in the 15 minutes before). An argmax rule fails whenever volatility stays high for several minutes, so it did not test the clock. Before any outcome, AM-B0-1 replaced it by a year-wise gate (the mean profile must peak at 10:30 at more than three times its 10:15&ndash;10:29 mean). All years 2013&ndash;2023 pass; 2026 fails (10.9 cents against 5.5) and is excluded. B0 is therefore exploratory.</p>
+<table>
+  <thead><tr><th>Surprise (1&nbsp;Mb)</th><th class="num">Cents per barrel</th><th>95% interval</th><th class="num">t</th><th class="num">Surprise sd (Mb)</th></tr></thead>
+  <tbody>
+    <tr><td>Cushing</td><td class="num">&minus;3.07</td><td>&minus;6.56 to +0.43</td><td class="num">&minus;1.72</td><td class="num">1.16</td></tr>
+    <tr><td>US crude ex-Cushing</td><td class="num">&minus;2.62</td><td>&minus;3.44 to &minus;1.80</td><td class="num">&minus;6.25</td><td class="num">4.89</td></tr>
+    <tr><td>Gasoline</td><td class="num">&minus;3.58</td><td>&minus;5.00 to &minus;2.17</td><td class="num">&minus;4.96</td><td class="num">2.77</td></tr>
+    <tr><td>Distillate</td><td class="num">&minus;3.10</td><td>&minus;4.53 to &minus;1.66</td><td class="num">&minus;4.24</td><td class="num">2.45</td></tr>
+  </tbody>
+</table>
+<p class="cap">447 releases, 2013&ndash;2023; R&sup2; 0.21; sd of &Delta;<i>P</i> 39.1 cents. Secondary horizon (to 11:01, 436 releases): Cushing &minus;1.42 (t&nbsp;&minus;0.65), ex-Cushing &minus;1.82 (t&nbsp;&minus;3.07), R&sup2; 0.07. <code>results/v2/B0_amended/b0.json</code>; verdict NOT DETECTED.</p>
+<figure class="w80"><img src="../../figures/B0_transmission.png" alt="Average one-minute move around 10:30 and coefficients per 1 Mb of surprise"><figcaption>Figure 5. Left: mean absolute one-minute change on the 464 release days of the clock check. Right: coefficients with 95% intervals. <code>figures/B0_transmission.png</code>.</figcaption></figure>
+<p><b>Reading.</b> Inventory news is priced within minutes, with similar per-Mb effects across categories; the Cushing surprise is small (sd 1.16&nbsp;Mb against 4.89 for the rest of US crude), so a one-sd Cushing surprise is worth about 3&ndash;4 cents a barrel on the outright at the print. <b>Limits:</b> the surprise is a proxy, not the consensus; bid-only CFD prices; outright only, no spread; 2026 excluded; no data for 2024-01 to 2026-05. <b>Scope:</b> a regression on the realised surprise is an ex-post diagnostic of transmission; a position built on <i>u</i> would be an oracle, not a backtest.</p>
+
+<h3>6.2 B1: incremental nowcast value <span class="pill prop">Proposed</span></h3>
+<table>
+  <thead><tr><th style="width:12%">Model</th><th>Content</th><th style="width:34%">Status</th></tr></thead>
+  <tbody>
+    <tr><td>B1a</td><td>AR(2) on the weekly change, expanding window</td><td><span class="pill emp">Finding</span> out-of-sample R&sup2; 0.307 on 521 forecasts (final series), 0.324 on 517 first-published values; RMSE 1.20&nbsp;Mb against 1.44 for a constant mean; sign hit 0.67; &plusmn;1.2&nbsp;Mb holds 74% of errors (<code>results/v2/baseline_cushing/metrics.json</code>)</td></tr>
+    <tr><td>B1b</td><td>Public model: season, lagged stocks, curve, prices already seen, API if known at the cut-off</td><td>To build; the benchmark that matters</td></tr>
+    <tr><td>B1c</td><td>B1b plus <i>Z</i>, its age, coverage and uncertainty</td><td>Requires an admissible <i>Z</i> (B-S)</td></tr>
+  </tbody>
+</table>
+<p>Walk-forward with an embargo; normalisation and calibration on the past only; extraction variants counted as trials. Metrics: RMSE, MAE, bias, interval calibration and the paired loss difference with a moving-block bootstrap (blocks of four weeks). <b>Promising</b> if the 95% interval of the loss difference favours B1c over B1b on the evaluation window and the gain holds at realistic cut-offs and in separate periods; <b>stop</b> if a useful gain is excluded; otherwise <b>inconclusive</b>. Weeks without <i>Z</i> stay in the universe: both common-coverage and operational (fallback) performance are reported. A noisy source can still help the residual of a precise benchmark; its raw error need not beat 1.20&nbsp;Mb.</p>
+
+<h3>6.3 B2: information beyond prices <span class="pill prop">Proposed</span></h3>
+<p>Compare <i>g</i><sub>0</sub>(<i>X</i>) and <i>g</i><sub>1</sub>(<i>X</i>, <i>a</i>) on the price change of each instrument from the cut-off to six minutes after the print, where <i>a</i> is the B1 correction produced out of fold (never fitted on the period it predicts), and <i>X</i> includes the curve, past returns and, after the API, the post-API move used by A. The test statistic is <i>&rho;</i>, the out-of-sample correlation between the forecast and the price change; the cost threshold is</p>
+<div class="eq"><i>&rho;</i>* = <i>k</i> / &radic;(2/&pi;) &asymp; 0.025 for <i>k</i> = 0.02 (CL).</div>
+<p><b>Promising</b> if the lower 95% bound of <i>&rho;</i> is above zero and the estimate above <i>&rho;</i>*; <b>stop</b> if the upper bound is below <i>&rho;</i>*; otherwise <b>inconclusive</b>. CL and CL1&ndash;CL2 are measured separately; the instrument is chosen on development data, then frozen. With five years of weekly decisions (<i>n</i>&nbsp;&asymp;&nbsp;260) the standard error of <i>&rho;</i> is about 0.06, so only large effects can be confirmed; small ones will remain inconclusive, and that will be reported as such.</p>
+
+<h3>6.4 B3: net value against the same strategy without the source <span class="pill prop">Proposed</span></h3>
+<p>Policy: one unit in the direction of the forecast price change, abstention below cost plus a margin fixed on development data. Counterfactual: same calendar, risk rules and costs with the public model only; the value of the source is the PnL difference, not the total PnL. Fills at bid and ask with sizes, fees, latency, weeks without measurement, size limits. Reported: mean per eligible event and per trade with intervals, drawdown, tail risk, concentration by year, abstention rate, break-even cost. Capacity from depth and impact, then the maximum data budget. Fifty-two announcements do not become 104 independent bets by adding a second instrument.</p>
+
+<h3>6.5 Branch A: replication and recent extension <span class="pill prop">Proposed</span> <span class="small faint">not run</span></h3>
+<p><b>A-R</b> reproduces the published regression (WTI return from EIA &minus;60 to &minus;1 minute on the return in the 30 minutes after the API release; January 2011 &ndash; August 2019) from a transcription of the paper's definitions, and explains differences before any extension. It was not run before the deadline: the published tables were not accessed, so a faithful protocol could not be fixed. <b>A-P</b> tests persistence on recent tradable quotes: signal from the 30 minutes after 16:30 ET with a quote convention fixed in advance (CL halts at 17:00 ET, at 17:15 before 21 September 2015), entry at EIA &minus;60 minutes, exit at &minus;1; aggressive one-lot orders after 1&nbsp;s latency, 10&nbsp;s stress <span class="pill ass">Assumption</span>. Baselines: no position, recursive mean, calendar-only rule. A positive A is reported separately and never as support for B.</p>
+
+<!-- ═══════════ 7 ═══════════ -->
+<h2><span class="n">7</span>Validation, decision rules and statistical limits</h2>
+<ul>
+  <li><b>Sample status.</b> Development (seen by the researcher), diagnostic (transition periods), held-back (kept by Borel, never inspected). A period already seen is exploratory, whatever its date.</li>
+  <li><b>Trial accounting.</b> Every extraction, model and instrument variant is a trial and is logged; selection uses development data only; the selected variant is frozen before the evaluation window is opened.</li>
+  <li><b>Multiple testing.</b> Families are declared in advance (e.g. Holm across the two T1 markets); exploratory results are labelled and never used as confirmation.</li>
+  <li><b>Gates.</b> Each gate ends promising, inconclusive or stop, by a rule written before the data. Inconclusive is not a pass: it triggers either more data of a stated kind or a stop.</li>
+</ul>
+<table>
+  <thead><tr><th style="width:36%">Quantity</th><th>Arithmetic</th><th style="width:28%">Consequence</th></tr></thead>
+  <tbody>
+    <tr><td>Decisions a year (I1)</td><td>About 52, fewer without a usable measurement</td><td>PnL accrues slowly</td></tr>
+    <tr><td>Standard error of a measured correlation</td><td>&asymp;&thinsp;1/&radic;<i>n</i>: 0.14 on one year, 0.06 on five</td><td>One year cannot tell 0.06 from 0</td></tr>
+    <tr><td>Decisions to tell <i>&rho;</i> = 0.06 from 0 at 2 se</td><td>(2/0.06)<sup>2</sup> &asymp; 1,100, about 21 years</td><td>Gates rely on B-S, B1 and B0, not on PnL alone</td></tr>
+    <tr><td>Weeks to detect <i>r</i> = 0.3 (80% power, 5%)</td><td>((1.96 + 0.84) / atanh&thinsp;0.3)<sup>2</sup> + 3 &asymp; 85</td><td>Hub test needs higher cadence</td></tr>
+  </tbody>
+</table>
+<p><b>What would falsify B.</b> No admissible weekly variable with a known error at a usable cadence (B-S); no out-of-sample gain over the public model (B1); a gain in stock forecasts with no price information beyond <i>X</i> (B2); a price effect that does not survive costs, capacity or the data cost (B3). If several physically credible sources fail successively against a solid benchmark, the thesis itself is reduced or abandoned.</p>
+
+<!-- ═══════════ 8 ═══════════ -->
+<h2><span class="n">8</span>Commercial data: when a purchase is justified</h2>
+<table>
+  <thead><tr><th style="width:22%">Product</th><th style="width:40%">Documented by the vendor</th><th>Not established for I1</th></tr></thead>
+  <tbody>
+    <tr><td>Kpler, Cushing drone inventories</td><td>Optical and infrared drone survey three times a week, before the EIA figure</td><td>Delivered history, timing, error on weekly changes, price</td></tr>
+    <tr><td>Ursa Space, Cushing from radar</td><td>Monday delivery; vendor-reported 0.98 correlation with EIA levels in 2023 (12 February 2024)</td><td>Accuracy on changes and surprises; level correlations overstate</td></tr>
+    <tr><td>Energy Aspects / Kayrros</td><td>Terminal and tank estimates; Kayrros acquisition completed 21 May 2026</td><td>Independent accuracy at Cushing, latency, usage rights</td></tr>
+    <tr><td>ICEYE</td><td>Commercial radar down to 0.5&nbsp;m in some modes</td><td>Not a stock series: tasking, archive, processing cost</td></tr>
+  </tbody>
+</table>
+<p><b>Gap measured by the pilot:</b> cadence (14% of weeks usable with a low sun), scene calibration (the hub sum does not yet track EIA) and truth (no gauge). <b>Evaluation protocol</b> <span class="pill prop">Proposed</span>: (1) request the history as delivered, with delivery timestamps, coverage flags and revisions, under a research licence; (2) freeze the evaluation code before receiving the data; (3) run B1c(vendor) against B1b on first-published changes, then B2 and B3 on the same windows; (4) compare with the free pilot on overlapping weeks; (5) apply the economic gate.</p>
+<div class="callout a"><b>Economic gate.</b> Buy if <i>G</i>, the annual incremental net PnL with the source minus without it at a size the book allows, exceeds the data and processing cost on a conservative estimate. Break-even per covered event: <i>c</i><sub>min</sub> = <i>C</i> / (<i>q</i> &times; 1,000 &times; <i>&kappa;</i> &times; 52) USD per barrel, for a cost <i>C</i>, <i>q</i> contracts and coverage <i>&kappa;</i>. <span class="pill ill">Illustrative</span> <i>C</i>&nbsp;=&nbsp;30,000&nbsp;USD, <i>q</i>&nbsp;=&nbsp;10, <i>&kappa;</i>&nbsp;=&nbsp;0.4 gives about 14 cents a barrel per covered event, above the 3&ndash;4 cents a one-sd Cushing surprise is worth on the outright at the print (B0). Value must therefore come from the spread, earlier incorporation or size, each tested first.</div>
+
+<!-- ═══════════ 9 ═══════════ -->
+<h2><span class="n">9</span>Execution, costs, risk, capacity and capital</h2>
+<ul>
+  <li><b>Execution simulation.</b> Fills at bid and ask with displayed sizes, latency 1&nbsp;s with a 10&nbsp;s stress, fees per contract; a missing exit quote never deletes an open trade (pre-declared liquidation rule, cost kept) <span class="pill ass">Assumption</span>.</li>
+  <li><b>Cost.</b> <i>k</i> = round-trip cost / sd of the move: about one tick plus fees (15&ndash;25&nbsp;USD) against a daily sd of 1,000&ndash;1,700&nbsp;USD per contract gives <i>k</i>&nbsp;&asymp;&nbsp;0.02 <span class="pill ass">Assumption</span>, to be replaced by Borel's costs.</li>
+  <li><b>Risk.</b> Event risk: size so that a two-sd move over the release window costs a fixed share of the risk budget, with the window measured on minute data (sd 39 cents over the six minutes after 10:30), not taken from daily data; CVaR of the release window as a position cap; volatility targeting; no position across an uncertain release time.</li>
+  <li><b>Capacity.</b> Assumed not binding at a few M$ of annual risk in CL; to be measured on order-book data <span class="pill ass">Assumption</span>.</li>
+  <li><b>Capital.</b> Backtest, then an isolated logged paper run, then 25%, 50% and 100% of target risk. Proposed defaults, to be set with Borel's risk team: halve risk at a drawdown of one annual sd of strategy PnL, stop at 1.5. Capital only under Borel's mandate and approval.</li>
+</ul>
+<p><b>Conditional PnL</b> <span class="pill ill">Illustrative</span>. For constant-size bets on the sign of a forecast (Gaussian approximation), with <i>N</i> independent decisions a year and annual risk budget <i>B</i>:</p>
+<div class="eq">IR = &radic;<i>N</i>&thinsp;(&radic;(2/&pi;)&thinsp;<i>&rho;</i> &minus; <i>k</i>),&emsp; PnL = IR &times; <i>B</i>.</div>
+<p>For I1 (<i>N</i>&nbsp;=&nbsp;52, <i>k</i>&nbsp;=&nbsp;0.02, <i>B</i>&nbsp;=&nbsp;1&nbsp;M$): 0.03 / 0.20 / 0.43&nbsp;M$ a year at <i>&rho;</i> = 0.03 / 0.06 / 0.10 (<code>results/v2/pnl_grid_v2.csv</code>, <code>scripts/pnl_grid.py</code>). <i>&rho;</i> is the correlation with the price move, measured in B2, not with the stock surprise. The first grid counted 52 oil and 52 gas reports (<i>N</i>&nbsp;=&nbsp;104); it is kept in <code>results/pnl_grid.csv</code>. These are orders of magnitude conditional on <i>&rho;</i>, never results.</p>
+
+<!-- ═══════════ 10 ═══════════ -->
+<h2><span class="n">10</span>Results registry</h2>
+<table>
+  <thead><tr><th style="width:9%">Test</th><th style="width:15%">Status</th><th>Result</th><th style="width:27%">File (trial id)</th></tr></thead>
+  <tbody>
+    <tr><td>T1</td><td><span class="pill emp">Finding</span></td><td>Report-day |return| ratio: WTI 1.105 [1.025, 1.189], 743 days, Holm p 0.017; gas 1.088 [1.007, 1.175], p 0.052; placebos 0.963, 0.940; 2017&ndash;24: WTI 1.083 [0.972, 1.199], gas 0.996 [0.885, 1.121] &mdash; <span class="v-sup">supported</span></td><td><code>results/T1.json</code></td></tr>
+    <tr><td>T2</td><td><span class="pill emp">Finding</span></td><td>Return on the standardised surprise: WTI &minus;17.0&nbsp;bp per sd, t&nbsp;&minus;1.26; gas &minus;8.9, t&nbsp;&minus;0.65 &mdash; <span class="v-not">not supported</span></td><td><code>results/T2.json</code></td></tr>
+    <tr><td>T3</td><td><span class="pill expl">Exploratory</span></td><td>Cloudy weeks: ratio 1.15 [0.91, 1.47], OLS t&nbsp;0.88, 430 weeks &mdash; <span class="v-inc">inconclusive</span></td><td><code>results/T3.json</code></td></tr>
+    <tr><td>T4, T5</td><td><span class="pill emp">Finding</span></td><td>Merit order &minus;15.9&nbsp;EUR/MWh per 10 points (t&nbsp;&minus;16.4); storage draw +645&nbsp;GWh/d per HDD (t&nbsp;37.5) &mdash; <span class="v-sup">supported</span></td><td><code>results/T4.json</code>, <code>results/T5.json</code></td></tr>
+    <tr><td>Audit</td><td><span class="pill emp">Finding</span></td><td>T1&ndash;T5 re-run with identical outputs; snapshot equals the folder except two new scripts; calendar 14/660 misdated; Cushing never revised</td><td><code>audit/repro_T1_T5.md</code>, <code>audit/*_audit.md</code></td></tr>
+    <tr><td>T1c</td><td><span class="pill emp">Finding</span></td><td>T1 with archive dates (12 days moved): WTI 1.108 [1.028, 1.192] &mdash; <span class="v-sup">supported</span></td><td><code>results/v2/T1c.json</code> (T1c)</td></tr>
+    <tr><td>T2c</td><td><span class="pill emp">Finding</span></td><td>WTI &minus;17.9&nbsp;bp per sd, t&nbsp;&minus;1.32 &mdash; <span class="v-not">not supported</span></td><td><code>results/v2/T2c.json</code> (T2c)</td></tr>
+    <tr><td>BS0, BS1</td><td><span class="pill emp">Finding</span></td><td>Descriptive: Section 5.2</td><td><code>results/v2/BS0</code>, <code>BS1</code> (BS1, BS0+BS1)</td></tr>
+    <tr><td>BS2</td><td><span class="pill emp">Finding</span></td><td>r 0.16 [&minus;0.32, 0.57], 19 weeks &mdash; <span class="v-inc">inconclusive</span></td><td><code>results/v2/BS2/bs2.json</code> (BS2)</td></tr>
+    <tr><td>B0</td><td><span class="pill emp">Finding</span></td><td>First run blocked by its clock gate (44% &lt; 70%)</td><td><code>results/v2/B0/</code> (B0)</td></tr>
+    <tr><td>B0-AM1</td><td><span class="pill expl">Exploratory</span></td><td>Cushing &minus;3.07 [&minus;6.56, 0.43] &mdash; <span class="v-not">not detected</span>; ex-Cushing &minus;2.62 (t&nbsp;&minus;6.25)</td><td><code>results/v2/B0_amended/b0.json</code> (B0-AM1)</td></tr>
+  </tbody>
+</table>
+
+<!-- ═══════════ 11 ═══════════ -->
+<h2><span class="n">11</span>Six-month roadmap <span class="pill prop">Proposed</span></h2>
+<table>
+  <thead><tr><th style="width:12%">When</th><th style="width:46%">Work</th><th>Gate (promising / inconclusive / stop)</th></tr></thead>
+  <tbody>
+    <tr><td>Month 1</td><td>B-S at hub level (Sentinel-1 phase data or a vendor trial against the pilot); B1 against B1b; CL1&ndash;CL2 quotes; A capped; I2 in parallel on free data</td><td><b>Gate 1:</b> a weekly physical variable that beats the public nowcast out of sample (B-S, B1). Otherwise B stops and I2 is promoted.</td></tr>
+    <tr><td>Months 2&ndash;3</td><td>B2 on prices, then B3 net of costs and capacity; regime and risk layers only where they change a decision; placebos</td><td><b>Gate 2:</b> price information above <i>&rho;</i>* (B2); incremental net PnL positive on both halves, capacity estimated (B3).</td></tr>
+    <tr><td>Months 4&ndash;6</td><td>Isolated, logged paper run; next idea prepared; held-back window kept by Borel</td><td><b>Gate 3:</b> paper gap at most the assumed cost plus 50%; <i>&rho;</i> on the held-back window above <i>&rho;</i>*; capital only with Borel's approval.</td></tr>
+  </tbody>
+</table>
+<p><b>Success at six months:</b> one strategy validated on held-back data with positive net PnL and an estimated capacity, or a documented stop with the gap quantified; a second idea through Gate 1; reproducible code and point-in-time data. <b>Stop at any time:</b> a source that cannot be verified point-in-time; <i>&rho;</i> below its threshold; a fusion model that does not beat the baseline; a data trial whose incremental value is below its cost; the drawdown rules.</p>
+
+<!-- ═══════════ 12 ═══════════ -->
+<h2><span class="n">12</span>Reproducibility</h2>
+<p>Python 3.11 with <code>requirements.txt</code>; <code>python -m pytest tests</code> runs 33 checks on synthetic data. Keys (ENTSO-E token, AGSI+ key) go in <code>.env</code> (template <code>.env.example</code>). HistData WTIUSD M1 zips are downloaded by the user into the folder named by <code>ALTDATA_HISTDATA_DIR</code>; <code>ALTDATA_PYTHON</code> sets the interpreter of the PowerShell driver. Test scripts check the pre-registration hash first and some refuse to overwrite existing results: reproduce in a scratch copy and compare with <code>audit/compare_repro.py</code>.</p>
+<table>
+  <thead><tr><th style="width:48%">Command</th><th>Output</th></tr></thead>
+  <tbody>
+    <tr><td><code>python scripts/eia_wpsr_archive.py</code></td><td>Release registry and first-published values</td></tr>
+    <tr><td><code>python audit/wpsr_audits.py</code></td><td>Calendar, vintage and release-time audits</td></tr>
+    <tr><td><code>python scripts/baseline_cushing_ar2.py</code></td><td>B1a baseline metrics</td></tr>
+    <tr><td><code>python scripts/t1c_t2c_calendar.py --calendar rule</code>, then <code>--calendar archive</code></td><td>Reproduction check, then T1c and T2c</td></tr>
+    <tr><td><code>python scripts/bs0_catalog.py</code>; <code>scripts/bs_run_all.ps1</code></td><td>BS0 catalogue; BS1 extraction and analysis, BS2, figures</td></tr>
+    <tr><td><code>python scripts/b0_transmission.py --amended</code>; <code>python scripts/fig_b0.py</code></td><td>B0 (amended) and its figure</td></tr>
+    <tr><td><code>python scripts/pnl_grid.py</code> (<code>--v1</code> for the first grid)</td><td>Conditional PnL grids</td></tr>
+  </tbody>
+</table>
+<p class="small">The full sequence, including the v1 tests T1&ndash;T5 and the satellite figures, is in <code>README.md</code>. This document describes the repository at commit <span class="mono" id="commit2">04134e6</span> (local repository; the specification PDF is added in the next commit); its own source, <code>docs/spec/spec.html</code>, is exported with <code>python docs/spec/export_spec.py</code>.</p>
+
+<!-- ═══════════ REFERENCES ═══════════ -->
+<h2><span class="n">A</span>References</h2>
+<ol class="refs">
+  <li>Alturki, S. and Kurov, A. (2022). Market inefficiencies surrounding energy announcements. <i>Journal of Futures Markets</i> 42(1), 172&ndash;188. doi:10.1002/fut.22264.</li>
+  <li>Miao, H., Ramchander, S., Wang, T. and Yang, J. (2018). The impact of crude oil inventory announcements on prices: evidence from derivatives markets. <i>Journal of Futures Markets</i> 38(1), 38&ndash;65. doi:10.1002/fut.21850.</li>
+  <li>Mukherjee, A., Panayotov, G. and Shon, J. (2021). Eye in the sky: private satellites and government macro data. <i>Journal of Financial Economics</i> 141(1), 234&ndash;254.</li>
+  <li>Villamil Lopez, C. and Stilla, U. (2021). Monitoring of oil tank filling with spaceborne SAR using coherent scatterers. <i>IEEE JSTARS</i> 14, 5638&ndash;5655. doi:10.1109/JSTARS.2021.3082181.</li>
+  <li>Hao, X. and Wang, Y. (2023). Cloud cover over floating-roof tanks and oil returns.</li>
+  <li>Copernicus / ESA (14 September 2018). Copernicus Sentinel-1 helps monitor oil industry activity (success story; documentary evidence of use, not an accuracy study).</li>
+  <li>Vendor product pages: Kpler (inventories analytics), Ursa Space (12 February 2024), Energy Aspects (acquisition of Kayrros, 21 May 2026), ICEYE (imaging modes). Vendor statistics are not reproduced here.</li>
+  <li>Data: U.S. Energy Information Administration; Copernicus Sentinel data 2018&ndash;2026 (ESA), modified; &copy; OpenStreetMap contributors (ODbL); HistData.com; Open-Meteo.com (CC BY 4.0); ENTSO-E Transparency Platform; GIE AGSI+.</li>
+</ol>
+</body>
+</html>
