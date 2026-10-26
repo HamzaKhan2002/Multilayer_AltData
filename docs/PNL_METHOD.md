@@ -32,6 +32,16 @@ N and k come from the structure of each market and are to be replaced by real co
 
 I1 counts one decision per Cushing report. The gas report is not a separate I1 bet, and two expressions of one signal (the outright and the calendar spread) are not independent bets.
 
+k is the round-trip cost over the standard deviation of the move across the holding window. The 0.02 above matches a window from the API release (16:30 ET) to 10:36 ET (sd 113 cents, 2013-2023, `results/v3/a_price_proxy.json`, AH, with an assumed 20 USD per contract). `python scripts/pnl_grid.py --windows` writes `results/v3/pnl_grid_windows.csv`:
+
+| Holding window | sd (cents) | k | rho* | rho = 0.03 | rho = 0.06 | rho = 0.10 |
+|---|---|---|---|---|---|---|
+| API release 16:30 to 10:36 | 113 | 0.018 | 0.022 | 0.05 | 0.22 | 0.45 |
+| 09:30 to 10:36 | 50 | 0.040 | 0.050 | -0.11 | 0.06 | 0.29 |
+| 10:30 to 10:36 (after the print) | 39 | 0.051 | 0.064 | -0.19 | -0.02 | 0.21 |
+
+The sd varies by regime (API release to 10:36: 86 cents in 2013-2019, 146 in 2019-2023, 220 in 2026), so k is re-measured on the window and period of the trial. These grids do not subtract a subscription or operating costs and are neither an expected-return estimate nor a capacity measure.
+
 ## Grid (M$ per year for B = 1 M$), illustrative
 
 Illustrative: conditional on N, k and rho, never a result. Values below zero mean the forecast does not cover costs at that frequency (shown as < 0 in the deck). The v1 grid (I1 with N = 104: 52 oil and 52 gas reports) is kept in `results/pnl_grid.csv`.

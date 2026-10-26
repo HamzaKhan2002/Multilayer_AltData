@@ -6,9 +6,10 @@ secondary: minute starting 11:00 minus minute starting 10:29. Surprise: first-pu
 (Cushing, US commercial crude excluding Cushing, gasoline, distillate; million barrels). Model: OLS of dP on a constant and the four
 surprises with HC1 errors. The clock check runs first; below 70% the test is BLOCKED and no outcome statistic is computed.
 
-Usage: python scripts/b0_transmission.py [--dry] [--amended]
+Usage: python scripts/b0_transmission.py [--dry] [--amended | --all-years]
   --dry       event availability only (exclusions by reason); no price difference, no statistic, nothing written
   --amended   amendment AM-B0-1 (results/v2/deviations_v2.md): year-wise clock gate instead of the argmax share; output results/v2/B0_amended
+  --all-years post hoc sensitivity (results/v3/deviations_v3.md): as --amended but the year gate is only reported, no year is excluded; output results/v2/B0_allyears
 Outputs: results/v2/B0/b0.json, events.csv, sanity_clock.json, b0.log; one line in results/v2/trial_log_v2.csv
 """
 import argparse
@@ -191,10 +192,14 @@ def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--amended", action="store_true")
+    ap.add_argument("--all-years", action="store_true")
     args = ap.parse_args()
     global OUT
     if args.amended:
         OUT = V2 / "B0_amended"
+    elif args.all_years:
+        OUT = V2 / "B0_allyears"
+    tid = "B0-AM1" if args.amended else ("B0-AM1-ALLYEARS" if args.all_years else "B0")
     t0 = time.time()
     sha = assert_prereg_v2_frozen()
     if not args.dry:
@@ -264,14 +269,15 @@ def main() -> None:
               "events": {"candidates": n_cand, "excluded_by_first_reason": waterfall, "independent_flags": flags, "no_surprise_detail": {k: int(v) for k, v in pd.Series(detail).value_counts().items() if k}},
               "sanity_clock": {k: san[k] for k in ("n_events", "n_argmax_1030", "share_1030", "threshold", "passed", "share_within_1_minute_of_1030", "profile_abs_change", "argmax_distribution")}}
     cols = ["event_day", "weekday", "page_release_date", "folder_day", "week_ending", "status", "reason", "no_surprise_detail"] + REASONS + ["n_bars_1000_1059"]
-    if args.amended:
+    if args.amended or args.all_years:
         gate = year_gate(G, sanity_days)
-        failed = {int(y) for y, g in gate.items() if not g["passed"]}
+        failed = set() if args.all_years else {int(y) for y, g in gate.items() if not g["passed"]}
         first = np.where((first == "") & ev["event_day"].dt.year.isin(failed).to_numpy(), "clock_gate_year", first)
         ev["reason"] = first
         ev["status"] = np.where(first == "", "included", "excluded")
         san["passed"] = bool((first == "").sum() >= 200)
-        common["amendment"] = {"id": "AM-B0-1", "status": "EXPLORATORY (validity gate amended after the first run)", "year_gate": gate,
+        status = "POST HOC SENSITIVITY (year gate reported, not applied)" if args.all_years else "EXPLORATORY (validity gate amended after the first run)"
+        common["amendment"] = {"id": "AM-B0-1", "status": status, "year_gate": gate,
                                "years_excluded": sorted(failed), "events_after_gate": int((first == "").sum())}
         log("AM-B0-1 year gate:", {y: (g["peak_minute"], round(g["mean_1030_cents"], 1), round(g["mean_1015_1029_cents"], 1), g["passed"]) for y, g in gate.items()})
     if not san["passed"]:
@@ -279,7 +285,7 @@ def main() -> None:
         ev[cols].to_csv(OUT / "events.csv", index=False, date_format="%Y-%m-%d")
         (OUT / "b0.json").write_text(json.dumps(out, indent=2), encoding="utf-8")
         secs = time.time() - t0
-        append_trial("B0-AM1" if args.amended else "B0", sha, "BLOCKED", secs, f"clock share {san['share_1030']:.3f} < {SANITY_MIN_SHARE}")
+        append_trial(tid, sha, "BLOCKED", secs, f"clock share {san['share_1030']:.3f} < {SANITY_MIN_SHARE}")
         log(f"BLOCKED; wrote results/v2/B0; done in {secs:.1f}s")
         return
 
@@ -322,7 +328,7 @@ def main() -> None:
     log(f"PRIMARY Cushing {cu['coef_cents_per_mb']:.3f} cents per barrel per Mb, t {cu['t']:.3f}, 95% CI [{cu['ci95_cents_per_mb'][0]:.3f}, {cu['ci95_cents_per_mb'][1]:.3f}] -> {verdict}")
     secs = time.time() - t0
     ex = m1["coefficients"]["us_ex_cushing"]
-    append_trial("B0-AM1" if args.amended else "B0", sha, verdict, secs, f"n {m1['n']}; clock share {san['share_1030']:.3f}; Cushing {cu['coef_cents_per_mb']:.2f} c/bbl per Mb "
+    append_trial(tid, sha, verdict, secs, f"n {m1['n']}; clock share {san['share_1030']:.3f}; Cushing {cu['coef_cents_per_mb']:.2f} c/bbl per Mb "
                  f"(95% CI {cu['ci95_cents_per_mb'][0]:.2f} to {cu['ci95_cents_per_mb'][1]:.2f}); US ex-Cushing {ex['coef_cents_per_mb']:.2f}")
     log(f"wrote results/v2/B0/b0.json, events.csv, sanity_clock.json; trial log line appended; done in {secs:.1f}s")
 

@@ -1,0 +1,68 @@
+{
+  "id": "ET_reference_sensitivity",
+  "scope": "post hoc documentation check; not a pre-registered test; stored BS0/BS2 results are unchanged",
+  "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+  "reason": "EIA-800/803/804 instructions: stocks as of 7 a.m. Eastern Time Friday; the frozen protocol used 07:00 America/Chicago",
+  "weeks_with_a_different_selected_acquisition": 0,
+  "identical_bs0": true,
+  "identical_bs2_primary": true,
+  "identical_bs2_all_season": true,
+  "ct_frozen_protocol": {
+    "bs0_share_of_weeks": {
+      "s2_usable_api": 0.3853658536585366,
+      "s2_usable_eia": 0.3853658536585366,
+      "s2_usable_api_sun_le45": 0.14390243902439023,
+      "s1_usable_api": 0.43902439024390244,
+      "s1_usable_eia": 0.43902439024390244
+    },
+    "n_weeks": 410,
+    "bs2_primary": {
+      "n": 19,
+      "r": 0.1605623934183439,
+      "fisher_ci95": [
+        -0.3167469059557628,
+        0.5729845309869708
+      ],
+      "verdict": "INCONCLUSIVE"
+    },
+    "bs2_all_season": {
+      "n": 57,
+      "r": 0.129908273724856,
+      "fisher_ci95": [
+        -0.1352371457060793,
+        0.377691125335015
+      ]
+    },
+    "n_weeks_with_selected_acquisition": 159,
+    "n_weeks_with_dV": 62
+  },
+  "et_eia_instructions": {
+    "bs0_share_of_weeks": {
+      "s2_usable_api": 0.3853658536585366,
+      "s2_usable_eia": 0.3853658536585366,
+      "s2_usable_api_sun_le45": 0.14390243902439023,
+      "s1_usable_api": 0.43902439024390244,
+      "s1_usable_eia": 0.43902439024390244
+    },
+    "n_weeks": 410,
+    "bs2_primary": {
+      "n": 19,
+      "r": 0.1605623934183439,
+      "fisher_ci95": [
+        -0.3167469059557628,
+        0.5729845309869708
+      ],
+      "verdict": "INCONCLUSIVE"
+    },
+    "bs2_all_season": {
+      "n": 57,
+      "r": 0.129908273724856,
+      "fisher_ci95": [
+        -0.1352371457060793,
+        0.377691125335015
+      ]
+    },
+    "n_weeks_with_selected_acquisition": 159,
+    "n_weeks_with_dV": 62
+  }
+}

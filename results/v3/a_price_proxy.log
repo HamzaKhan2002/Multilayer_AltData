@@ -1,0 +1,9 @@
+2026-10-25T09:42:08 start A price proxy dry=False prereg_v3 d0b8d4c6b960
+2026-10-25T09:42:25 candidates 562; excluded by first reason {'holiday_shifted': 81, 'data_only_same_day': 2, 'other_release_time': 0, 'missing_bar': 51, 'nonpositive_price': 0, 'structural_clock_year': 0}; included by block {'overlap': 251, 'post': 163, 'recent': 14}
+2026-10-25T09:42:25 structural clock check (bars 17:15-17:59 / hour 16; bars 17:00-17:14 / hour 16, descriptive): {'2013': (17, 0.006, 0.269, False), '2014': (46, 0.008, 0.24, False), '2015': (46, 0.008, 0.183, False), '2016': (45, 0.0, 0.006, False), '2017': (44, 0.0, 0.006, False), '2018': (41, 0.0, 0.011, False), '2019': (43, 0.0, 0.0, False), '2020': (46, 0.0, 0.0, False), '2021': (46, 0.0, 0.0, False), '2022': (43, 0.0, 0.0, False), '2023': (28, 0.0, 0.0, False), '2026': (14, 0.0, 0.0, False)}
+2026-10-25T09:42:25 AR overlap n 251 r 0.152 [0.028, 0.270] -> SIGNAL; slope 0.109 HC1 [0.001, 0.216]; R2 0.0230
+2026-10-25T09:42:25 AR post n 163 r -0.026 [-0.179, 0.128]
+2026-10-25T09:42:25 AR recent n 14 r 0.699 [0.268, 0.897]
+2026-10-25T09:42:25 sign rule gross cents: {'overlap': (3.81, 2.64), 'post': (-3.86, -1.03), 'recent': (29.87, 1.78)}
+2026-10-25T09:42:25 AH pooled sd (cents): {'api_to_1036': 113.4, 'wed_0930_to_1036': 50.5, 'print_1030_to_1036': 39.4, 'api_window': 30.5}
+2026-10-25T09:42:25 wrote results/v3/a_price_proxy.json and a_events.csv; trial log line appended; done in 17.5s

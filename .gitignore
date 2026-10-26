@@ -19,9 +19,11 @@ __pycache__/
 .venv/
 .pytest_cache/
 
-# Per-event files of B0 hold HistData minute closes (licensed, not redistributed); rebuilt by scripts/b0_transmission.py
+# Per-event files of B0 and A hold HistData-derived minute prices (licensed, not redistributed); rebuilt by the scripts
 results/v2/B0/events.csv
 results/v2/B0_amended/events.csv
+results/v2/B0_allyears/events.csv
+results/v3/a_events.csv
 
 # Temporary export copy of the specification
 docs/spec/_spec_export.html

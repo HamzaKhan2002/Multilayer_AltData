@@ -1,0 +1,54 @@
+{
+  "prereg_id": "tests_v3",
+  "written": "2026-10-25",
+  "scope": "Price-only variant of branch A of I1: does the WTI return in the 30 minutes after the API release predict the WTI return from 60 minutes to 1 minute before the EIA release? Exploratory proxy on bid-only HistData WTIUSD minute bars. It is not a replication of the published Sharpe tables (signal: API minus Bloomberg consensus; the consensus is not available here), not a test of branch B, and not an executable PnL on CL futures.",
+  "known_before_freeze": "The B0 event list and its exclusions (results/v2/deviations_v2.md items 3-5); the average absolute one-minute change at the 10:30 ET minute on EIA days (24.1 cents, results/v2/B0/sanity_clock.json); the clock rule AM1 and its checks (CME daily halt, EURUSD at 08:30). No statistic of the tests below existed when this file was frozen: no return over the API or pre-EIA window, no regression, no sign-rule mean, no horizon standard deviation, no 16:30 profile.",
+  "common": {
+    "stop_rule": "If fewer than 150 events of the overlap block remain after the exclusions below, AR is reported as BLOCKED and no outcome statistic is computed.",
+    "single_run": "scripts/a_price_proxy.py refuses to overwrite results/v3/a_price_proxy.json; the hash of this file is checked at the start of every run (results/v3/prereg_v3.sha256).",
+    "data": "HistData WTIUSD M1 bid bars read by src/altdata/histdata.py (clock rule AM1). Files exist for 2013-08..2023-12 and 2026-06..2026-10 only."
+  },
+  "events": {
+    "source": "audit/eia_release_registry.csv rows without the data-only note, dated by the archive folder (as B0).",
+    "periods": [["2013-08-01", "2023-12-31"], ["2026-06-01", "2026-10-24"]],
+    "api_day": "the calendar day before the event day (a Tuesday for a Wednesday release); API release assumed at 16:30 ET.",
+    "price_convention": "P(t) is the close of the minute bar that starts at t minus one minute (the convention of B0).",
+    "required_bars": {"api_day": ["16:29", "16:59"], "event_day": ["09:29", "10:28", "10:29", "10:35"]},
+    "exclusions_in_order": ["holiday_shifted (event day not a Wednesday)", "data_only_same_day", "other_release_time", "missing_bar (any required bar absent)", "nonpositive_price", "structural_clock_year (see AC)"],
+    "no_other_exclusion": "No event is dropped for the size of a price move and no year is dropped for a weak reaction at 16:30 or 10:30."
+  },
+  "variables": {
+    "r_api": "100 * ln(P(17:00 on the API day) / P(16:30 on the API day))",
+    "r_pre": "100 * ln(P(10:29) / P(09:30)) on the event day",
+    "dP_pre_usd": "P(10:29) - P(09:30), USD per barrel"
+  },
+  "blocks": {
+    "overlap": ["2013-08-01", "2019-08-31"],
+    "post": ["2019-09-01", "2023-12-31"],
+    "recent": ["2026-06-01", "2026-10-24"],
+    "note": "overlap is the part of the authors' sample (January 2011 to August 2019) that our data cover; it is the same calendar weeks but a different instrument and price source, so it is a proxy check, not an independent replication. post and recent are after the published sample."
+  },
+  "tests": {
+    "AR": {
+      "question": "Is r_pre positively related to r_api in the overlap block?",
+      "statistic": "Pearson correlation r between r_api and r_pre, Fisher-z 95% interval; reported beside it: OLS slope of r_pre on r_api with HC1 95% interval, Spearman rank correlation, R2, n.",
+      "verdict_rule": "SIGNAL if the lower 95% bound of r is above 0; NO SIGNAL DETECTED if the upper bound is below 0.10; otherwise INCONCLUSIVE. Verdict on the overlap block only.",
+      "secondary": "The same statistics for post and recent, without verdict (persistence after the published sample; descriptive).",
+      "proxy_rule": "Descriptive sign rule: position = sign(r_api) from 09:30 to 10:29, gross result G = sign(r_api) * dP_pre in cents per barrel; reported per block: n, mean, sd, t of the mean, share of positive G. No cost is deducted: the mean is compared with an assumed round-trip cost of 1.5 to 2.5 cents per barrel (one tick plus fees; assumption) only to state whether it exceeds it. No net PnL is claimed.",
+      "reading": "A positive result here is a statement about a price-only proxy of branch A. It is never evidence for branch B."
+    },
+    "AH": {
+      "question": "Descriptive standard deviations of the WTI move over the holding windows used in the PnL illustration (to set k on the same window).",
+      "statistic": "Over the included events of the overlap and post blocks pooled: standard deviation and mean absolute value, in cents per barrel, of P(10:36 on the event day) - P(16:30 on the API day); P(10:36) - P(09:30); P(10:36) - P(10:30); P(17:00) - P(16:30) on the API day. P(10:36) is the close of the 10:35 bar. No verdict."
+    },
+    "AC": {
+      "question": "Is the file clock right in each year, independently of the size of the reaction?",
+      "structural_check": "Per calendar year: bars in New York hour 17 divided by bars in hour 16 on the API days of the Wednesday events that have any bar in hour 16. The CME halts 17:00-18:00 ET Monday-Thursday, so a correct clock gives a ratio near 0; a year with a ratio above 0.25 is excluded as structural_clock_year and reported.",
+      "descriptive": "Per year: mean absolute one-minute change at the 16:30 minute against the mean over 16:15-16:29 on API days; same for 10:30 against 10:15-10:29 on event days. Reported, not used as a gate."
+    }
+  },
+  "not_run": {
+    "api_minus_consensus": "The published portfolio signal (API minus Bloomberg consensus) is not tested: no timestamped consensus is available.",
+    "executable_pnl": "No fill, quote, size or cost simulation on CL futures: the data are bid-only CFD bars."
+  }
+}

@@ -177,7 +177,7 @@ def fig_availability(av: pd.DataFrame, name: str = "BS0_availability") -> None:
     ax.set_xticklabels(MONTHS)
     ax.set_ylim(0, 100)
     ax.set_ylabel("EIA weeks with a usable acquisition (%)")
-    ax.set_title(f"Availability within ±2 days of Friday 07:00 CT, {av['week_ending'].min()[:4]}-{av['week_ending'].max()[:4]}, {len(av)} weeks", fontsize=14)
+    ax.set_title(f"Availability within ±2 days of the Friday stock reference, {av['week_ending'].min()[:4]}-{av['week_ending'].max()[:4]}, {len(av)} weeks", fontsize=14)
     _style(ax, legend=True)
     P.finish(fig, name, SRC_ESA + "Sentinel-2 L2A (Earth Search) and Sentinel-1 RTC (Planetary Computer) catalogues; availability = acquisition time + 24 h "
                         "before the API (Tuesday 16:30 ET) or EIA (Wednesday 10:30 ET) release; Sentinel-2 requires at least 50% of the tank area clear.")

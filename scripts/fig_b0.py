@@ -38,7 +38,7 @@ def profile_panel(a, prof: dict, title: str = "Average move per minute\naround t
     a.set_title(title, fontsize=14.5)
     k = mins.index("10:30")
     before = [y[i] for i, m in enumerate(mins) if "10:15" <= m <= "10:29"]
-    a.text(k + 1.0, y[k] * 0.97, f"10:30: {y[k]:.1f} cents,\n{y[k] / (sum(before) / len(before)):.1f}x the 15 minutes before", fontsize=12.5, color=P.AMBER,
+    a.text(k + 1.0, y[k] * 0.97, f"10:30: {y[k]:.1f} cents,\n{y[k] / (sum(before) / len(before)):.1f}x the 15\nminutes before", fontsize=12, color=P.AMBER,
            ha="left", va="top", linespacing=1.35)
     a.set_ylim(0, max(y) * 1.1)
     a.set_axisbelow(True)
@@ -98,7 +98,7 @@ def draw(b0: dict) -> None:
     b.set_xlim(lo - 0.08 * span, hi + 0.30 * span)
     b.tick_params(axis="x", labelsize=13)
     b.set_xlabel("cents per barrel per million barrels", fontsize=13.5)
-    b.set_title(f"Change in the 6 minutes after 10:30\nper 1 Mb surprise ({n} releases)", fontsize=14.5)
+    b.set_title(f"Move in the 6 minutes after 10:30\nper 1 Mb surprise ({n} events)", fontsize=14)
     b.set_axisbelow(True)
     b.grid(axis="y", visible=False)
     fig.suptitle("Does the EIA print move WTI within minutes?  (Wednesday releases, 2013\u20132023)", fontsize=16, y=0.985)

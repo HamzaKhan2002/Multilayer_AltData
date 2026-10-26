@@ -1,0 +1,526 @@
+{
+  "id": "B0",
+  "prereg_v2_sha256": "acfe66efb2878adf811e5b58aea99ff14048199728a9d76cc1045c67da67d84f",
+  "periods": [
+    [
+      "2013-08-01",
+      "2023-12-31"
+    ],
+    [
+      "2026-06-01",
+      "2026-10-24"
+    ]
+  ],
+  "data": {
+    "pair": "WTIUSD",
+    "n_bars": 3431268,
+    "first_bar": "2013-08-01 00:00:00-04:00",
+    "last_bar": "2026-10-16 16:58:00-04:00"
+  },
+  "events": {
+    "candidates": 562,
+    "excluded_by_first_reason": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 15,
+      "missing_1029_or_1035": 0,
+      "no_surprise": 3
+    },
+    "independent_flags": {
+      "holiday_shifted": 81,
+      "data_only_same_day": 2,
+      "other_release_time": 0,
+      "no_minute_data": 19,
+      "missing_1029_or_1035": 20,
+      "no_surprise": 3
+    },
+    "no_surprise_detail": {
+      "lag_missing": 2,
+      "no_first_release_row": 1
+    }
+  },
+  "sanity_clock": {
+    "n_events": 464,
+    "n_argmax_1030": 205,
+    "share_1030": 0.4418103448275862,
+    "threshold": 0.7,
+    "passed": false,
+    "share_within_1_minute_of_1030": 0.5387931034482759,
+    "profile_abs_change": {
+      "10:15": {
+        "mean_abs_change_cents": 4.1006465517241315,
+        "n": 464
+      },
+      "10:16": {
+        "mean_abs_change_cents": 3.686853448275825,
+        "n": 464
+      },
+      "10:17": {
+        "mean_abs_change_cents": 3.786363636363604,
+        "n": 462
+      },
+      "10:18": {
+        "mean_abs_change_cents": 3.7474025974025977,
+        "n": 462
+      },
+      "10:19": {
+        "mean_abs_change_cents": 3.5685344827586665,
+        "n": 464
+      },
+      "10:20": {
+        "mean_abs_change_cents": 3.8543103448275877,
+        "n": 464
+      },
+      "10:21": {
+        "mean_abs_change_cents": 3.6153347732181276,
+        "n": 463
+      },
+      "10:22": {
+        "mean_abs_change_cents": 3.5974082073434244,
+        "n": 463
+      },
+      "10:23": {
+        "mean_abs_change_cents": 3.274568965517262,
+        "n": 464
+      },
+      "10:24": {
+        "mean_abs_change_cents": 3.306896551724154,
+        "n": 464
+      },
+      "10:25": {
+        "mean_abs_change_cents": 3.4465517241379398,
+        "n": 464
+      },
+      "10:26": {
+        "mean_abs_change_cents": 3.3648706896551577,
+        "n": 464
+      },
+      "10:27": {
+        "mean_abs_change_cents": 3.1946120689655237,
+        "n": 464
+      },
+      "10:28": {
+        "mean_abs_change_cents": 3.6267241379310207,
+        "n": 464
+      },
+      "10:29": {
+        "mean_abs_change_cents": 4.070689655172408,
+        "n": 464
+      },
+      "10:30": {
+        "mean_abs_change_cents": 24.10711206896551,
+        "n": 464
+      },
+      "10:31": {
+        "mean_abs_change_cents": 11.075215517241404,
+        "n": 464
+      },
+      "10:32": {
+        "mean_abs_change_cents": 9.285344827586202,
+        "n": 464
+      },
+      "10:33": {
+        "mean_abs_change_cents": 8.537284482758638,
+        "n": 464
+      },
+      "10:34": {
+        "mean_abs_change_cents": 7.603017241379328,
+        "n": 464
+      },
+      "10:35": {
+        "mean_abs_change_cents": 8.920043103448302,
+        "n": 464
+      },
+      "10:36": {
+        "mean_abs_change_cents": 7.410991379310326,
+        "n": 464
+      },
+      "10:37": {
+        "mean_abs_change_cents": 7.3219827586207185,
+        "n": 464
+      },
+      "10:38": {
+        "mean_abs_change_cents": 6.302801724137909,
+        "n": 464
+      },
+      "10:39": {
+        "mean_abs_change_cents": 6.769827586206876,
+        "n": 464
+      },
+      "10:40": {
+        "mean_abs_change_cents": 6.653663793103472,
+        "n": 464
+      },
+      "10:41": {
+        "mean_abs_change_cents": 6.779310344827598,
+        "n": 464
+      },
+      "10:42": {
+        "mean_abs_change_cents": 5.9133620689655535,
+        "n": 464
+      },
+      "10:43": {
+        "mean_abs_change_cents": 5.645689655172447,
+        "n": 464
+      },
+      "10:44": {
+        "mean_abs_change_cents": 6.002370689655192,
+        "n": 464
+      },
+      "10:45": {
+        "mean_abs_change_cents": 6.050862068965497,
+        "n": 464
+      }
+    },
+    "argmax_distribution": {
+      "10:00": 3,
+      "10:01": 2,
+      "10:02": 1,
+      "10:04": 2,
+      "10:05": 3,
+      "10:07": 1,
+      "10:09": 2,
+      "10:10": 1,
+      "10:15": 1,
+      "10:17": 2,
+      "10:18": 1,
+      "10:19": 3,
+      "10:20": 1,
+      "10:21": 1,
+      "10:22": 1,
+      "10:23": 1,
+      "10:26": 1,
+      "10:28": 1,
+      "10:29": 3,
+      "10:30": 205,
+      "10:31": 42,
+      "10:32": 27,
+      "10:33": 19,
+      "10:34": 17,
+      "10:35": 17,
+      "10:36": 9,
+      "10:37": 7,
+      "10:38": 6,
+      "10:39": 8,
+      "10:40": 5,
+      "10:41": 7,
+      "10:42": 3,
+      "10:43": 8,
+      "10:44": 11,
+      "10:45": 4,
+      "10:46": 5,
+      "10:47": 7,
+      "10:48": 2,
+      "10:49": 2,
+      "10:50": 3,
+      "10:51": 2,
+      "10:53": 5,
+      "10:54": 1,
+      "10:55": 8,
+      "10:56": 2,
+      "10:59": 1
+    }
+  },
+  "amendment": {
+    "id": "AM-B0-1",
+    "status": "POST HOC SENSITIVITY (year gate reported, not applied)",
+    "year_gate": {
+      "2013": {
+        "n": 17,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 21.47058823529432,
+        "mean_1015_1029_cents": 3.564705882352981,
+        "passed": true
+      },
+      "2014": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 17.086956521739083,
+        "mean_1015_1029_cents": 2.9217391304347737,
+        "passed": true
+      },
+      "2015": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 31.02173913043476,
+        "mean_1015_1029_cents": 3.666666666666671,
+        "passed": true
+      },
+      "2016": {
+        "n": 45,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 31.39999999999995,
+        "mean_1015_1029_cents": 2.9765993265993225,
+        "passed": true
+      },
+      "2017": {
+        "n": 44,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 18.886363636363594,
+        "mean_1015_1029_cents": 1.9226568005637859,
+        "passed": true
+      },
+      "2018": {
+        "n": 42,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 30.96428571428587,
+        "mean_1015_1029_cents": 2.801587301587304,
+        "passed": true
+      },
+      "2019": {
+        "n": 44,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 24.89318181818179,
+        "mean_1015_1029_cents": 2.54242424242422,
+        "passed": true
+      },
+      "2020": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 16.1260869565217,
+        "mean_1015_1029_cents": 3.291594202898544,
+        "passed": true
+      },
+      "2021": {
+        "n": 46,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 19.419565217391412,
+        "mean_1015_1029_cents": 3.57188405797104,
+        "passed": true
+      },
+      "2022": {
+        "n": 43,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 32.02325581395338,
+        "mean_1015_1029_cents": 7.565891472868209,
+        "passed": true
+      },
+      "2023": {
+        "n": 31,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 25.929032258064368,
+        "mean_1015_1029_cents": 4.750107526881708,
+        "passed": true
+      },
+      "2026": {
+        "n": 14,
+        "peak_minute": "10:30",
+        "mean_1030_cents": 10.85714285714283,
+        "mean_1015_1029_cents": 5.520476190476165,
+        "passed": false
+      }
+    },
+    "years_excluded": [],
+    "events_after_gate": 461
+  },
+  "status": "COMPLETED",
+  "verdict": "NOT DETECTED",
+  "included_events": 461,
+  "secondary_events_with_1100": 450,
+  "descriptives": {
+    "n": 461,
+    "mean_dP_1035_cents": -0.7652928416485812,
+    "sd_dP_1035_cents": 38.60564119302936,
+    "sd_dP_1100_cents": 57.417693184859196,
+    "sd_surprise_million_bbl": {
+      "cushing": 1.164176345955371,
+      "us_ex_cushing": 4.916476546970879,
+      "gasoline": 2.738486359842161,
+      "distillate": 2.462344529174108
+    },
+    "events_by_year": {
+      "2013": 17,
+      "2014": 46,
+      "2015": 46,
+      "2016": 45,
+      "2017": 44,
+      "2018": 42,
+      "2019": 41,
+      "2020": 46,
+      "2021": 46,
+      "2022": 43,
+      "2023": 31,
+      "2026": 14
+    },
+    "largest_abs_dP_1035": [
+      {
+        "event_day": "2017-06-07",
+        "dP_1035_usd": -1.5
+      },
+      {
+        "event_day": "2016-05-11",
+        "dP_1035_usd": 1.3699999999999974
+      },
+      {
+        "event_day": "2015-04-15",
+        "dP_1035_usd": 1.1799999999999997
+      },
+      {
+        "event_day": "2016-10-26",
+        "dP_1035_usd": 1.1499999999999986
+      },
+      {
+        "event_day": "2016-11-02",
+        "dP_1035_usd": -1.1000000000000014
+      }
+    ]
+  },
+  "primary": {
+    "outcome": "close(10:35) - close(10:29), USD per barrel",
+    "unit": "cents per barrel per million barrels",
+    "cushing": {
+      "coef_usd_per_mb": -0.03157466004100754,
+      "coef_cents_per_mb": -3.1574660041007543,
+      "se_cents_per_mb": 1.7129057687440947,
+      "t": -1.8433389983944144,
+      "p_two_sided": 0.06527953055414329,
+      "ci95_cents_per_mb": [
+        -6.5146996197500755,
+        0.19976761154856595
+      ]
+    },
+    "n": 461,
+    "verdict": "NOT DETECTED",
+    "us_ex_cushing_reference": {
+      "coef_usd_per_mb": -0.025183192983168307,
+      "coef_cents_per_mb": -2.5183192983168308,
+      "se_cents_per_mb": 0.4072502747223202,
+      "t": -6.183714179281827,
+      "p_two_sided": 6.261068669854167e-10,
+      "ci95_cents_per_mb": [
+        -3.316515169466621,
+        -1.7201234271670405
+      ]
+    }
+  },
+  "model_primary": {
+    "n": 461,
+    "r2": 0.20797216302893362,
+    "r2_adjusted": 0.2010245504239242,
+    "cov_type": "HC1",
+    "interval": "normal approximation (statsmodels default for robust covariance)",
+    "coefficients": {
+      "const": {
+        "coef_usd_per_mb": -0.007129130340168742,
+        "coef_cents_per_mb": -0.7129130340168742,
+        "se_cents_per_mb": 1.6086361669239517,
+        "t": -0.44317854383450345,
+        "p_two_sided": 0.657636597075728,
+        "ci95_cents_per_mb": [
+          -3.8657819854163824,
+          2.439955917382634
+        ]
+      },
+      "cushing": {
+        "coef_usd_per_mb": -0.03157466004100754,
+        "coef_cents_per_mb": -3.1574660041007543,
+        "se_cents_per_mb": 1.7129057687440947,
+        "t": -1.8433389983944144,
+        "p_two_sided": 0.06527953055414329,
+        "ci95_cents_per_mb": [
+          -6.5146996197500755,
+          0.19976761154856595
+        ]
+      },
+      "us_ex_cushing": {
+        "coef_usd_per_mb": -0.025183192983168307,
+        "coef_cents_per_mb": -2.5183192983168308,
+        "se_cents_per_mb": 0.4072502747223202,
+        "t": -6.183714179281827,
+        "p_two_sided": 6.261068669854167e-10,
+        "ci95_cents_per_mb": [
+          -3.316515169466621,
+          -1.7201234271670405
+        ]
+      },
+      "gasoline": {
+        "coef_usd_per_mb": -0.03533922920897586,
+        "coef_cents_per_mb": -3.5339229208975858,
+        "se_cents_per_mb": 0.7111062850168104,
+        "t": -4.9696128347593564,
+        "p_two_sided": 6.708672196440722e-07,
+        "ci95_cents_per_mb": [
+          -4.927665628710609,
+          -2.140180213084563
+        ]
+      },
+      "distillate": {
+        "coef_usd_per_mb": -0.030776399559810094,
+        "coef_cents_per_mb": -3.0776399559810095,
+        "se_cents_per_mb": 0.6989537952925152,
+        "t": -4.403209449192565,
+        "p_two_sided": 1.0666110050861484e-05,
+        "ci95_cents_per_mb": [
+          -4.447564221611921,
+          -1.7077156903500978
+        ]
+      }
+    }
+  },
+  "model_secondary": {
+    "outcome": "close(11:00) - close(10:29), USD per barrel",
+    "n": 450,
+    "r2": 0.07148525741863132,
+    "r2_adjusted": 0.06313905748531567,
+    "cov_type": "HC1",
+    "interval": "normal approximation (statsmodels default for robust covariance)",
+    "coefficients": {
+      "const": {
+        "coef_usd_per_mb": 0.013731028282161684,
+        "coef_cents_per_mb": 1.3731028282161684,
+        "se_cents_per_mb": 2.6148097080496338,
+        "t": 0.5251253366503504,
+        "p_two_sided": 0.5994960639600762,
+        "ci95_cents_per_mb": [
+          -3.7518300259868074,
+          6.498035682419144
+        ]
+      },
+      "cushing": {
+        "coef_usd_per_mb": -0.021174143030633648,
+        "coef_cents_per_mb": -2.1174143030633648,
+        "se_cents_per_mb": 2.126479704667945,
+        "t": -0.9957368971899049,
+        "p_two_sided": 0.3193779975878729,
+        "ci95_cents_per_mb": [
+          -6.285237938067908,
+          2.0504093319411782
+        ]
+      },
+      "us_ex_cushing": {
+        "coef_usd_per_mb": -0.018213078251191554,
+        "coef_cents_per_mb": -1.8213078251191555,
+        "se_cents_per_mb": 0.5750846698868813,
+        "t": -3.167025519002976,
+        "p_two_sided": 0.001540068031776742,
+        "ci95_cents_per_mb": [
+          -2.948453066158549,
+          -0.6941625840797618
+        ]
+      },
+      "gasoline": {
+        "coef_usd_per_mb": -0.03204084173263251,
+        "coef_cents_per_mb": -3.2040841732632512,
+        "se_cents_per_mb": 1.0940253957335884,
+        "t": -2.9287109657219457,
+        "p_two_sided": 0.0034037076528850565,
+        "ci95_cents_per_mb": [
+          -5.348334547073264,
+          -1.0598337994532379
+        ]
+      },
+      "distillate": {
+        "coef_usd_per_mb": -0.032528343884349886,
+        "coef_cents_per_mb": -3.2528343884349886,
+        "se_cents_per_mb": 1.1455792919242802,
+        "t": -2.8394668194211667,
+        "p_two_sided": 0.004518899446125864,
+        "ci95_cents_per_mb": [
+          -5.498128542041475,
+          -1.0075402348285027
+        ]
+      }
+    }
+  }
+}

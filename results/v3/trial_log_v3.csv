@@ -1,0 +1,2 @@
+id,timestamp,script,prereg_v3_sha256,verdict,seconds
+AR,2026-10-25T09:42:25,scripts/a_price_proxy.py,d0b8d4c6b9604bd15d0f57037208d5208b4e6747c449c78bf62e76555a824ec9,SIGNAL,17.5

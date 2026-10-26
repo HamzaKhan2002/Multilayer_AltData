@@ -2,7 +2,7 @@
 
 A research scaffold for a multilayer alternative-data system: sources, engineering per data type, regimes, fusion, risk, and a validation discipline that never changes. The scaffold is asset-class independent; the first idea developed in it is energy inventories before the weekly EIA report.
 
-**No strategy backtest is run or claimed here.** What the repository contains is (1) the toolkit, (2) five **pre-registered** checks on free public data (v1), each frozen before its first run, plus a second pre-registration (v2) with an audit, a Sentinel-2 roof-shadow pilot (B-S) and an exploratory price diagnostic (B0), and (3) the documents that turn six ideas into conditional PnL figures from explicit assumptions.
+**No strategy backtest is run or claimed here.** What the repository contains is (1) the toolkit, (2) five **pre-registered** checks on free public data (v1), each frozen before its first run, plus a second pre-registration (v2) with an audit, a Sentinel-2 roof-shadow pilot (B-S) and an exploratory price diagnostic (B0), and a third (v3) with a price-only proxy of branch A, and (3) the documents that turn six ideas into conditional PnL figures from explicit assumptions.
 
 ## Results of the five pre-registered checks
 
@@ -37,27 +37,47 @@ Pre-registration: `prereg/tests_v2.json`, SHA-256 `acfe66efb2878adf811e5b58aea99
 | B0, first run | How do first-published inventory surprises move WTI at the 10:30 ET print? Ex post diagnostic, not a strategy. Clock check first: the 10:30 minute must be the largest one-minute move of 10:00-10:59 on at least 70% of release days. | 10:30 is the largest minute on 44% of 464 days, below 70%. No price difference and no regression computed (`results/v2/B0/`). | blocked |
 | B0-AM1 (amended) | Same question; the clock check is replaced by the year-wise gate of AM-B0-1. Detected if the 95% interval of the Cushing coefficient lies below 0. | 447 releases 2013-2023. WTI change from 10:30:00 to 10:36:00 (HistData minute bid bars) on first-published surprises (AR(2) recursive forecast errors), HC1. Cushing -3.1 cents per barrel per Mb, 95% interval -6.6 to +0.4. US crude ex-Cushing -2.6 (-3.4 to -1.8, t -6.2); gasoline -3.6; distillate -3.1; R2 0.21; sd of the move 39 cents (`results/v2/B0_amended/b0.json`). | not detected (exploratory) |
 
-**AM-B0-1.** The first B0 run stopped at its written clock check. The mean profile of the one-minute moves peaks at 10:30, but the rule asked for the single largest minute of the hour, and volatility stays high for several minutes after the print. Before any outcome statistic was computed, the check was replaced by a year-wise gate: for each calendar year, the mean absolute one-minute change over 10:15-10:45 must peak at 10:30 and exceed 3 times its 10:15-10:29 mean. 2026 failed the gate and is excluded. The blocked run stays on record in `results/v2/B0/`; the amended run is in `results/v2/B0_amended/` and is reported as exploratory.
+**AM-B0-1.** The first B0 run stopped at its written clock check. The mean profile of the one-minute moves peaks at 10:30, but the rule asked for the single largest minute of the hour, and volatility stays high for several minutes after the print. Before any outcome statistic was computed, the check was replaced by a year-wise gate: for each calendar year, the mean absolute one-minute change over 10:15-10:45 must peak at 10:30 and exceed 3 times its 10:15-10:29 mean. 2026 failed the gate and is excluded from the amended run (a post hoc sensitivity keeping every year follows below: the conclusion is unchanged). The blocked run stays on record in `results/v2/B0/`; the amended run is in `results/v2/B0_amended/` and is reported as exploratory.
 
-Not run: A (replication of Alturki and Kurov; the published tables were not accessed) and B2-B3 (they need intraday quotes for two contracts and an admissible weekly variable).
+Not run: the published API-minus-consensus signal of A (no timestamped consensus), an executable PnL on CL (the minute bars are bid-only CFD data) and B2-B3 (they need intraday quotes for two contracts and an admissible weekly variable). A price-only proxy of A was run under v3 (next section).
 
-Deviations, implementation choices and the amendment, each written before the statistic it affects: `results/v2/deviations_v2.md`. Every v2 run, with the pre-registration hash: `results/v2/trial_log_v2.csv` (ids BS1, BS0+BS1, BS2, FIG, T1c, T2c, B0, B0-AM1). BS0 to BS2 are the B-S pilot of idea I1 and B0 prices the print; the gates are in `docs/IDEAS.md`.
+Deviations, implementation choices and the amendment, each written before the statistic it affects: `results/v2/deviations_v2.md`. Every v2 run, with the pre-registration hash: `results/v2/trial_log_v2.csv` (ids BS1, BS0+BS1, BS2, FIG, T1c, T2c, B0, B0-AM1, B0-AM1-ALLYEARS). BS0 to BS2 are the B-S pilot of idea I1 and B0 prices the print; the gates are in `docs/IDEAS.md`.
+
+**B0 sensitivity (post hoc, not pre-registered).** The amended gate excluded 2026 for a weak reaction at 10:30, which is not evidence of a wrong clock (independent checks support the file clock, 2026 included: the CME halt hour is the emptiest hour in every year, and EURUSD at 08:30 peaks at the stamped minute in 2016, 2019, 2022 and 2026; `results/v2/deviations_v2.md`). With every year kept (461 events, `scripts/b0_transmission.py --all-years`, `results/v2/B0_allyears/`): Cushing -3.16 cents per Mb, 95% interval -6.52 to +0.20 (t -1.84); US crude ex-Cushing -2.52 (t -6.18); R2 0.21. Not detected, as before. A reaction within a window does not show full incorporation, and a non-detection is not an absence of effect: the Cushing interval contains the effect estimated for the other categories.
+
+## Third pre-registration (v3, 25 October 2026): a price-only proxy of branch A
+
+Pre-registration: `prereg/tests_v3.json`, SHA-256 `d0b8d4c6b9604bd15d0f57037208d5208b4e6747c449c78bf62e76555a824ec9`, frozen 2026-10-25 09:38 and recorded in `results/v3/prereg_v3.sha256`. Script: `scripts/a_price_proxy.py` (single run). Deviations and the amendment AM-A-1, written before any outcome statistic: `results/v3/deviations_v3.md`. Trial log: `results/v3/trial_log_v3.csv` (id AR).
+
+Question: does the WTI return in the 30 minutes after the API release (16:30-17:00 ET, the day before) predict the return from 60 minutes to 1 minute before the EIA release (09:30-10:29 ET)? Bid-only HistData WTIUSD, same events as B0 (428 included: 251 in the overlap block 2013-08 to 2019-08, 163 in 2019-09 to 2023-12, 14 in 2026). This is a partial exploratory reproduction, on a price proxy, of the relation studied by Alturki and Kurov (2022; their Table 2A and Figure 4): other instrument, other price source, no consensus; it does not reproduce their data, their recursive predictive exercise or their Table 8 strategy (API minus consensus). Rule fixed in advance on the overlap block: SIGNAL if the lower 95% Fisher bound of r is above 0; NO SIGNAL if the upper bound is below 0.10; else INCONCLUSIVE.
+
+| Block | n | r | 95% interval | R2 | Sign rule, gross cents per event (t) |
+|---|---|---|---|---|---|
+| Overlap 2013-2019 | 251 | 0.152 | 0.028 to 0.270 | 2.3% | +3.81 (2.64) |
+| Post 2019-2023 | 163 | -0.026 | -0.179 to 0.128 | 0.07% | -3.86 (-1.03) |
+| 2026 | 14 | 0.699 | 0.268 to 0.897 | 49% | +29.9 (1.78) |
+
+Verdict AR on the overlap block: SIGNAL, as an exploratory proxy and a weak one (the lower bound of the HC1 slope is 0.001). After August 2019 persistence is not established: r -0.03, 95% interval [-0.18, 0.13], which does not exclude 0.10, with a negative gross sign-rule gain on this descriptive block; the 14 events of 2026 are too few for a stable assessment. The sign rule is descriptive and gross: no cost is deducted, there are no fills or sizes, and it is not a net PnL. A result of A is never evidence for B. Descriptives AH (standard deviation of the WTI move over three holding windows: 113 cents from the API release to 10:36, 50 cents from 09:30, 39 cents for the six minutes after the print) feed `scripts/pnl_grid.py --windows`; AC reports the clock evidence by year.
+
+Amendment AM-A-1: before September 2015 the CL halt began at 17:15 ET, so the structural clock check counts bars from 17:15; no year was excluded.
 
 ## Repository layout
 
 ```
 prereg/tests_v1.json     the five tests, frozen before any statistic was computed
 prereg/tests_v2.json     second pre-registration (T1c, T2c, BS0 to BS2, B0), frozen 2026-10-25
+prereg/tests_v3.json     third pre-registration (AR, AH, AC: price-only proxy of branch A), frozen 2026-10-25
 src/altdata/             toolkit: EIA files, trading calendars, statistics, Sentinel-1/-2, OpenStreetMap,
                          ENTSO-E, GIE AGSI+, Open-Meteo, plotting, run log, secrets handling
   tankshadow.py          roof-shadow model of floating-roof tanks (v2)
   histdata.py            HistData minute loader (v2)
   v2common.py            shared paths, guards and helpers of the v2 tests
-scripts/                 coverage audit, T1 to T5, T1c, T2c, BS0 to BS2, B0, EIA archive, Cushing
-                         baseline, PnL grid, tank registry, figures
+scripts/                 coverage audit, T1 to T5, T1c, T2c, BS0 to BS2, B0, A price proxy, EIA archive,
+                         Cushing baseline, PnL grid, tank registry, figures
 audit/                   re-runs of T1-T5, EIA release calendar, first-published vintages, snapshot diff
 results/                 result JSON files, verdicts, deviations, coverage, trial log, PnL grid (v1)
 results/v2/              v2 results, logs, trial log, deviations
+results/v3/              v3 results (A price proxy), trial log, deviations, PnL grid by holding window
 figures/                 every chart and satellite figure (PNG and SVG)
 docs/                    architecture, ideas, PnL method, six-month plan, data sources
 docs/spec/               Research and Technical Specification (HTML source and PDF)
@@ -104,9 +124,15 @@ python scripts/bs0_catalog.py                 # Sentinel catalogues, publication
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/bs_run_all.ps1
 python scripts/b0_transmission.py             # first run: stops at the clock check
 python scripts/b0_transmission.py --amended   # amendment AM-B0-1
+python scripts/b0_transmission.py --all-years # post hoc sensitivity, 2026 kept
 python scripts/fig_b0.py
+python scripts/a_price_proxy.py --selftest    # v3: synthetic check, no price read
+python scripts/a_price_proxy.py --dry         # event availability and clock check, no return
+python scripts/a_price_proxy.py               # test AR (single run)
 python scripts/pnl_grid.py                    # v2 grid
 python scripts/pnl_grid.py --v1               # v1 grid
+python scripts/pnl_grid.py --windows          # I1, k set from the sd of three holding windows (needs the v3 result)
+python scripts/et_reference_sensitivity.py    # post hoc: BS0 and BS2 with the Eastern stock reference (scratch recomputation)
 ```
 
 - `eia_wpsr_archive.py` downloads the report archive (network; pages cached in `data/eia_wpsr_archive/`) and writes `audit/eia_release_registry.csv` and `results/v2/eia_first_release.csv`. `wpsr_audits.py` writes the calendar and vintage audits in `audit/`.
@@ -114,16 +140,16 @@ python scripts/pnl_grid.py --v1               # v1 grid
 - `baseline_cushing_ar2.py` writes `results/v2/baseline_cushing/`. It reads the first-version weekly CSV from `../deliverables/analysis/eia_cushing_weekly.csv` unless `--v1-csv PATH` is given.
 - `t1c_t2c_calendar.py --calendar rule` is a check: the WTI blocks computed with the rule calendar must reproduce `results/T1.json` and `results/T2.json`. `--calendar archive` repeats it, then runs T1c and T2c.
 - `bs0_catalog.py` writes the Sentinel catalogues and the latency check in `results/v2/BS0/`. `bs_run_all.ps1` then runs `bs1_extract`, `bs1_analysis`, `bs2_aggregate` and `fig_bs`; set `ALTDATA_PYTHON` to your interpreter.
-- B0 needs the HistData WTIUSD M1 zips (`DAT_ASCII_WTIUSD_M1_<year or yyyymm>.zip`), downloaded by you from HistData.com into the folder named by the environment variable `ALTDATA_HISTDATA_DIR`. HistData files are not redistributed. The first command is the run as pre-registered; `--amended` applies AM-B0-1 and writes `results/v2/B0_amended/`; `fig_b0.py` draws from the amended result when it exists.
+- B0 and the A proxy need the HistData WTIUSD M1 zips (`DAT_ASCII_WTIUSD_M1_<year or yyyymm>.zip`), downloaded by you from HistData.com into the folder named by the environment variable `ALTDATA_HISTDATA_DIR`. HistData files are not redistributed (the per-event files `events.csv` and `a_events.csv`, which hold prices derived from them, are git-ignored and rebuilt by the scripts). The first B0 command is the run as pre-registered; `--amended` applies AM-B0-1 and writes `results/v2/B0_amended/`; `--all-years` is the post hoc sensitivity; `fig_b0.py` draws from the amended result when it exists.
 - `pnl_grid.py` writes `results/v2/pnl_grid_v2.csv`; `--v1` reproduces `results/pnl_grid.csv` byte for byte.
 
-Every test script checks the pre-registration hash first. T1c, T2c and B0 also refuse to overwrite an existing result file (single-run guard); the other test scripts overwrite their outputs. A reproduction therefore runs in a scratch copy of the repository and is compared with the archived results, as `audit/compare_repro.py` does.
+Every test script checks the pre-registration hash first. T1c, T2c, B0 and the A proxy also refuse to overwrite an existing result file (single-run guard); the other test scripts overwrite their outputs. A reproduction therefore runs in a scratch copy of the repository and is compared with the archived results, as `audit/compare_repro.py` does.
 
 ## Discipline built into the code
 
 - The pre-registration hash is checked at the start of every test script; a changed file stops the run.
-- Each test runs once. Every run is appended to `results/trial_log.csv` (v1) or `results/v2/trial_log_v2.csv` (v2), and deviations are written before the statistic they affect (`results/deviations.md`, `results/v2/deviations_v2.md`).
-- One amendment (AM-B0-1), dated and written before any outcome statistic; B0 is reported as exploratory and its first, blocked run stays on record.
+- Each test runs once. Every run is appended to `results/trial_log.csv` (v1), `results/v2/trial_log_v2.csv` (v2) or `results/v3/trial_log_v3.csv` (v3), and deviations are written before the statistic they affect (`results/deviations.md`, `results/v2/deviations_v2.md`, `results/v3/deviations_v3.md`).
+- Two amendments (AM-B0-1, AM-A-1), each dated and written before any outcome statistic of its test; B0 is reported as exploratory and its first, blocked run stays on record. One post hoc sensitivity (B0 with all years) is labelled as such.
 - Availability timestamps, not event timestamps, define what is known at a decision time. In v1 the EIA release dates are rebuilt by rule, and the cases where that can be wrong are listed in `results/coverage.md`; v2 uses the release dates of the EIA report archive (`audit/calendar_audit.md`).
 - Secrets are read from the environment (`.env`, git-ignored), never printed or logged; exceptions are masked.
 - Every result file carries the pre-registration hash; the SHA-256 of each raw EIA file used is recorded in `results/data_versions.json`.
@@ -151,9 +177,10 @@ Details and point-in-time caveats: `docs/DATA_SOURCES.md`.
 - T3 is exploratory and at daily resolution; B0 (v2) is an intraday test around the print, for the stock surprise.
 - Free 10 m imagery gives coarse per-tank readings (about 6 pixels across a median tank). The v2 pilot reads roof depth from the shadow inside each tank; the documents propose aggregation by hub, Sentinel-1 phase data, and a vendor trial measured against the pilot.
 - There is no gauge truth for tank depths: the pilot shows repeatability, not accuracy, and its nominal 68% intervals are too narrow.
-- The hub test is inconclusive on 19 weeks, and the nowcast test could not be evaluated.
-- B0 is exploratory: its validity gate was amended after the first run, and it excludes 2026. Its surprises are AR(2) forecast errors on first-published values, not consensus or API surprises.
-- There is no HistData file for 2024-01 to 2026-05; its minute bars are bid-only.
-- A, B2 and B3 were not run.
+- The hub test is inconclusive on 19 weeks, and the nowcast test could not be evaluated. Cadence (one orbit, clouds, sun angle, two passes near consecutive Fridays) is a documented constraint of this protocol; it is not shown to explain the weak correlation, and other causes are not excluded.
+- B0 is exploratory: its validity gate was amended after the first run and the amended run excludes 2026 (the sensitivity keeping it gives the same conclusion). Its surprises are AR(2) forecast errors on first-published values, not consensus or API surprises. A reaction within six minutes does not show full incorporation; a non-detection for Cushing is not an absence of effect.
+- There is no HistData file for 2024-01 to 2026-05; its minute bars are bid-only CFD data.
+- The A proxy is exploratory: bid-only bars, another instrument than CL futures, no consensus; its sign rule is gross and descriptive. The published API-minus-consensus signal, an executable PnL on CL and B2-B3 were not run.
+- The Friday stock reference is 07:00 Eastern Time in the EIA survey instructions; the frozen v2 protocol used 07:00 Central. A post hoc recomputation (`scripts/et_reference_sensitivity.py`, `results/v3/et_reference_sensitivity.json`) changes no selected scene and no BS0 or BS2 result.
 - Vendor claims are not reproduced.
 - The PnL figures in `docs/PNL_METHOD.md`, `results/v2/pnl_grid_v2.csv` and `results/pnl_grid.csv` (v1) are illustrative: conditional orders of magnitude from explicit assumptions (N, k, B), not results.

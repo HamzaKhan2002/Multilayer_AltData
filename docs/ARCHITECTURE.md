@@ -6,7 +6,7 @@ The repository supports a multilayer research system for alternative data. The s
 
 > Data can be bought; the edge has to be built.
 
-Test the free source first. Processed data that a vendor already sells (a tank fill level, a footfall index, a shipping flow) is bought only where it closes a measured gap in accuracy, freshness or coverage, at a cost below its marginal value. The trading signal is built: it comes from fusing several sources, from knowing when a source is wrong, from speed of integration and from risk management around events.
+Test the free source first. Processed data that a vendor already sells (a tank fill level, a footfall index, a shipping flow) is trialled where it closes a measured gap in accuracy, freshness or coverage, and subscribed to only if the trial shows incremental value at a cost below it. The trading signal is built: it comes from fusing several sources, from knowing when a source is wrong, from speed of integration and from risk management around events.
 
 ## Layers
 
