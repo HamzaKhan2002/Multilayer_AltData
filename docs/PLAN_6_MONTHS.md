@@ -7,7 +7,7 @@ Each gate ends in one of three outcomes, written in advance: promising, inconclu
 | Period | Work | Gate |
 |---|---|---|
 | Month 1 | Professional Cushing trial against the pilot (a sample, then a historical trial; delivery dates logged from the first day); B1 against the public model B1b on the declared target; CL1-CL2 quotes; A capped; I2 in parallel on free data. | **Gate 1** (end of month 1): a physical variable that beats the public nowcast on its own target, out of sample (B-S, B1). Otherwise: inconclusive (one bounded extension, if it can change the decision at a reasonable cost) or stop for that use; if no credible source passes, B's budget is reallocated and I2 is promoted. |
-| Months 2 to 3 | B2 on prices, then B3 net of costs and capacity; regime and risk layers only where they change a decision; placebos. | **Gate 2** (end of month 3): price information above rho* (B2); incremental net PnL positive on both halves, capacity estimated (B3). |
+| Months 2 to 3 | B2 on prices, then B3 net of costs and capacity; regime and risk layers only where they change a decision; placebos. | **Gate 2** (end of month 3): B2, a paired gain over the model without the source with a 95% lower bound above zero, and an enriched correlation above the illustrative threshold rho*; B3, incremental net PnL positive on both halves, capacity estimated. |
 | Month 4 | Isolated, logged paper run; next idea prepared (I3 if a transaction panel is available, otherwise I2). | |
 | Month 5 | Window held back by Borel (genuine out of sample); capital proposal. | |
 | Month 6 | Decision with Borel under the capital protocol (below): paper, then 25%, 50%, 100% of the target risk. | **Gate 3** (end of month 6): paper gap at most cost plus 50%; rho on the held-back window above rho*; capital only with Borel's approval. |
@@ -21,7 +21,7 @@ Each gate ends in one of three outcomes, written in advance: promising, inconclu
 ## Stop (at any time)
 
 - A data source that cannot be verified point-in-time.
-- a useful incremental gain excluded by the interval (below the cost threshold).
+- A useful incremental gain excluded by the interval (B2).
 - A fusion model that does not beat the baseline: keep the baseline, or stop.
 - A data trial whose incremental value is below its cost.
 - The drawdown rules of the capital protocol.
@@ -44,7 +44,7 @@ Paper, then 25%, 50% and 100% of the target risk. Risk is halved when the drawdo
 ## Revisions of 26 October 2026
 
 - **One decision rule everywhere.** Promising: a useful effect estimated, with compatible robustness and uncertainty. Inconclusive: the interval cannot separate a useful gain from none; one bounded extension is justified only if it can change the decision at a reasonable cost. Stop that use: data unfit for the test, a useful gain excluded, or additional information that costs disproportionately. An economic stop can be decided without a statistical refutation: it is a budget decision, not proof that no edge exists, and a negative B1 concerns the intended use and target, not all physical information.
-- **B2 is incremental.** The augmented forecast is compared with the forecast without the source by a paired difference; a good total correlation does not show that the source adds anything. The threshold rho* belongs to the Gaussian sign-rule illustration, not to every policy; B3 (incremental net PnL against the same strategy without the source) remains the economic arbiter.
+- **B2 is incremental.** The augmented forecast is compared with the forecast without the source by a paired difference; a good total correlation does not show that the source adds anything. The threshold rho* belongs to the Gaussian sign-rule illustration, not to every policy, and it is compared with the total correlation of the enriched forecast, never with the gain; B3 (incremental net PnL against the same strategy without the source) remains the economic arbiter.
 - **Order of work.** The professional-data trial and its economic evaluation come first; new measurement work (scene calibration, Friday anchoring, Sentinel-1 phase) is taken up where the trial identifies a limit it can address.
 - **Branch A.** The price proxy is a partial exploratory reproduction of the relation studied by Alturki and Kurov (post-API return, their Table 2A and Figure 4), not of their API-minus-consensus strategy (Table 8). A weak positive association in 2013-2019; persistence not established in 2019-2023 (r -0.03, interval -0.18 to 0.13); 2026 (14 events) insufficient.
 - **Friday reference time.** EIA survey instructions: 7 a.m. Eastern Time. The frozen protocol used Central; recomputing BS0 and BS2 with Eastern changes nothing (`results/v3/et_reference_sensitivity.json`).
